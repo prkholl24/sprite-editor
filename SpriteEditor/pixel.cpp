@@ -1,25 +1,37 @@
 #include "pixel.h"
 
-pixel::pixel(QObject *parent)
+Pixel::Pixel(QObject *parent)
     : QObject{parent}
 {}
 
-pixel::pixel(std::vector<int>& color){
+Pixel::Pixel(std::vector<int>& color){
     this->color = color;
 
 }
 
-void pixel::setColor(std::vector<int>& newColor){
+Pixel::Pixel(Pixel& px){
+
+    color = px.getColor();
+
+}
+
+void Pixel::operator=(Pixel& px){
+    color = px.getColor();
+}
+
+void Pixel::setColor(std::vector<int>& newColor){
     color = newColor;
 
 }
 
-void pixel::setOpacity(int opacity){
+void Pixel::setOpacity(int opacity){
     if (this->color[3]){
         this->color[3] = opacity;
     }
 }
 
-std::vector<int>& pixel::getColor(){
+std::vector<int>& Pixel::getColor(){
     return this->color;
 }
+
+

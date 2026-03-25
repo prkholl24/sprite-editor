@@ -4,13 +4,20 @@
 #include <QObject>
 
 
-class pixel : public QObject
+class Pixel : public QObject
 {
     Q_OBJECT
 public:
-    explicit pixel(QObject *parent = nullptr);
+    explicit Pixel(QObject *parent = nullptr);
 
-    pixel(std::vector<int>& color);
+    //Constructor which takes a color
+    Pixel(std::vector<int>& color);
+
+    //Copy Constructor
+    Pixel(Pixel& px);
+
+    //Assignment Operator
+    void operator=(Pixel& px);
 
     std::vector<int>& getColor();
 
