@@ -12,4 +12,6 @@ void Frame::setPixel(int x, int y, Pixel& p) {
     pixels[x][y] = p;
 }
 
-void Frame::setResolution()
+// void Frame::setResolution() {
+
+// }
