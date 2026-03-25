@@ -11,11 +11,19 @@ class Frame : public QObject
 public:
     explicit Frame(QObject *parent = nullptr);
 
+    //Constructor
+    //Outter vector is width
+    //Inner vectors is height
+    Frame(int width, int height);
+
+    /*
+     *
+     */
     Pixel& getPixel(int x, int y);
 
     void setPixel(int x, int y, Pixel& p);
 
-    void setResolution(int w, int h);
+    void changeResolution(int w, int h);
 
     void clearAll();
 private:
