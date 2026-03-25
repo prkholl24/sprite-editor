@@ -10,11 +10,11 @@ class pixel : public QObject
 public:
     explicit pixel(QObject *parent = nullptr);
 
-    pixel(std::vector<int> color);
+    pixel(std::vector<int>& color);
 
-    std::vector<int>* getColor();
+    std::vector<int>& getColor();
 
-    void setColor(std::vector<int> newColor);
+    void setColor(std::vector<int>& newColor);
 
     void setOpacity(int opacity);
 
