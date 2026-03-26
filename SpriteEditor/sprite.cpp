@@ -6,44 +6,37 @@
  * behavior such as frame order and grames per second.
  * It also tracks the currently active frame.
  *
- * @authors
- * @date
+ * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/26/2026 2:42PM MST by Charles Adair
  */
 #include "sprite.h"
 
-sprite::sprite(QObject *parent)
-    : QObject{parent}
-{}
-
-/**
- * @brief Adds a new frame to the end of the frame array.
- * @param The frame you want to add
- */
-void sprite::addFrame(Frame f) {
-    frames.push_back(f);
+Sprite::Sprite(int width, int height) : width(width), height{height} {
+    frames.push_back(Frame());
 }
 
-/**
- * @brief Removes the desired frame from the frame array.
- * @param The index of the frame to delete
- */
-void sprite::removeFrame(int index) {
+
+void Sprite::addFrame() {
+    frames.push_back(Frame());
+}
+
+
+void Sprite::removeFrame(int index) {
     frames.erase(frames.begin() + index);
     frames.shrink_to_fit();
 }
 
-/**
- * @brief getCurrentFrame - Gets the desired frame
- * @return
- */
-Frame sprite::getFrame(int index) {
+Frame& Sprite::getFrame(int index) {
     return frames[index];
 }
 
-void sprite::setFPS(int newFps) {
+
+void Sprite::setFPS(int newFps) {
     fps = newFps;
 }
 
-int sprite::getFrameCount() {
+int Sprite::getFrameCount() const {
     return frames.size();
 }

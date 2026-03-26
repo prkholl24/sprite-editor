@@ -24,12 +24,20 @@
 class Sprite {
 private:
 
-
+    /**
+     * @brief Frames is  a set of 2D arrays containing color data ordered by
+     * the sequence in which they are played back.
+     */
     std::vector<Frame> frames;
 
+    /**
+     * @brief Frame rate at which the playback occurs
+     */
     int fps;
 
-    int currentFrame;
+    const int width;
+
+    const int height;
 
 public:
 
@@ -42,6 +50,12 @@ public:
      * @brief Adds a new frame
      */
     void addFrame();
+
+    /**
+     * @brief Removes a frame
+     * @param The index of the frame to be removed.
+     */
+    void removeFrame(int index);
 
     /**
      * @brief Removes a frame
@@ -65,7 +79,13 @@ public:
     int getFPS() const;
 
     /**
-     * @brief gets total frame count.
+     * @brief Sets a new playback speed
+     * @param The new speed measured in Frames Per Second (FPS).
+     */
+    void setFPS(int newFPS);
+
+    /**
+     * @brief Gets total frame count.
      * @return number of frames
      */
     int getFrameCount() const;
