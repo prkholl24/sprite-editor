@@ -13,19 +13,26 @@
  */
 #include "sprite.h"
 
-Sprite::Sprite(int width, int height) : width(width), height{height} {
-    frames.push_back(Frame());
+Sprite::Sprite(int width, int height) : fps(12), width(width), height(height) {
+    frames.push_back(Frame(width, height));
 }
 
 
 void Sprite::addFrame() {
-    frames.push_back(Frame());
+    frames.push_back(Frame(width, height));
 }
 
 
 void Sprite::removeFrame(int index) {
-    frames.erase(frames.begin() + index);
-    frames.shrink_to_fit();
+    if (index >= 0 && index < (int)frames.size()) {
+        frames.erase(frames.begin() + index);
+    }
+}
+
+void Sprite::duplicateFrame(int index) {
+    if (index >= 0 && index < (int)frames.size()) {
+        frames.insert(frames.begin() + index + 1, frames[index]);
+    }
 }
 
 Frame& Sprite::getFrame(int index) {
@@ -37,6 +44,18 @@ void Sprite::setFPS(int newFps) {
     fps = newFps;
 }
 
+int Sprite::getFPS() const {
+    return fps;
+}
+
 int Sprite::getFrameCount() const {
-    return frames.size();
+    return (int)frames.size();
+}
+
+int Sprite::getWidth() const {
+    return width;
+}
+
+int Sprite::getHeight() const {
+    return height;
 }

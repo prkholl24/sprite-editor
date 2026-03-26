@@ -24,3 +24,11 @@ Pixel& Frame::getPixel(int x, int y) {
     return pixels[x][y];
 }
 
+int Frame::getWidth() const {
+    return width;
+}
+
+int Frame::getHeight() const {
+    return height;
+}
+

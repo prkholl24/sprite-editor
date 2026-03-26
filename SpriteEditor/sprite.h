@@ -40,12 +40,12 @@ private:
     /**
      * @brief width of the Sprite animation
      */
-    const int width;
+    int width;
 
     /**
      * @brief height of the Sprite animation
      */
-    const int height;
+    int height;
 
 public:
 
@@ -61,13 +61,13 @@ public:
 
     /**
      * @brief Removes a frame
-     * @param The index of the frame to be removed.
+     * @param index The index of the frame to be removed.
      */
     void removeFrame(int index);
 
     /**
-     * @brief Removes a frame
-     * @param index Frame index
+     * @brief Duplicates a frame
+     * @param index Frame index to duplicate
      */
     void duplicateFrame(int index);
 
@@ -80,15 +80,15 @@ public:
     Frame& getFrame(int index);
 
     /**
-     * @brief Gets the playback  frames per second
+     * @brief Gets the playback frames per second
      *
-     * @param fps New FPS value
+     * @return Current FPS value
      */
     int getFPS() const;
 
     /**
      * @brief Sets a new playback speed
-     * @param The new speed measured in Frames Per Second (FPS).
+     * @param newFPS The new speed measured in Frames Per Second (FPS).
      */
     void setFPS(int newFPS);
 
@@ -97,6 +97,18 @@ public:
      * @return number of frames
      */
     int getFrameCount() const;
+
+    /**
+     * @brief Gets the width of the sprite.
+     * @return sprite width
+     */
+    int getWidth() const;
+
+    /**
+     * @brief Gets the height of the sprite.
+     * @return sprite height
+     */
+    int getHeight() const;
 };
 
 #endif // SPRITE_H

@@ -33,7 +33,7 @@ public:
      *
      * @param color A vector of integers representing RGBA values.
      */
-    Pixel(std::vector<int>& color);
+    Pixel(const std::vector<int>& color);
 
     /**
      * @brief Copy constructor for Pixel.
@@ -42,7 +42,7 @@ public:
      *
      * @param px The Pixel to copy.
      */
-    Pixel(Pixel& px);
+    Pixel(const Pixel& px);
 
     /**
      * @brief Assignment operator for Pixel.
@@ -50,26 +50,28 @@ public:
      * Assigns the color values from another Pixel to this Pixel.
      *
      * @param px The Pixel to copy from.
+     * @return A reference to this Pixel.
      */
-    void operator=(Pixel& px);
+    Pixel& operator=(const Pixel& px);
 
     /**
      * @brief Gets the color of the Pixel.
      *
      * Returns the RGBA color values stored in this Pixel.
      *
-     * @return A reference to a vector of integers representing RGBA values.
+     * @return A vector of integers representing RGBA values.
      */
-    std::vector<int> const getColor();
+    std::vector<int> getColor() const;
 
     /**
      * @brief Sets the color of the Pixel.
      *
-     * Updates the Pixel’s RGBA color values.
+     * Updates the Pixel’s RGBA color values if the input is valid.
+     * Vector must be length 4 and all values must be between 0-255.
      *
      * @param newColor A vector of integers representing RGBA values.
      */
-    void setColor(std::vector<int>& newColor);
+    void setColor(const std::vector<int>& newColor);
 
     /**
      * @brief Sets the opacity of the Pixel.

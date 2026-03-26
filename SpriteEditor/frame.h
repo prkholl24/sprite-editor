@@ -26,19 +26,10 @@ class Frame
 {
 public:
     /**
-     * @brief width is the maximum x value which can be retrieved or set.
-     */
-    const int width;
-
-    /**
-     * @brief heightis the maximum y value which can be retrieved or set.
-     */
-    const int height;
-
-    /**
      * @brief Frame constructor
      *
-     * @param parent the Sprite object which holds this Frame object.
+     * @param x the width of the frame
+     * @param y the height of the frame
      */
     explicit Frame(int x = 16, int y = 16 );
 
@@ -51,7 +42,29 @@ public:
      */
     Pixel& getPixel(int x, int y);
 
+    /**
+     * @brief Gets the width of the frame.
+     * @return frame width
+     */
+    int getWidth() const;
+
+    /**
+     * @brief Gets the height of the frame.
+     * @return frame height
+     */
+    int getHeight() const;
+
 private:
+    /**
+     * @brief width of the frame
+     */
+    int width;
+
+    /**
+     * @brief height of the frame
+     */
+    int height;
+
     /**
      * @brief pixels is two dimensional vector containing all of the color data through Pixel objects.
      */
