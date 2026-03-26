@@ -30,7 +30,7 @@ void Pixel::setOpacity(int opacity){
     }
 }
 
-std::vector<int>& Pixel::getColor(){
+std::vector<int> const Pixel::getColor(){
     return this->color;
 }
 
