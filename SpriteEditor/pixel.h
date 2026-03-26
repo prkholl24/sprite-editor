@@ -1,36 +1,30 @@
 /**
  * @file pixel.h
+ * @brief Declaration of the Pixel class
  *
- * @brief Declaration of the Pixel class used in the sprite editor.
+ * This class represents a Pixel which contains color data
  *
- * The Pixel class represents a single pixel within a frame. It stores
- * color information using RGBA values and provides methods to access
- * and modify those values. This class is part of the model layer and
- * is used by the Frame class to represent image data.
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
  *
- * @authors:
- * @date last modified:
+ * Last Revision: 3/26/2026 3:02PM MST by Charles Adair
  */
 
 #ifndef PIXEL_H
 #define PIXEL_H
 
-#include <QObject>
 #include <vector>
 
-class Pixel : public QObject
+class Pixel
 {
-    Q_OBJECT
 public:
 
     /**
      * @brief Default constructor for Pixel.
      *
      * Initializes a Pixel object with no color set.
-     *
-     * @param parent Optional QObject parent.
      */
-    explicit Pixel(QObject *parent = nullptr);
+    Pixel();
 
     /**
      * @brief Constructs a Pixel with a specified color.
@@ -87,12 +81,13 @@ public:
     void setOpacity(int opacity);
 
 private:
-    //Color expressed as 4 int values
-    //Red, Green, Blue, Alpha (Gamma/Opacity)
+
+    /**
+     * @brief color expressed as 4 int values
+     *
+     * Red, Green, Blue, Alpha (Gamma/Opacity)
+     */
     std::vector<int> color;
-
-
-signals:
 };
 
 #endif // PIXEL_H

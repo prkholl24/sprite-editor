@@ -6,8 +6,10 @@
  * behavior such as frame order and grames per second.
  * It also tracks the currently active frame.
  *
- * @authors
- * @date
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/26/2026 3:01PM MST by Charles Adair
  */
 
 #ifndef SPRITE_H
@@ -35,8 +37,14 @@ private:
      */
     int fps;
 
+    /**
+     * @brief width of the Sprite animation
+     */
     const int width;
 
+    /**
+     * @brief height of the Sprite animation
+     */
     const int height;
 
 public:

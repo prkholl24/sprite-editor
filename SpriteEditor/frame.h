@@ -1,8 +1,19 @@
+/**
+ * @file frame.h
+ * @brief Declaration of the Frame class.
+ *
+ * This class manages a 2D array of Pixel objects which represents a still image.
+ *
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/26/2026 3:01PM MST by Charles Adair
+ */
+
 #ifndef FRAME_H
 
 #define FRAME_H
 
-#include <QObject>
 #include "pixel.h"
 
 /**
@@ -11,9 +22,8 @@
  * This supports
  */
 
-class Frame : public QObject
+class Frame
 {
-    Q_OBJECT
 public:
     /**
      * @brief width is the maximum x value which can be retrieved or set.
@@ -30,7 +40,7 @@ public:
      *
      * @param parent the Sprite object which holds this Frame object.
      */
-    explicit Frame(QObject *parent = nullptr, int x = 16, int y = 16 );
+    explicit Frame(int x = 16, int y = 16 );
 
     /**
      * @brief getPixel of the location specified.
@@ -46,8 +56,6 @@ private:
      * @brief pixels is two dimensional vector containing all of the color data through Pixel objects.
      */
     std::vector<std::vector<Pixel>> pixels;
-
-signals:
 };
 
 #endif // FRAME_H
