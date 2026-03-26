@@ -4,9 +4,12 @@
 #include "frame.h"
 #include <QObject>
 
-class Sprite : public QObject
-{
-    Q_OBJECT
+/**
+ * @brief Represents an animated sprite composed of multiple frames.
+ *
+ *This class manages a collection of frames and playback settings.
+ */
+class Sprite {
 private:
 
 
@@ -14,26 +17,53 @@ private:
 
     int fps;
 
-    int width;
-
-    int height;
+    int currentFrame;
 
 public:
-    explicit Sprite(QObject *parent = nullptr);
+    // explicit Sprite(QObject *parent = nullptr);
 
-    void addFrame(Frame frame);
+    // Frame getCurrentFrame();
 
-    Frame getCurrentFrame();
+    // void setFPS(int fps);
 
-    void setFPS(int fps);
+    // int getFrameCount();
 
-    int getFrameCount();
+    // void swapFrame();
+    /**
+     * @brief Constructs a sprite with a default frame.
+     */
+    Sprite(int width = 16, int height = 16);
 
-    void swapFrame();
+    /**
+     * @brief Adds a new frame
+     */
+    void addFrame();
 
-    void duplicateFrame();
+    /**
+     * @brief Removes a frame
+     * @param index Frame index
+     */
+    void duplicateFrame(int index);
 
-signals:
+    /**
+     * @brief Gets the current frame
+     *
+     * @param index of current frame
+     * @return Reference to the current frame
+     */
+    Frame& getFrame(int index);
+
+    /**
+     * @brief sets frames per second
+     * @param fps New FPS value
+     */
+    int getFPS() const;
+
+    /**
+     * @brief gets total frame count.
+     * @return number of frames
+     */
+    int getFrameCount() const;
 };
 
 #endif // SPRITE_H
