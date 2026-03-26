@@ -13,8 +13,8 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <vector>
 #include "frame.h"
-#include <QObject>
 
 /**
  * @brief Represents an animated sprite composed of multiple frames.
@@ -32,15 +32,7 @@ private:
     int currentFrame;
 
 public:
-    // explicit Sprite(QObject *parent = nullptr);
 
-    // Frame getCurrentFrame();
-
-    // void setFPS(int fps);
-
-    // int getFrameCount();
-
-    // void swapFrame();
     /**
      * @brief Constructs a sprite with a default frame.
      */
@@ -66,7 +58,8 @@ public:
     Frame& getFrame(int index);
 
     /**
-     * @brief sets frames per second
+     * @brief Gets the playback  frames per second
+     *
      * @param fps New FPS value
      */
     int getFPS() const;
