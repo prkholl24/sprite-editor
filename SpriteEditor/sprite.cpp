@@ -1,3 +1,14 @@
+/**
+ * @file sprite.cpp
+ * @brief implementation of the Sprite class.
+ *
+ * This class manages a collection of Frame objects and controls animation
+ * behavior such as frame order and grames per second.
+ * It also tracks the currently active frame.
+ *
+ * @authors
+ * @date
+ */
 #include "sprite.h"
 
 sprite::sprite(QObject *parent)
