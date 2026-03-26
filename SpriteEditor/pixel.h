@@ -66,7 +66,7 @@ public:
      *
      * @return A reference to a vector of integers representing RGBA values.
      */
-    std::vector<int>& getColor();
+    std::vector<int> const getColor();
 
     /**
      * @brief Sets the color of the Pixel.
