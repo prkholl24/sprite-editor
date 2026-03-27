@@ -1,49 +1,140 @@
 /**
  * @file sprite.cpp
- * @brief implementation of the Sprite class.
+ * @brief Implementation of the Sprite class.
  *
- * This class manages a collection of Frame objects and controls animation
- * behavior such as frame order and grames per second.
- * It also tracks the currently active frame.
+ * This file contains the method definitions for the Sprite class.
+ * A Sprite stores multiple Frame objects and manages animation data
+ * such as the current frame and playback speed.
  *
- * @authors
- * @date
+ * @authors Charles Adair, Armando Carillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
+ * @date 3-26-2026
  */
+
 #include "sprite.h"
 
-sprite::sprite(QObject *parent)
-    : QObject{parent}
-{}
-
-/**
- * @brief Adds a new frame to the end of the frame array.
- * @param The frame you want to add
- */
-void sprite::addFrame(Frame f) {
-    frames.push_back(f);
+bool Sprite::isValidIndex(int index) const
+{
+    return index >= 0 && index < frames.size();
 }
 
-/**
- * @brief Removes the desired frame from the frame array.
- * @param The index of the frame to delete
- */
-void sprite::removeFrame(int index) {
+Frame Sprite::makeDefaultFrame() const
+{
+    Frame defaultFrame;
+    defaultFrame.setResolution(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    return defaultFrame;
+}
+
+Sprite::Sprite()
+{
+    fps = DEFAULT_FPS;
+    currentFrameIndex = 0;
+    frames.push_back(makeDefaultFrame());
+}
+
+void Sprite::addFrame(const Frame& frame)
+{
+    frames.push_back(frame);
+}
+
+void Sprite::removeFrame(int index)
+{
+    // Check for invalid index
+    if (!isValidIndex(index))
+        return;
+
+    // Remove the frame at the given index
     frames.erase(frames.begin() + index);
-    frames.shrink_to_fit();
+
+    // If all frames were removed, create a new default blank frame
+    if (frames.empty())
+    {
+        frames.push_back(makeDefaultFrame());
+        currentFrameIndex = 0;
+    }
+    // If currentFrameIndex is now past the end, move it back
+    else if (currentFrameIndex >= frames.size())
+    {
+        currentFrameIndex = frames.size() - 1;
+    }
 }
 
-/**
- * @brief getCurrentFrame - Gets the desired frame
- * @return
- */
-Frame sprite::getFrame(int index) {
-    return frames[index];
+void Sprite::duplicateFrame(int index)
+{
+    // Check for invalid index
+    if (!isValidIndex(index))
+        return;
+
+    frames.insert(frames.begin() + index + 1, frames[index]);
 }
 
-void sprite::setFPS(int newFps) {
-    fps = newFps;
+void Sprite::moveFrame(int fromIndex, int toIndex)
+{
+    // Check for invalid indices
+    if (!isValidIndex(fromIndex))
+        return;
+
+    if (!isValidIndex(toIndex))
+        return;
+
+    // No changes if both indices are the same
+    if (fromIndex == toIndex)
+        return;
+
+    // Save the frame being moved
+    Frame movedFrame = frames.at(fromIndex);
+
+    // Remove the frame from its original position
+    frames.erase(frames.begin() + fromIndex);
+
+    // Adjust index after removal
+    if (fromIndex < toIndex)
+        toIndex--;
+
+    // Insert it into the new position
+    frames.insert(frames.begin() + toIndex, movedFrame);
+
+    // Keep currentFrameIndex pointing to the same frame after the move
+    if (currentFrameIndex == fromIndex)
+    {
+        currentFrameIndex = toIndex;
+    }
+    else if (fromIndex < currentFrameIndex && toIndex >= currentFrameIndex)
+    {
+        currentFrameIndex--;
+    }
+    else if (fromIndex > currentFrameIndex && toIndex <= currentFrameIndex)
+    {
+        currentFrameIndex++;
+    }
 }
 
-int sprite::getFrameCount() {
+Frame& Sprite::getCurrentFrame()
+{
+    return frames.at(currentFrameIndex);
+}
+
+int Sprite::getCurrentFrameIndex() const
+{
+    return currentFrameIndex;
+}
+
+Frame& Sprite::getFrame(int index)
+{
+    return frames.at(index);
+}
+
+int Sprite::getFPS() const
+{
+    return fps;
+}
+
+void Sprite::setFPS(int fps)
+{
+    if (fps > 0)
+        this->fps = fps;
+}
+
+int Sprite::getFrameCount() const
+{
     return frames.size();
 }
