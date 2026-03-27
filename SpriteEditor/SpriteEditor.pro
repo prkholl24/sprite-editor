@@ -14,7 +14,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pixel.cpp \
-    sprite.cpp
+    sprite.cpp \
+    spriteTest.cpp
 
 HEADERS += \
     controller.h \
