@@ -58,6 +58,23 @@ private:
     static const int DEFAULT_HEIGHT = 16;
     static const int DEFAULT_FPS = 12;
 
+    /**
+     * @brief Checks whether an index is valid for the frames vector.
+     *
+     * @param index The index to check.
+     * @return True if the index is within bounds, false otherwise.
+     */
+    bool isValidIndex(int index) const;
+
+    /**
+     * @brief Creates a default blank frame for the sprite.
+     *
+     * The default frame uses the standard sprite width and height.
+     *
+     * @return A blank Frame object with the default resolution.
+     */
+    Frame makeDefaultFrame() const;
+
 public:
 
     /**
@@ -157,25 +174,6 @@ public:
      * @return The number of frames.
      */
     int getFrameCount() const;
-
-private:
-
-    /**
-     * @brief Checks whether an index is valid for the frames vector.
-     *
-     * @param index The index to check.
-     * @return True if the index is within bounds, false otherwise.
-     */
-    bool isValidIndex(int index) const;
-
-    /**
-     * @brief Creates a default blank frame for the sprite.
-     *
-     * The default frame uses the standard sprite width and height.
-     *
-     * @return A blank Frame object with the default resolution.
-     */
-    Frame makeDefaultFrame() const;
 };
 
 #endif // SPRITE_H
