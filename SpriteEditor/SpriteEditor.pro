@@ -16,6 +16,7 @@ SOURCES += \
     pixel.cpp \
     sprite.cpp \
     toolbar.cpp
+    spriteTest.cpp
 
 HEADERS += \
     controller.h \

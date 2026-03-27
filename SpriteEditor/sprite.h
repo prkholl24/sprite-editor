@@ -6,6 +6,7 @@
  * behavior such as frame order and frames per second.
  * It also tracks the currently active frame.
  *
+ * Team: Green Goombas
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/26/2026
  *
@@ -49,11 +50,11 @@ private:
      * @brief height of the Sprite animation
      */
     int height;
-    /**
-     * @brief Index of the current Frame being displayed.
-     */
-    int currentFrameIndex;
 
+
+    /**
+     * @brief Default values for a new Sprite object
+     */
     static const int DEFAULT_WIDTH = 16;
     static const int DEFAULT_HEIGHT = 16;
     static const int DEFAULT_FPS = 12;
@@ -64,7 +65,7 @@ private:
      * @param index The index to check.
      * @return True if the index is within bounds, false otherwise.
      */
-    bool isValidIndex(int index) const;
+    bool isValidFrameIndex(int index) const;
 
     /**
      * @brief Creates a default blank frame for the sprite.
@@ -73,7 +74,7 @@ private:
      *
      * @return A blank Frame object with the default resolution.
      */
-    Frame makeDefaultFrame() const;
+    Frame createDefaultFrame() const;
 
 public:
 
