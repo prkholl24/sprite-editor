@@ -1,16 +1,17 @@
 /**
  * @file sprite.cpp
- * @brief implementation of the Sprite class.
+ * @brief Implementation of the Sprite class.
  *
- * This class manages a collection of Frame objects and controls animation
- * behavior such as frame order and grames per second.
- * It also tracks the currently active frame.
+ * This file contains the method definitions for the Sprite class.
+ * A Sprite stores multiple Frame objects and manages animation data
+ * such as the current frame and playback speed.
  *
  * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/26/2026
  *
  * Last Revision: 3/26/2026 2:42PM MST by Charles Adair
  */
+
 #include "sprite.h"
 
 Sprite::Sprite(int width, int height) : fps(12), width(width), height(height) {
