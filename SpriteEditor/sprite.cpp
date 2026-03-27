@@ -22,15 +22,13 @@ bool Sprite::isValidFrameIndex(int index) const
 
 Frame Sprite::createDefaultFrame() const
 {
-    Frame defaultFrame;
-    defaultFrame.setResolution(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    Frame defaultFrame(width, height);
     return defaultFrame;
 }
 
 Sprite::Sprite()
 {
     fps = DEFAULT_FPS;
-    currentFrameIndex = 0;
     frames.push_back(createDefaultFrame());
 }
 
@@ -47,12 +45,6 @@ void Sprite::removeFrame(int index)
     if (frames.empty())
     {
         frames.push_back(createDefaultFrame());
-        currentFrameIndex = 0;
-    }
-    // If currentFrameIndex is now past the end, move it back
-    else if (currentFrameIndex >= static_cast<int>(frames.size()))
-    {
-        currentFrameIndex = frames.size() - 1;
     }
 }
 
