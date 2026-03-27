@@ -9,7 +9,7 @@
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/26/2026
  *
- * Last Revision: 3/26/2026 3:01PM MST by Charles Adair
+ * Last Revision: 3/27/2026 1:26AM MST by Charles Adair
  */
 
 #ifndef SPRITE_H
@@ -86,13 +86,20 @@ public:
     Sprite();
 
     /**
+     * @brief Sprite constructor accepts parameters for resolution.
+     * @param Width in pixels
+     * @param Height in pixel.
+     */
+    Sprite(int width, int height);
+
+    /**
      * @brief Adds a new frame to the sprite.
      *
      * Appends a frame to the list of frames in the sprite.
      *
      * @param frame The frame to add.
      */
-    void addFrame(const Frame& frame);
+    void addFrame();
 
     /**
      * @brief Removes a frame at the specified index.
@@ -120,20 +127,6 @@ public:
      * @param toIndex The new index for the frame.
      */
     void moveFrame(int fromIndex, int toIndex);
-
-    /**
-     * @brief Gets the current frame of the sprite.
-     *
-     * @return A reference to the current frame.
-     */
-    Frame& getCurrentFrame();
-
-    /**
-     * @brief Gets the current frame index.
-     *
-     * @return The index of the current frame.
-     */
-    int getCurrentFrameIndex() const;
 
     /**
      * @brief Gets a frame at the specified index.
