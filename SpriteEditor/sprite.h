@@ -6,7 +6,8 @@
  * behavior such as frame order and frames per second.
  * It also tracks the currently active frame.
  *
- * @authors Charles Adair, Armando Carillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
+ * Team: Green Goombas
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3-26-2026
  */
 
@@ -133,7 +134,7 @@ private:
      * @param index The index to check.
      * @return True if the index is within bounds, false otherwise.
      */
-    bool isValidIndex(int index) const;
+    bool isValidFrameIndex(int index) const;
 
     /**
      * @brief Creates a default blank frame for the sprite.
@@ -142,7 +143,7 @@ private:
      *
      * @return A blank Frame object with the default resolution.
      */
-    Frame makeDefaultFrame() const;
+    Frame createDefaultFrame() const;
 };
 
 #endif // SPRITE_H

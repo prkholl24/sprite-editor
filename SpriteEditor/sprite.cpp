@@ -6,18 +6,19 @@
  * A Sprite stores multiple Frame objects and manages animation data
  * such as the current frame and playback speed.
  *
- * @authors Charles Adair, Armando Carillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
+ * Team: Green Goombas
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3-26-2026
  */
 
 #include "sprite.h"
 
-bool Sprite::isValidIndex(int index) const
+bool Sprite::isValidFrameIndex(int index) const
 {
-    return index >= 0 && index < frames.size();
+    return index >= 0 && index < static_cast<int>(frames.size());
 }
 
-Frame Sprite::makeDefaultFrame() const
+Frame Sprite::createDefaultFrame() const
 {
     Frame defaultFrame;
     defaultFrame.setResolution(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -28,7 +29,7 @@ Sprite::Sprite()
 {
     fps = DEFAULT_FPS;
     currentFrameIndex = 0;
-    frames.push_back(makeDefaultFrame());
+    frames.push_back(createDefaultFrame());
 }
 
 void Sprite::addFrame(const Frame& frame)
@@ -38,8 +39,8 @@ void Sprite::addFrame(const Frame& frame)
 
 void Sprite::removeFrame(int index)
 {
-    // Check for invalid index
-    if (!isValidIndex(index))
+    // Return if index is invalid
+    if (!isValidFrameIndex(index))
         return;
 
     // Remove the frame at the given index
@@ -48,11 +49,11 @@ void Sprite::removeFrame(int index)
     // If all frames were removed, create a new default blank frame
     if (frames.empty())
     {
-        frames.push_back(makeDefaultFrame());
+        frames.push_back(createDefaultFrame());
         currentFrameIndex = 0;
     }
     // If currentFrameIndex is now past the end, move it back
-    else if (currentFrameIndex >= frames.size())
+    else if (currentFrameIndex >= static_cast<int>(frames.size()))
     {
         currentFrameIndex = frames.size() - 1;
     }
@@ -60,20 +61,20 @@ void Sprite::removeFrame(int index)
 
 void Sprite::duplicateFrame(int index)
 {
-    // Check for invalid index
-    if (!isValidIndex(index))
+    // Return if index is invalid
+    if (!isValidFrameIndex(index))
         return;
 
-    frames.insert(frames.begin() + index + 1, frames[index]);
+    frames.insert(frames.begin() + index + 1, frames.at(index));
 }
 
 void Sprite::moveFrame(int fromIndex, int toIndex)
 {
-    // Check for invalid indices
-    if (!isValidIndex(fromIndex))
+    // Return if either index is invalid
+    if (!isValidFrameIndex(fromIndex))
         return;
 
-    if (!isValidIndex(toIndex))
+    if (!isValidFrameIndex(toIndex))
         return;
 
     // No changes if both indices are the same
@@ -93,7 +94,7 @@ void Sprite::moveFrame(int fromIndex, int toIndex)
     // Insert it into the new position
     frames.insert(frames.begin() + toIndex, movedFrame);
 
-    // Keep currentFrameIndex pointing to the same frame after the move
+    // Keep currentFrameIndex referring to the same frame after reordering
     if (currentFrameIndex == fromIndex)
     {
         currentFrameIndex = toIndex;
@@ -136,5 +137,5 @@ void Sprite::setFPS(int fps)
 
 int Sprite::getFrameCount() const
 {
-    return frames.size();
+    return static_cast<int>(frames.size());
 }
