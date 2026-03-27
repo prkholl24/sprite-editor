@@ -1,8 +1,19 @@
+/**
+ * @file frame.h
+ * @brief Declaration of the Frame class.
+ *
+ * This class manages a 2D array of Pixel objects which represents a still image.
+ *
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/26/2026 3:01PM MST by Charles Adair
+ */
+
 #ifndef FRAME_H
 
 #define FRAME_H
 
-#include <QObject>
 #include "pixel.h"
 
 /**
@@ -11,26 +22,16 @@
  * This supports
  */
 
-class Frame : public QObject
+class Frame
 {
-    Q_OBJECT
 public:
-    /**
-     * @brief width is the maximum x value which can be retrieved or set.
-     */
-    int width;
-
-    /**
-     * @brief heightis the maximum y value which can be retrieved or set.
-     */
-    int height;
-
     /**
      * @brief Frame constructor
      *
-     * @param parent the Sprite object which holds this Frame object.
+     * @param x the width of the frame
+     * @param y the height of the frame
      */
-    explicit Frame(QObject *parent = nullptr);
+    explicit Frame(int x = 16, int y = 16 );
 
     /**
      * @brief getPixel of the location specified.
@@ -39,32 +40,35 @@ public:
      * @param y value where 0 is the top-most row.
      * @return the Pixel object located at the x and y specified
      */
-    std::vector<int> getPixelColor(int x, int y);
+    Pixel& getPixel(int x, int y);
 
     /**
-     * @brief setPixel
-     *
-     * @param x value where 0 is the left-most column.
-     * @param y value where 0 is the top-most row..
-     * @param color represented by a vector containing four integers in this order–red, green, blue, alpha (opacity).
+     * @brief Gets the width of the frame.
+     * @return frame width
      */
-    void setPixelColor(int x, int y, std::vector<int> color);
+    int getWidth() const;
 
     /**
-     * @brief changeResolution changes the maximum allowed input values for set and get pixel and initializes the pixels.
-     *
-     * @param w – the new maxmium width.
-     * @param h - the new maximum height.
+     * @brief Gets the height of the frame.
+     * @return frame height
      */
-    void setResolution(int w, int h);
+    int getHeight() const;
 
 private:
+    /**
+     * @brief width of the frame
+     */
+    int width;
+
+    /**
+     * @brief height of the frame
+     */
+    int height;
+
     /**
      * @brief pixels is two dimensional vector containing all of the color data through Pixel objects.
      */
     std::vector<std::vector<Pixel>> pixels;
-
-signals:
 };
 
 #endif // FRAME_H

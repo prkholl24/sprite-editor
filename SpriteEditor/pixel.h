@@ -1,36 +1,30 @@
 /**
  * @file pixel.h
+ * @brief Declaration of the Pixel class
  *
- * @brief Declaration of the Pixel class used in the sprite editor.
+ * This class represents a Pixel which contains color data
  *
- * The Pixel class represents a single pixel within a frame. It stores
- * color information using RGBA values and provides methods to access
- * and modify those values. This class is part of the model layer and
- * is used by the Frame class to represent image data.
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
  *
- * @authors:
- * @date last modified:
+ * Last Revision: 3/26/2026 3:02PM MST by Charles Adair
  */
 
 #ifndef PIXEL_H
 #define PIXEL_H
 
-#include <QObject>
 #include <vector>
 
-class Pixel : public QObject
+class Pixel
 {
-    Q_OBJECT
 public:
 
     /**
      * @brief Default constructor for Pixel.
      *
      * Initializes a Pixel object with no color set.
-     *
-     * @param parent Optional QObject parent.
      */
-    explicit Pixel(QObject *parent = nullptr);
+    Pixel();
 
     /**
      * @brief Constructs a Pixel with a specified color.
@@ -39,7 +33,7 @@ public:
      *
      * @param color A vector of integers representing RGBA values.
      */
-    Pixel(std::vector<int>& color);
+    Pixel(const std::vector<int>& color);
 
     /**
      * @brief Copy constructor for Pixel.
@@ -48,7 +42,7 @@ public:
      *
      * @param px The Pixel to copy.
      */
-    Pixel(Pixel& px);
+    Pixel(const Pixel& px);
 
     /**
      * @brief Assignment operator for Pixel.
@@ -56,26 +50,28 @@ public:
      * Assigns the color values from another Pixel to this Pixel.
      *
      * @param px The Pixel to copy from.
+     * @return A reference to this Pixel.
      */
-    void operator=(Pixel& px);
+    Pixel& operator=(const Pixel& px);
 
     /**
      * @brief Gets the color of the Pixel.
      *
      * Returns the RGBA color values stored in this Pixel.
      *
-     * @return A reference to a vector of integers representing RGBA values.
+     * @return A vector of integers representing RGBA values.
      */
-    std::vector<int>& getColor();
+    std::vector<int> getColor() const;
 
     /**
      * @brief Sets the color of the Pixel.
      *
-     * Updates the Pixel’s RGBA color values.
+     * Updates the Pixel’s RGBA color values if the input is valid.
+     * Vector must be length 4 and all values must be between 0-255.
      *
      * @param newColor A vector of integers representing RGBA values.
      */
-    void setColor(std::vector<int>& newColor);
+    void setColor(const std::vector<int>& newColor);
 
     /**
      * @brief Sets the opacity of the Pixel.
@@ -87,12 +83,13 @@ public:
     void setOpacity(int opacity);
 
 private:
-    //Color expressed as 4 int values
-    //Red, Green, Blue, Alpha (Gamma/Opacity)
+
+    /**
+     * @brief color expressed as 4 int values
+     *
+     * Red, Green, Blue, Alpha (Gamma/Opacity)
+     */
     std::vector<int> color;
-
-
-signals:
 };
 
 #endif // PIXEL_H

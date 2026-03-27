@@ -1,43 +1,34 @@
+/**
+ * @file frame.cpp
+ * @brief implementation of the Frame class.
+ *
+ * This class manages a 2D array of Pixel objects which represents a still image.
+ *
+ * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/26/2026 3:00PM MST by Charles Adair
+ */
 #include "frame.h"
 
-Frame::Frame(QObject *parent)
-    : QObject{parent}
+Frame::Frame(int x, int y)
+    : width(x), height(y)
 {
-    width = 16;
-    height = 16;
+    pixels.resize(width);
+    for (int i = 0; i < width; i++) {
+        pixels[i].resize(height);
+    }
  }
 
-// Frame::Frame(int width, int height){
-
-//     this->width = width;
-//     this->height = height;
-
-//     std::vector<int> defaultColor {255, 255, 255, 1};
-
-//     for (int i = 0; i < width; i++ ){
-//         for(int z = 0; z < height; z++){
-
-//             pixels[i][z].setColor(defaultColor);
-
-//         }
-//     }
-
-std::vector<int> Frame::getPixelColor(int x, int y) {
-    if (x > width || y > height) {
-        throw std::invalid_argument("Index is out of bounds.");
-    };
-    return pixels[x][y].getColor();
+Pixel& Frame::getPixel(int x, int y) {
+    return pixels[x][y];
 }
 
-void Frame::setPixelColor(int x, int y, std::vector<int> color) {
-    if (x > width || y > height) {
-        throw std::invalid_argument("Index is out of bounds.");
-    };
-    pixels[x][y].setColor(color);
+int Frame::getWidth() const {
+    return width;
 }
 
-void Frame::setResolution(int w, int h) {
-    width = w;
-    height = h;
+int Frame::getHeight() const {
+    return height;
 }
 

@@ -1,49 +1,62 @@
 /**
  * @file sprite.cpp
- * @brief implementation of the Sprite class.
+ * @brief Implementation of the Sprite class.
  *
- * This class manages a collection of Frame objects and controls animation
- * behavior such as frame order and grames per second.
- * It also tracks the currently active frame.
+ * This file contains the method definitions for the Sprite class.
+ * A Sprite stores multiple Frame objects and manages animation data
+ * such as the current frame and playback speed.
  *
- * @authors
- * @date
+ * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/26/2026
+ *
+ * Last Revision: 3/27/2026 1:25AM MST by Charles Adair
  */
+
 #include "sprite.h"
 
-sprite::sprite(QObject *parent)
-    : QObject{parent}
-{}
-
-/**
- * @brief Adds a new frame to the end of the frame array.
- * @param The frame you want to add
- */
-void sprite::addFrame(Frame f) {
-    frames.push_back(f);
+Sprite::Sprite(int width, int height) : fps(12), width(width), height(height) {
+    frames.push_back(Frame(width, height));
 }
 
-/**
- * @brief Removes the desired frame from the frame array.
- * @param The index of the frame to delete
- */
-void sprite::removeFrame(int index) {
-    frames.erase(frames.begin() + index);
-    frames.shrink_to_fit();
+
+void Sprite::addFrame() {
+    frames.push_back(Frame(width, height));
 }
 
-/**
- * @brief getCurrentFrame - Gets the desired frame
- * @return
- */
-Frame sprite::getFrame(int index) {
+
+void Sprite::removeFrame(int index) {
+    if (index >= 0 && index < (int)frames.size()) {
+        frames.erase(frames.begin() + index);
+    }
+}
+
+void Sprite::duplicateFrame(int index) {
+    if (index >= 0 && index < (int)frames.size()) {
+        frames.insert(frames.begin() + index + 1, frames[index]);
+    }
+}
+
+Frame& Sprite::getFrame(int index) {
     return frames[index];
 }
 
-void sprite::setFPS(int newFps) {
+
+void Sprite::setFPS(int newFps) {
     fps = newFps;
 }
 
-int sprite::getFrameCount() {
-    return frames.size();
+int Sprite::getFPS() const {
+    return fps;
+}
+
+int Sprite::getFrameCount() const {
+    return (int)frames.size();
+}
+
+int Sprite::getWidth() const {
+    return width;
+}
+
+int Sprite::getHeight() const {
+    return height;
 }
