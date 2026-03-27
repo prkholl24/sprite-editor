@@ -14,19 +14,25 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     pixel.cpp \
-    sprite.cpp
+    sprite.cpp \
+    toolbar.cpp
 
 HEADERS += \
     controller.h \
     frame.h \
     mainwindow.h \
     pixel.h \
-    sprite.h
+    sprite.h \
+    toolbar.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    toolbar.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

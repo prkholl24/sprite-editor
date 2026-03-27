@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>paint_brush.png</file>
+        <file>dropper.png</file>
+        <file>eraser.png</file>
+        <file>mirror.png</file>
+        <file>paint_bucket.png</file>
+        <file>rectangle_selection.png</file>
+    </qresource>
+</RCC>
