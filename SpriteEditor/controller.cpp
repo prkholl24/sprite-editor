@@ -1,7 +1,7 @@
 #include "controller.h"
 #include "QAction"
 #include <QInputDialog>
-#include <iostream>
+// #include <iostream>
 
 Controller::Controller(QWidget *parent)
 {
@@ -20,11 +20,14 @@ void Controller::newProjectSlot(int spriteSize){
 
 void Controller::handleCanvasInputSlot(int x, int y){
 
-    switch(currentTool)
+    switch(currentTool) {
+
+        case ToolStates::PaintBucket:
+            fillBucket(x,y);
+            break;
 
 
-
-
+    }
 }
 
 
