@@ -1,5 +1,9 @@
 #include "controller.h"
 
-controller::controller(QObject *parent)
-    : QObject{parent}
-{}
+
+Controller::Controller(QWidget *parent)
+{
+
+}
+
+void savePressed();
