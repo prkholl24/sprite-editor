@@ -16,7 +16,8 @@ SOURCES += \
     mainwindow.cpp \
     pixel.cpp \
     sprite.cpp \
-    toolbar.cpp
+    timeline.cpp \
+    toolbar.cpp \
     spriteTest.cpp
 
 HEADERS += \
@@ -26,11 +27,13 @@ HEADERS += \
     mainwindow.h \
     pixel.h \
     sprite.h \
+    timeline.h \
     toolbar.h
 
 FORMS += \
     canvas.ui \
     mainwindow.ui \
+    timeline.ui \
     toolbar.ui
 
 # Default rules for deployment.
