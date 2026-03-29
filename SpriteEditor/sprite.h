@@ -18,6 +18,7 @@
 
 #include <vector>
 #include "frame.h"
+#include <QJsonObject>
 
 /**
  * @class Sprite
@@ -85,6 +86,13 @@ public:
      * and the current frame index set to 0.
      */
     Sprite();
+
+    /**
+     * @brief Constructor used for loadind saved Sprite objects from stroage
+     *
+     * Uses a saved JSON file to initialize the Sprite state.
+     */
+    Sprite(QJsonObject);
 
     /**
      * @brief Sprite constructor accepts parameters for resolution.

@@ -15,6 +15,17 @@
 
 #include "sprite.h"
 
+Sprite::Sprite()
+{
+    fps = DEFAULT_FPS;
+    frames.push_back(createDefaultFrame());
+}
+
+Sprite::Sprite(QJsonObject jsonFile) {
+    // TO-DO Implement this haha lol very funny.
+    return;
+}
+
 bool Sprite::isValidFrameIndex(int index) const
 {
     return index >= 0 && index < static_cast<int>(frames.size());
@@ -24,12 +35,6 @@ Frame Sprite::createDefaultFrame() const
 {
     Frame defaultFrame(width, height);
     return defaultFrame;
-}
-
-Sprite::Sprite()
-{
-    fps = DEFAULT_FPS;
-    frames.push_back(createDefaultFrame());
 }
 
 void Sprite::removeFrame(int index)
@@ -82,20 +87,6 @@ void Sprite::moveFrame(int fromIndex, int toIndex)
 
     // Insert it into the new position
     frames.insert(frames.begin() + toIndex, movedFrame);
-
-    // Keep currentFrameIndex referring to the same frame after reordering
-    if (currentFrameIndex == fromIndex)
-    {
-        currentFrameIndex = toIndex;
-    }
-    else if (fromIndex < currentFrameIndex && toIndex >= currentFrameIndex)
-    {
-        currentFrameIndex--;
-    }
-    else if (fromIndex > currentFrameIndex && toIndex <= currentFrameIndex)
-    {
-        currentFrameIndex++;
-    }
 }
 
 Frame& Sprite::getFrame(int index) {
