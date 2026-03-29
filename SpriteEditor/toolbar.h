@@ -20,6 +20,8 @@ signals:
 
     void eraserClickedSignal();
 
+    void paintBucketSelected();
+
 private slots:
     void on_PaintBrush_clicked();
 

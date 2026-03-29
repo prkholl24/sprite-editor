@@ -1,7 +1,17 @@
+/**
+ * @file main.cpp
+ * @brief main is called upon execution
+ *
+ * Initializes the application
+ *
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/29/2026
+ *
+ * Last Revision: 3/29/2026 12:46AM MST by Charles Adair
+ */
 #include "mainwindow.h"
 
 #include <QApplication>
-#include "controller.h"
 
 int main(int argc, char *argv[])
 {

@@ -2,8 +2,9 @@
 #define CONTROLLER_H
 
 #include <QObject>
+#include <QWidget>
+#include <vector>
 #include "sprite.h"
-// #include "toolbar.h"
 
 class Controller : public QObject
 {
@@ -17,10 +18,15 @@ private:
     Sprite* model = nullptr;
 
     enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
-    ToolStates currentTool;
+    ToolStates currentTool = ToolStates::StandardBrush;
 
 
-    void fillBucket(int x, int y);
+    void fillBucket();
+
+    Frame* currentFrame = nullptr;
+
+    std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
+
 public:
     /**
      * @brief Controller constructor
@@ -34,13 +40,9 @@ public:
 signals:
 
 public slots:
-
-
     void newProjectSlot(int spriteSize);
-
-    void toolBarEraserClicked();
-
     void handleCanvasInputSlot(int x, int y);
+    void paintBucketSelectedSlot();
 
 };
 

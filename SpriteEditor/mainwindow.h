@@ -32,12 +32,16 @@ signals:
 
     void canvasInput(int x, int y);
 
+    void fillBucketSelected();
+
 private slots:
     void on_actionSave_triggered();
 
     void on_actionNew_triggered();
 
     void on_pushButton_clicked();
+
+    void on_fillBucket_clicked();
 
 private:
     Ui::MainWindow *ui;
