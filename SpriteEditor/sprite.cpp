@@ -10,10 +10,15 @@
  * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/26/2026
  *
- * Last Revision: 3/27/2026 1:25AM MST by Charles Adair
+ * Last Revision: 3/29/2026 12:44AM MST by Charles Adair
  */
 
 #include "sprite.h"
+
+Sprite::Sprite(int width, int height) : fps{DEFAULT_FPS}, width{width}, height{height} {
+    createDefaultFrame();
+    frames.push_back(createDefaultFrame());
+}
 
 bool Sprite::isValidFrameIndex(int index) const
 {
@@ -26,10 +31,8 @@ Frame Sprite::createDefaultFrame() const
     return defaultFrame;
 }
 
-Sprite::Sprite()
+Sprite::Sprite() : fps{DEFAULT_FPS}, width{DEFAULT_WIDTH}, height{DEFAULT_HEIGHT}
 {
-    fps = DEFAULT_FPS;
-    frames.push_back(createDefaultFrame());
 }
 
 void Sprite::removeFrame(int index)
