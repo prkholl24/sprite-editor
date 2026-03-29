@@ -17,7 +17,6 @@ toolbar::~toolbar()
 
 void toolbar::on_PaintBrush_clicked()
 {
-
 }
 
 
