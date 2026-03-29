@@ -16,7 +16,6 @@ public:
     ~toolbar();
 
 private slots:
-
     void on_PaintBrush_clicked();
 
     void on_Eraser_clicked();
