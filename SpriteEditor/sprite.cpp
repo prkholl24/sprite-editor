@@ -82,20 +82,6 @@ void Sprite::moveFrame(int fromIndex, int toIndex)
 
     // Insert it into the new position
     frames.insert(frames.begin() + toIndex, movedFrame);
-
-    // Keep currentFrameIndex referring to the same frame after reordering
-    if (currentFrameIndex == fromIndex)
-    {
-        currentFrameIndex = toIndex;
-    }
-    else if (fromIndex < currentFrameIndex && toIndex >= currentFrameIndex)
-    {
-        currentFrameIndex--;
-    }
-    else if (fromIndex > currentFrameIndex && toIndex <= currentFrameIndex)
-    {
-        currentFrameIndex++;
-    }
 }
 
 Frame& Sprite::getFrame(int index) {
