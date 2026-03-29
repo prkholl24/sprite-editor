@@ -7,6 +7,8 @@ toolbar::toolbar(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //connect
+
 }
 
 toolbar::~toolbar()

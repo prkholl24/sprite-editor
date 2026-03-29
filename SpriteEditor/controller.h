@@ -15,6 +15,12 @@ private:
      * Model object starts uninitialized.
      */
     Sprite* model = nullptr;
+
+    enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
+    ToolStates currentTool;
+
+
+    void fillBucket(int x, int y);
 public:
     /**
      * @brief Controller constructor
@@ -27,8 +33,14 @@ public:
     Controller(QWidget *parent = nullptr);
 signals:
 
-private slots:
-    void savePressed();
+public slots:
+
+
+    void newProjectSlot(int spriteSize);
+
+    void toolBarEraserClicked();
+
+    void handleCanvasInputSlot(int x, int y);
 
 };
 
