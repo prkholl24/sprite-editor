@@ -12,8 +12,7 @@ class Canvas : public QWidget
     Q_OBJECT
 
 public:
-    explicit Canvas(QWidget *parent = nullptr);
-    Canvas(int w, int h, int tileSize, QWidget* parent);
+    Canvas(int w, int h, int tileSize, QWidget* parent = nullptr);
     ~Canvas();
 
 private:
