@@ -1,7 +1,8 @@
 #include "timeline.h"
+#include "controller.h"
 #include "ui_timeline.h"
 
-Timeline::Timeline(QWidget *parent)
+Timeline::Timeline(QWidget *parent, controller* controller)
     : QWidget(parent)
     , ui(new Ui::Timeline)
     , selectedIndex(-1)
@@ -17,6 +18,8 @@ Timeline::Timeline(QWidget *parent)
 
     connect(ui->fpsSlider, &QSlider::valueChanged,
             this, &Timeline::onFpsSliderChanged);
+    connect(controller, &controller::sendPixmap,
+            this, &Timeline::updateButtonImage);
 
     addFrame();
 }
@@ -165,4 +168,9 @@ void Timeline::updateFrameStyles()
             );
         }
     }
+}
+
+void Timeline::updateButtonImage(QPixmap image) {
+    frameButtons[selectedIndex]->setIcon(QIcon(image));
+    frameButtons[selectedIndex]->setIconSize(frameButtons[selectedIndex]->size());
 }

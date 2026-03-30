@@ -1,6 +1,7 @@
 #ifndef TIMELINE_H
 #define TIMELINE_H
 
+#include "controller.h"
 #include <QWidget>
 #include <QPushButton>
 #include <QList>
@@ -19,7 +20,7 @@ public:
      * @brief Default Constructor for Timeline.
      * @param parent: the window to which the Timeline belongs to.
      */
-    explicit Timeline(QWidget *parent = nullptr);
+    explicit Timeline(QWidget *parent = nullptr, controller* controller = nullptr);
 
     /**
      * @brief The default destructor for Timeline.
@@ -94,6 +95,12 @@ signals:
 
 private slots:
     /**
+     * @brief Receives the signal from controller that a button image need to be updated.
+     * Upon receiving the signal, the view draws the image drawn on the frame at index to a more current rendition.
+     */
+    void updateButtonImage(QPixmap image);
+
+    /**
      * @brief Receives the signal from controller that a frame was selected.
      * Upon receiving the signal, the button is redrawn to the "selected" state from the stylesheet.
      */
@@ -143,7 +150,7 @@ private:
     /**
      * @brief The default size of the buttons in the timeline.
      */
-    static const int FRAME_SIZE = 100;
+    static const int FRAME_SIZE = 70;
 };
 
 #endif // TIMELINE_H
