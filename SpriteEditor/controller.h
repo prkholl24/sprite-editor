@@ -105,8 +105,6 @@ public:
      */
     void selectionTool(int x, int y);
 
-
-public:
     /**
      * @brief Controller constructor
      *
@@ -120,6 +118,9 @@ signals:
 
 public slots:
     void newProjectSlot(int spriteSize);
+    void loadProjectSlot();
+    void saveProjectSlot();
+
     void handleCanvasInputSlot(int x, int y);
 
     /// TOOL BAR ///

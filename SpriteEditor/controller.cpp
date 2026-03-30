@@ -13,6 +13,7 @@
 #include "controller.h"
 #include <QMessageBox>
 #include <iostream>
+#include <QJsonObject>
 
 Controller::Controller(QWidget *parent)
 {
@@ -64,6 +65,15 @@ void Controller::newProjectSlot(int spriteSize){
     model = new Sprite(spriteSize, spriteSize);
     currentFrame = &model->getFrame(0);
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
+}
+
+void Controller::loadProjectSlot(){
+
+}
+
+void Controller::saveProjectSlot(){
+
+    model::json
 }
 
 

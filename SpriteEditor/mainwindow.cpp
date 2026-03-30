@@ -15,7 +15,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QAction>
-#include <iostream>
 #include "controller.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -26,9 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
     control = new Controller(this);
 
     //Connecting signal new project in mainwindow to slot newProjectSlot in controller
-    connect(this, &MainWindow::newProject, control, &Controller::newProjectSlot);
+    connect(this, &MainWindow::newProjectSignal, control, &Controller::newProjectSlot);
 
+    connect(this, &MainWindow::loadProjectSignal, control, &Controller::loadProjectSlot);
 
+    connect(this, &MainWindow::saveProjectSignal, control, &Controller::saveProjectSlot);
 
     connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
 
@@ -52,12 +53,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-
 void MainWindow::on_actionSave_triggered()
 {
-    std::cout << "hello world" << std::endl;
+    emit saveProjectSignal();
 }
 
 
@@ -67,9 +65,8 @@ void MainWindow::on_actionNew_triggered()
 
     int spriteSize = QInputDialog::getInt(nullptr, "New Srite Wizard", "Please enter the resolution", QLineEdit::Normal);
 
-    emit newProject(spriteSize);
+    emit newProjectSignal(spriteSize);
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -78,6 +75,6 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_actionLoad_triggered()
 {
-
+    emit loadProjectSignal();
 }
 

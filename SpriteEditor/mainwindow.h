@@ -23,8 +23,11 @@ public:
 
 signals:
 
-    void newProject(int spriteSize);
+    void newProjectSignal(int spriteSize);
 
+    void loadProjectSignal();
+
+    void saveProjectSignal();
 
 
     void canvasInput(int x, int y);
