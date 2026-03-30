@@ -42,6 +42,8 @@ signals:
     void frameModified();
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
+    // sends specific pixel data to the canvas.
+    void drawPixel(int x, int y, std::vector<int> color);
 
 public slots:
     /**

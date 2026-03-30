@@ -8,6 +8,7 @@ Canvas::Canvas(QWidget *parent)
     , spriteHeight(16)
 {
     ui->setupUi(this);
+    setMinimumSize(500, 500);
     render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
 }
 
@@ -29,11 +30,24 @@ void Canvas::initialize(int width, int height) {
 }
 
 void Canvas::paintEvent(QPaintEvent *event) {
-    return;
+    QPainter painter(this);
+    painter.fillRect(rect(), Qt::white);
+
+    // Takes the data stored into `render` and blows it up to fill 500x500 pixels.
+    QImage scaled = render.scaled(size(), Qt::KeepAspectRatio, Qt::FastTransformation);
+    int x = (width() - scaled.width()) / 2;
+    int y = (height() - scaled.height()) / 2;
+
+    painter.drawImage(x, y, scaled);
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event) {
-    return;
+    if (event->button() == Qt::LeftButton) {
+        QPoint spritePos = mapToSprite(event->pos());
+        if (spritePos.x() != -1) {
+            emit canvasInputSignal(spritePos.x(), spritePos.y());
+        }
+    }
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event) {
@@ -41,5 +55,21 @@ void Canvas::mouseMoveEvent(QMouseEvent *event) {
 }
 
 QPoint Canvas::mapToSprite(const QPoint &pos) const {
-    return pos;
+
+    // Scales the input down to the spriteHeight and spriteWidth and determines which
+    // pixel is equivalent.
+    QImage scaled = render.scaled(size(), Qt::KeepAspectRatio, Qt::FastTransformation);
+    int offsetX = (width() - scaled.width()) / 2;
+    int offsetY = (height() - scaled.height()) / 2;
+
+    int relativeX = pos.x() - offsetX;
+    int relativeY = pos.y() - offsetY;
+
+    int spriteX = (relativeX * spriteWidth) / scaled.width();
+    int spriteY = (relativeY * spriteHeight) / scaled.height();
+
+    spriteX = std::max(0, std::min(spriteX, spriteWidth - 1));
+    spriteY = std::max(0, std::min(spriteY, spriteHeight - 1));
+
+    return QPoint(spriteX, spriteY);
 }

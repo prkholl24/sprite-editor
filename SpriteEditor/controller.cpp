@@ -69,6 +69,8 @@ void Controller::newProjectSlot(int spriteSize){
 
 void Controller::handleCanvasInputSlot(int x, int y){
     if (!(model == nullptr)) {
+        // TO-DO: Remove std::cout statements.
+        std::cout << "Input at: (" << x << ", " << y << ")" << std::endl;
         switch(currentTool) {
 
         case ToolStates::PaintBucket:
