@@ -129,18 +129,18 @@ QJsonObject Sprite::toJson() const {
 
 }
 
-Sprite Sprite::fromJson(const QJsonObject &json){
+Sprite* Sprite::fromJson(const QJsonObject &json){
     int size = json["Size"].toInt();
     int fps = json["FPS"].toInt();
     QJsonArray jsonFrames = json["Frames"].toArray();
 
-    Sprite newSprite(size,size);
-    newSprite.setFPS(fps);
-    newSprite.frames.clear();
+    Sprite* newSprite = new Sprite(size,size);
+    newSprite->setFPS(fps);
+    newSprite->frames.clear();
 
     for (const QJsonValue jsonFrame : jsonFrames){
         Frame frame = Frame::fromJson(jsonFrame.toObject());
-        newSprite.frames.push_back(frame);
+        newSprite->frames.push_back(frame);
     }
 
     return newSprite;

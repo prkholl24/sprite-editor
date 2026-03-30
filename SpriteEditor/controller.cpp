@@ -15,6 +15,7 @@
 #include <iostream>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QFileDialog>
 
 Controller::Controller(QWidget *parent)
 {
@@ -68,16 +69,37 @@ void Controller::newProjectSlot(int spriteSize){
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
 }
 
-void Controller::loadProjectSlot(){
+void Controller::loadProjectSlot(QString filePath){
+    QFile file(filePath);
+
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    model = Sprite::fromJson(doc.object());
 
 }
 
-void Controller::saveProjectSlot(){
+void Controller::saveProjectSlot(QString filePath){
     QJsonObject object = model->toJson();
 
     QJsonDocument output(object);
 
-    std::cout << output.toJson().toStdString() << std::endl;
+    QByteArray data = output.toJson();
+
+    QFile file(filePath);
+
+    if(!file.open(QIODevice::WriteOnly)){
+        return;
+    }
+
+    file.write(data);
+    file.close();
+
 }
 
 

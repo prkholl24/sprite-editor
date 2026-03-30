@@ -16,6 +16,7 @@
 #include "ui_mainwindow.h"
 #include <QAction>
 #include "controller.h"
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -55,13 +56,26 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionSave_triggered()
 {
-    emit saveProjectSignal();
+    QString fileName = QFileDialog::getSaveFileName(this, "Save Sprite", "", "JSON Files (*.json);;All Files (*)");
+
+    if(fileName.isEmpty()){
+        return;
+    }
+
+    emit saveProjectSignal(fileName);
 }
 
 
 void MainWindow::on_actionLoad_triggered()
 {
-    emit loadProjectSignal();
+
+    QString fileName = QFileDialog::getOpenFileName(this, "Save Sprite", "", "JSON Files (*.json);;All Files (*)");
+
+    if(fileName.isEmpty()){
+        return;
+    }
+
+    emit loadProjectSignal(fileName);
 }
 
 /// TEST SLOTS MEANT FOR TESTING ///

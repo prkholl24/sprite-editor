@@ -118,8 +118,8 @@ signals:
 
 public slots:
     void newProjectSlot(int spriteSize);
-    void loadProjectSlot();
-    void saveProjectSlot();
+    void loadProjectSlot(QString filePath);
+    void saveProjectSlot(QString filePath);
 
     void handleCanvasInputSlot(int x, int y);
 

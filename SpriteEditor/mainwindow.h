@@ -25,9 +25,9 @@ signals:
 
     void newProjectSignal(int spriteSize);
 
-    void loadProjectSignal();
+    void loadProjectSignal(QString filePath);
 
-    void saveProjectSignal();
+    void saveProjectSignal(QString filePath);
 
 
     void canvasInput(int x, int y);

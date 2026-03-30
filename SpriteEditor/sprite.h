@@ -181,7 +181,7 @@ public:
      * @param json test
      * @return Sprite Object
      */
-    static Sprite fromJson(const QJsonObject &json);
+    static Sprite* fromJson(const QJsonObject &json);
 };
 
 #endif // SPRITE_H
