@@ -7,6 +7,7 @@
 #include <QWidget>
 #include <vector>
 #include "sprite.h"
+#include "palettedata.h"
 
 class Controller : public QObject
 {
@@ -42,12 +43,53 @@ private:
      */
     Frame* colorPalette = nullptr;
 
+    PaletteType selectedPalette = PaletteType::Default;
+
     /**
      * @brief updateColorPalette
      *
      * Handles drawing to the color palette.
      */
     void updateColorPalette();
+
+    /**
+     * @brief defaultPalette
+     * @return
+     *
+     * Creates the default color wheel
+     */
+    Frame* defaultPalette();
+
+    /**
+     * @brief artDecoPalette
+     * @return
+     */
+    Frame* artDecoPalette();
+
+    /**
+     * @brief retroPastelPalette
+     * @return
+     */
+    Frame* retroPastelPalette();
+
+    /**
+     * @brief sixtiesPopPalette
+     * @return
+     */
+    Frame* sixtiesPopPalette();
+
+    /**
+     * @brief seventiesEarthPalette
+     * @return
+     */
+    Frame* seventiesEarthPalette();
+
+    /**
+     * @brief eightiesNeonPalette
+     * @return
+     */
+    Frame* eightiesNeonPalette();
+
 public:
     /**
      * @brief Controller constructor
@@ -181,10 +223,9 @@ public slots:
      * @param size effects the number of colors which are created
      *
      * Creates a new Frame object and populates it with colors.
-     * Uses a O(size^2) loop to create as many unique colors between
-     * RGB(0,0,0) and RGB(255,255,255) as possible.
+     * Colors a
      */
-    void initializePalette(int size);
+    void initializePalette();
 
     void newProjectSlot(int spriteSize);
 

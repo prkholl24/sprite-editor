@@ -51,7 +51,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>37</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -62,7 +62,13 @@
     <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
    </widget>
+   <widget class="QMenu" name="menuPalettes">
+    <property name="title">
+     <string>Palettes</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuPalettes"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">

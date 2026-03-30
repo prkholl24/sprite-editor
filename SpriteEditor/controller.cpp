@@ -213,27 +213,51 @@ void Controller::handleColorPaletteInput(int x, int y) {
     }
 }
 
-void Controller::initializePalette(int size) {
+void Controller::initializePalette() {
     if (colorPalette) {
         delete colorPalette;
     }
-    colorPalette = new Frame(size, size);
 
-    int increments = 255 / (size - 1);
-
-    int r = 0, g = 0, b = 0;
-
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            colorPalette->getPixel(i, j).setColor(std::vector<int>{r, g, b, 255});
-
-            // TO-DO: Fix this really bad color palette init.
-            r > 255 ? r = 255 : r += increments;
-            g > 255 ? g = 255 : g += increments;
-            b > 255 ? b = 255 : b += increments;
-        }
+    switch (selectedPalette) {
+    case PaletteType::Default:
+        colorPalette = defaultPalette();
+        break;
+    case PaletteType::ArtDecoGold:
+    case PaletteType::RetroPastel:
+    case PaletteType::SixtiesPop:
+    case PaletteType::SeventiesEarth:
+    case PaletteType::EightiesNeon:
+        break;
     }
     updateColorPalette();
+}
+
+Frame* Controller::eightiesNeonPalette(){
+    Frame* eightiesPalette = new Frame(3,3);
+
+    eightiesPalette->getPixel(0,0).setColor(std::vector<int> {0,0,0,255});
+    eightiesPalette->getPixel(1,1).setColor(std::vector<int> {123,0,0,255});
+    return eightiesPalette;
+}
+
+Frame* Controller::seventiesEarthPalette() {
+    return new Frame();
+}
+
+Frame* Controller::sixtiesPopPalette() {
+    return new Frame();
+}
+
+Frame* Controller::retroPastelPalette() {
+    return new Frame();
+}
+
+Frame* Controller::artDecoPalette() {
+    return new Frame();
+}
+
+Frame* Controller::defaultPalette() {
+    return new Frame();
 }
 
 //TOOLBAR
