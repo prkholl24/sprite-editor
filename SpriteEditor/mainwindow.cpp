@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->canvas, &Canvas::canvasInputSignal, control, &Controller::handleCanvasInputSlot);
 
+    connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
+
+    connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
+
     // Direct connection from Toolbar to Controller
     connect(ui->toolbarWidget, &toolbar::standardBrushSelectedSignal, control, &Controller::standardBrushSelectedSlot);
 

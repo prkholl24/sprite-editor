@@ -28,6 +28,12 @@ private:
     ToolStates currentTool = ToolStates::StandardBrush;
     
     void fillBucket();
+
+    /**
+     * @brief Loops through the current frame and emits drawPixel for every pixel.
+     * Ensures the Canvas View is perfectly synced with the Model.
+     */
+    void updateCanvas();
 public:
     /**
      * @brief Controller constructor
@@ -44,6 +50,9 @@ signals:
     void sendPixmap(int index, QPixmap map);
     // sends specific pixel data to the canvas.
     void drawPixel(int x, int y, std::vector<int> color);
+
+    // tells the canvas to resize its internal buffers.
+    void initializeCanvas(int width, int height);
 
 public slots:
     /**

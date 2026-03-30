@@ -1,3 +1,13 @@
+/**
+ * @file canvas.cpp
+ * @brief implementation of the Canvas widget
+ * Displays the Frame data and processes inputs to send back to the controller
+ *
+ * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * @date 3/29/2026
+ *
+ * Last Revision: 3/30/2026 12:56AM MST by Charles Adair
+ */
 #include "canvas.h"
 #include "ui_canvas.h"
 
@@ -10,6 +20,7 @@ Canvas::Canvas(QWidget *parent)
     ui->setupUi(this);
     setMinimumSize(500, 500);
     render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
+    render.fill(Qt::transparent);
 }
 
 Canvas::~Canvas()
@@ -18,7 +29,12 @@ Canvas::~Canvas()
 }
 
 void Canvas::drawPixel(int x, int y, std::vector<int> color) {
-    return;
+    if (x < 0 || x >= spriteWidth || y < 0 || y >= spriteHeight)
+        return;
+    
+    QColor qcolor(color[0], color[1], color[2], color[3]);
+    render.setPixelColor(x, y, qcolor);
+    update();
 }
 
 void Canvas::initialize(int width, int height) {
