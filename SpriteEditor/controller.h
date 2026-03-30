@@ -49,6 +49,12 @@ public slots:
     void convertAllFrames(const std::vector<Frame>& frames);
 
     /**
+     * @brief Sets the sprite's framerate accordingly upon reception of an fpsChanged() signal.
+     * @param fps The FPS value to set.
+     */
+    void setSpriteFPS(int fps);
+
+    /**
      * @brief standardBrush
      *
      * Paints one pixel in Sprite.

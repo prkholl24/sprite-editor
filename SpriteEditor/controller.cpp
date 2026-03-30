@@ -40,6 +40,10 @@ void Controller::convertAllFrames(const std::vector<Frame>& frames) {
     }
 }
 
+void Controller::setSpriteFPS(int fps) {
+    model->setFPS(fps);
+}
+
 void Controller::fillBucketLogic(std::vector<std::vector<Pixel>>& pixelGrid, int x, int y, std::vector<int> oldColor) {
     int gridSize = pixelGrid.size();
 
