@@ -20,7 +20,7 @@ public:
      * @brief Default Constructor for Timeline.
      * @param parent: the window to which the Timeline belongs to.
      */
-    explicit Timeline(QWidget *parent = nullptr, controller* controller = nullptr);
+    explicit Timeline(QWidget *parent = nullptr, Controller* controller = nullptr);
 
     /**
      * @brief The default destructor for Timeline.

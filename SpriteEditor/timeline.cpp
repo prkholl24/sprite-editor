@@ -2,7 +2,7 @@
 #include "controller.h"
 #include "ui_timeline.h"
 
-Timeline::Timeline(QWidget *parent, controller* controller)
+Timeline::Timeline(QWidget *parent, Controller* controller)
     : QWidget(parent)
     , ui(new Ui::Timeline)
     , selectedIndex(-1)
@@ -18,7 +18,7 @@ Timeline::Timeline(QWidget *parent, controller* controller)
 
     connect(ui->fpsSlider, &QSlider::valueChanged,
             this, &Timeline::onFpsSliderChanged);
-    connect(controller, &controller::sendPixmap,
+    connect(controller, &Controller::sendPixmap,
             this, &Timeline::updateButtonImage);  // Now passes (int index, QPixmap image)
 
     addFrame();
