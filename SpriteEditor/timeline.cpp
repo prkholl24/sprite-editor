@@ -19,7 +19,7 @@ Timeline::Timeline(QWidget *parent, controller* controller)
     connect(ui->fpsSlider, &QSlider::valueChanged,
             this, &Timeline::onFpsSliderChanged);
     connect(controller, &controller::sendPixmap,
-            this, &Timeline::updateButtonImage);
+            this, &Timeline::updateButtonImage);  // Now passes (int index, QPixmap image)
 
     addFrame();
 }
@@ -118,6 +118,22 @@ void Timeline::setFps(int value)
     ui->fpsSlider->setValue(value);
 }
 
+void Timeline::setFrameCount(int count)
+{
+    // Clear all existing buttons
+    while (!frameButtons.isEmpty()) {
+        QPushButton* btn = frameButtons.takeLast();
+        ui->frameLayout->removeWidget(btn);
+        delete btn;
+    }
+    selectedIndex = -1;
+
+    // Add the specified number of frames
+    for (int i = 0; i < count; ++i) {
+        addFrame();
+    }
+}
+
 void Timeline::onFrameClicked()
 {
     QPushButton* clickedBtn = qobject_cast<QPushButton*>(sender());
@@ -170,7 +186,9 @@ void Timeline::updateFrameStyles()
     }
 }
 
-void Timeline::updateButtonImage(QPixmap image) {
-    frameButtons[selectedIndex]->setIcon(QIcon(image));
-    frameButtons[selectedIndex]->setIconSize(frameButtons[selectedIndex]->size());
+void Timeline::updateButtonImage(int index, QPixmap image) {
+    if (index < 0 || index >= frameButtons.size())
+        return;
+    frameButtons[index]->setIcon(QIcon(image));
+    frameButtons[index]->setIconSize(frameButtons[index]->size());
 }

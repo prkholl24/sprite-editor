@@ -4,6 +4,7 @@
 #include "frame.h"
 #include "qpixmap.h"
 #include <QObject>
+#include <vector>
 
 class controller : public QObject
 {
@@ -16,16 +17,23 @@ private:
 
 signals:
     // sends the pixmap over to the view.
-    void sendPixmap(QPixmap map);
+    void sendPixmap(int index, QPixmap map);
 
-private slots:
+public slots:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
      * Does this via "emit sendPixmap(pixmap-you-just-made)".
-     * @param frame
-     * @return
+     * @param index The index of the frame button to update
+     * @param frame The frame to convert
      */
-    void convertToPixmap(Frame frame);
+    void convertToPixmap(int index, Frame frame);
+
+    /**
+     * @brief Converts all frames to pixmaps and sends them to the timeline.
+     * Use this when loading a new sprite or initializing the timeline.
+     * @param frames Vector of all frames to convert
+     */
+    void convertAllFrames(const std::vector<Frame>& frames);
 
 };
 

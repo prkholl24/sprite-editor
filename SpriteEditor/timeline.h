@@ -68,6 +68,14 @@ public:
      */
     void setFps(int value);
 
+    /**
+     * @brief Sets the number of frame buttons in the timeline.
+     * Clears existing buttons and creates the specified number of new ones.
+     * Use this when loading a new sprite to sync button count with frame count.
+     * @param count The number of frames to display.
+     */
+    void setFrameCount(int count);
+
 signals:
     /**
      * @brief Tells the controller that a frame at the index has been chosen.
@@ -97,8 +105,10 @@ private slots:
     /**
      * @brief Receives the signal from controller that a button image need to be updated.
      * Upon receiving the signal, the view draws the image drawn on the frame at index to a more current rendition.
+     * @param index The index of the frame button to update
+     * @param image The pixmap to display on the button
      */
-    void updateButtonImage(QPixmap image);
+    void updateButtonImage(int index, QPixmap image);
 
     /**
      * @brief Receives the signal from controller that a frame was selected.
