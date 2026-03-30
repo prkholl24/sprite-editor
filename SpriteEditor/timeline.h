@@ -129,9 +129,8 @@ private slots:
     void onRemoveFrameClicked();
 
     /**
-     * @brief Receives the signal from controller that a new value for FPS has been selected through the scroll bar.
-     * Upon receivng the signal, the FPS counter is redrawn to show the new value.
-     * @param The new recorded FPS value.
+     * @brief When the FPS slider is modified, this slot will emit the fpsChanged() signal.
+     * @param The modified FPS value.
      */
     void onFpsSliderChanged(int value);
 
