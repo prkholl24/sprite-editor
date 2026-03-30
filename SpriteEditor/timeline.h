@@ -110,15 +110,39 @@ private slots:
      * Upon receiving the signal, the the desired frame is removed from the UI.
      */
     void onRemoveFrameClicked();
+
+    /**
+     * @brief Receives the signal from controller that a new value for FPS has been selected through the scroll bar.
+     * Upon receivng the signal, the FPS counter is redrawn to show the new value.
+     * @param The new recorded FPS value.
+     */
     void onFpsSliderChanged(int value);
 
 private:
+    /**
+     * @brief Redraws the frames (which are buttons) to the "selected" style.
+     */
     void updateFrameStyles();
 
+    /**
+     * @brief This is the UI element that the timeline belongs to.
+     */
     Ui::Timeline *ui;
+
+    /**
+     * @brief The internal frame array that stores all the frames (which are buttons). This list is different from the array of frames
+     * contained in the model, since these are QPushButtons rather than Frame objects.
+     */
     QList<QPushButton*> frameButtons;
+
+    /**
+     * @brief The index of the selected frame. This tells the view which button the blue outline should be drawn upon.
+     */
     int selectedIndex;
 
+    /**
+     * @brief The default size of the buttons in the timeline.
+     */
     static const int FRAME_SIZE = 100;
 };
 
