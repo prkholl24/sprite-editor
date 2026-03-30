@@ -14,6 +14,7 @@
  */
 
 #include "sprite.h"
+#include <iostream>
 
 Sprite::Sprite(int width, int height) : fps{DEFAULT_FPS}, width{width}, height{height} {
     createDefaultFrame();
@@ -133,15 +134,19 @@ Sprite* Sprite::fromJson(const QJsonObject &json){
     int size = json["Size"].toInt();
     int fps = json["FPS"].toInt();
     QJsonArray jsonFrames = json["Frames"].toArray();
+    std::cout << "sprite:137" << std::endl;
 
     Sprite* newSprite = new Sprite(size,size);
     newSprite->setFPS(fps);
     newSprite->frames.clear();
+    std::cout << "sprite:142" << std::endl;
 
-    for (const QJsonValue jsonFrame : jsonFrames){
+    for (const QJsonValue &jsonFrame : std::as_const(jsonFrames)){
+
         Frame frame = Frame::fromJson(jsonFrame.toObject());
+        std::cout << "sprite:147" << std::endl;
         newSprite->frames.push_back(frame);
     }
-
+    std::cout << "Made it to return newSprite in sprite.cpp" << std::endl;
     return newSprite;
 }

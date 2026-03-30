@@ -72,6 +72,8 @@ void Controller::newProjectSlot(int spriteSize){
 void Controller::loadProjectSlot(QString filePath){
     QFile file(filePath);
 
+    std::cout << "in load project slot" << std::endl;
+
     if(!file.open(QIODevice::ReadOnly)){
         return;
     }
@@ -80,6 +82,7 @@ void Controller::loadProjectSlot(QString filePath){
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
 
+    std::cout << "Line 85 above Sprite::fromJson" << std::endl;
     model = Sprite::fromJson(doc.object());
 
 }
