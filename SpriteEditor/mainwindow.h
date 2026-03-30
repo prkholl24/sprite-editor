@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QInputDialog>
+#include "controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +19,30 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+//public slots: void openFile();
+
+signals:
+
+    void newProject(int spriteSize);
+
+
+
+    void canvasInput(int x, int y);
+
+
+private slots:
+    void on_actionSave_triggered();
+
+    void on_actionNew_triggered();
+
+    void on_pushButton_clicked();
+
+
 private:
     Ui::MainWindow *ui;
+
+    Controller* control = nullptr;
+
+
 };
 #endif // MAINWINDOW_H
