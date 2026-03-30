@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="toolbar" name="widget" native="true">
+   <widget class="toolbar" name="toolbarWidget" native="true">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -27,10 +27,10 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>279</x>
+      <x>169</x>
       <y>300</y>
-      <width>231</width>
-      <height>51</height>
+      <width>341</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="text">
@@ -44,7 +44,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

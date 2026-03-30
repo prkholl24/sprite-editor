@@ -31,7 +31,18 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
 
     // Direct connection from Toolbar to Controller
-    connect(ui->widget, &toolbar::paintBucketSelected, control, &Controller::paintBucketSelectedSlot);
+    connect(ui->toolbarWidget, &toolbar::standardBrushSelectedSignal, control, &Controller::standardBrushSelectedSlot);
+
+    connect(ui->toolbarWidget, &toolbar::eraserToolSelectedSignal, control, &Controller::eraserToolSelectedSlot);
+
+    connect(ui->toolbarWidget, &toolbar::paintBucketSelectedSignal, control, &Controller::paintBucketSelectedSlot);
+
+    connect(ui->toolbarWidget, &toolbar::eyeDropperToolSelectedSignal, control, &Controller::eyeDropperToolSelectedSlot);
+
+    connect(ui->toolbarWidget, &toolbar::mirrorToolSelectedSignal, control, &Controller::mirrorToolSelectedSlot);
+
+    connect(ui->toolbarWidget, &toolbar::selectionToolSelectedSignal, control, &Controller::selectionToolSelectedSlot);
+
 }
 
 MainWindow::~MainWindow()
@@ -48,7 +59,7 @@ void MainWindow::on_actionSave_triggered()
 }
 
 
-
+/// TEST SLOTS MEANT FOR TESTING ///
 void MainWindow::on_actionNew_triggered()
 {
 
@@ -61,9 +72,4 @@ void MainWindow::on_actionNew_triggered()
 void MainWindow::on_pushButton_clicked()
 {
     emit canvasInput(0,0);
-}
-
-void MainWindow::on_fillBucket_clicked()
-{
-    emit fillBucketSelected();
 }

@@ -19,7 +19,6 @@ toolbar::toolbar(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //connect
 }
 
 toolbar::~toolbar()
@@ -30,36 +29,36 @@ toolbar::~toolbar()
 
 void toolbar::on_PaintBrush_clicked()
 {
+    emit standardBrushSelectedSignal();
 
 }
 
-
 void toolbar::on_Eraser_clicked()
 {
-
+    emit eraserToolSelectedSignal();
 }
 
 
 void toolbar::on_FillBucket_clicked()
 {
-    emit paintBucketSelected();
+    emit paintBucketSelectedSignal();
 }
 
 
 void toolbar::on_EyeDropper_clicked()
 {
-
+    emit eyeDropperToolSelectedSignal();
 }
 
 
 void toolbar::on_Mirror_clicked()
 {
-
+    emit mirrorToolSelectedSignal();
 }
 
 
 void toolbar::on_Selection_clicked()
 {
-
+    emit selectionToolSelectedSignal();
 }
 

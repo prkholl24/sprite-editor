@@ -17,15 +17,72 @@ private:
      */
     Sprite* model = nullptr;
 
-    enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
-    ToolStates currentTool = ToolStates::StandardBrush;
-
-
-    void fillBucket();
-
     Frame* currentFrame = nullptr;
 
     std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
+
+    enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
+
+    ToolStates currentTool = ToolStates::StandardBrush;
+
+
+    /**
+     * @brief standardBrush
+     *
+     * Paints one pixel in Sprite.
+     * @param x and y coordinate
+     */
+    void standardBrush(int x, int y);
+
+    /**
+     * @brief eraserBrush
+     *
+     * Erases one pixel in Sprite.
+     * @param x and y coordinate
+     */
+    void eraserTool(int x, int y);
+
+    /**
+     * @brief fillBucket
+     *
+     * Fills a enclosed area with one color.
+     * @param x and y coordinate
+     */
+    void fillBucket(int x, int y);
+
+    /**
+     * @brief fillBucketLogic
+     *
+     * Depth-First Search fill bucket helper method.
+     * FLOOD FILL ALGORITHM
+     * TODO: UNTESTED UNTIL CANVAS IS DONE
+     */
+    void fillBucketLogic(std::vector<std::vector<Pixel>>& pixelGrid, int x, int y, std::vector<int> oldColor);
+
+    /**
+     * @brief eyeDropperTool
+     *
+     * Saves selected color of selected pixel.
+     * @param x and y coordinate
+     */
+    void eyeDropperTool(int x, int y);
+
+    /**
+     * @brief mirrorTool
+     *
+     * Mirror sprite manipulation.
+     * @param x and y coordinate
+     */
+    void mirrorTool(int x, int y);
+
+    /**
+     * @brief selectionTool
+     *
+     * Selects pixel selection tool.
+     * @param x and y coordinate
+     */
+    void selectionTool(int x, int y);
+
 
 public:
     /**
@@ -42,7 +99,14 @@ signals:
 public slots:
     void newProjectSlot(int spriteSize);
     void handleCanvasInputSlot(int x, int y);
+
+    /// TOOL BAR ///
+    void standardBrushSelectedSlot();
+    void eraserToolSelectedSlot();
     void paintBucketSelectedSlot();
+    void eyeDropperToolSelectedSlot();
+    void mirrorToolSelectedSlot();
+    void selectionToolSelectedSlot();
 
 };
 
