@@ -37,13 +37,13 @@
      <string>testButton</string>
     </property>
    </widget>
-   <widget class="canvas" name="canvas" native="true">
+   <widget class="Canvas" name="canvas" native="true">
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>50</y>
-      <width>400</width>
-      <height>400</height>
+      <y>-20</y>
+      <width>475</width>
+      <height>475</height>
      </rect>
     </property>
    </widget>
@@ -92,7 +92,7 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>canvas</class>
+   <class>Canvas</class>
    <extends>QWidget</extends>
    <header location="global">canvas.h</header>
    <container>1</container>
