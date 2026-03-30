@@ -59,6 +59,11 @@ void MainWindow::on_actionSave_triggered()
 }
 
 
+void MainWindow::on_actionLoad_triggered()
+{
+    emit loadProjectSignal();
+}
+
 /// TEST SLOTS MEANT FOR TESTING ///
 void MainWindow::on_actionNew_triggered()
 {
@@ -73,8 +78,4 @@ void MainWindow::on_pushButton_clicked()
     emit canvasInput(0,0);
 }
 
-void MainWindow::on_actionLoad_triggered()
-{
-    emit loadProjectSignal();
-}
 

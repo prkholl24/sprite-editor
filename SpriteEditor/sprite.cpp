@@ -112,3 +112,36 @@ int Sprite::getFrameCount() const
 {
     return static_cast<int>(frames.size());
 }
+
+QJsonObject Sprite::toJson() const {
+    QJsonObject json;
+    QJsonArray frameArray;
+
+    for(Frame frame : frames){
+        frameArray.append(frame.toJson());
+    }
+
+    json["Frames"] = frameArray;
+    json["Size"] = width;
+    json["FPS"] = fps;
+
+    return json;
+
+}
+
+Sprite Sprite::fromJson(const QJsonObject &json){
+    int size = json["Size"].toInt();
+    int fps = json["FPS"].toInt();
+    QJsonArray jsonFrames = json["Frames"].toArray();
+
+    Sprite newSprite(size,size);
+    newSprite.setFPS(fps);
+    newSprite.frames.clear();
+
+    for (const QJsonValue jsonFrame : jsonFrames){
+        Frame frame = Frame::fromJson(jsonFrame.toObject());
+        newSprite.frames.push_back(frame);
+    }
+
+    return newSprite;
+}

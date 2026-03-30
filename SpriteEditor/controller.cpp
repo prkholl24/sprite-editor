@@ -14,6 +14,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include <QJsonObject>
+#include <QJsonDocument>
 
 Controller::Controller(QWidget *parent)
 {
@@ -72,8 +73,11 @@ void Controller::loadProjectSlot(){
 }
 
 void Controller::saveProjectSlot(){
+    QJsonObject object = model->toJson();
 
-    model::json
+    QJsonDocument output(object);
+
+    std::cout << output.toJson().toStdString() << std::endl;
 }
 
 

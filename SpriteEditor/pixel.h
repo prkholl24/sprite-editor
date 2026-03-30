@@ -56,12 +56,9 @@ public:
      */
     Pixel& operator=(const Pixel& px);
 
-
     QJsonObject toJson() const;
 
-    void extracted(QJsonArray &jsonArray);
-    Pixel fromJson(const QJsonObject &json);
-
+    static Pixel fromJson(const QJsonObject &json);
     /**
      * @brief Gets the color of the Pixel.
      *

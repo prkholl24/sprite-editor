@@ -32,3 +32,42 @@ int Frame::getHeight() const {
     return height;
 }
 
+QJsonObject Frame::toJson() const {
+    QJsonObject json;
+
+    QJsonArray jsonPixel;
+    QJsonArray Inner;
+
+
+    for (const std::vector<Pixel> &row : pixels){
+        for (const Pixel &column : row){
+            Inner.append(column.toJson());
+        }
+        jsonPixel.append(Inner);
+    }
+
+    json["PixelGrid"] = jsonPixel;
+    json["Size"] = width;
+
+    return json;
+}
+
+
+Frame Frame::fromJson(const QJsonObject &json){
+    Frame copyFrame(json["Size"].toInt(),json["Size"].toInt());
+    QJsonArray jsonArray = json["PixelGrid"].toArray();
+
+
+    int x = 0;
+    for (auto main : std::as_const(jsonArray)){
+        int y = 0;
+        QJsonArray inner = main.toArray();
+        for (const QJsonValue &inner : std::as_const(inner)){
+            Pixel testingPixel = Pixel::fromJson(inner.toObject());
+            copyFrame.getPixel(x,y) = testingPixel;
+            y++;
+        }
+        x++;
+    }
+    return copyFrame;
+}

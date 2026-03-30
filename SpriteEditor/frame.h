@@ -59,6 +59,19 @@ public:
      */
     std::vector<std::vector<Pixel>> pixels;
 
+    /**
+     * @brief Converts Frame to Json.
+     * @return Json
+     */
+    QJsonObject toJson() const;
+
+    /**
+     * @brief fromJson Creates a Frame object from Json
+     * @param Json text
+     * @return Frame Object
+     */
+    static Frame fromJson(const QJsonObject &json);
+
 private:
     /**
      * @brief width of the frame
