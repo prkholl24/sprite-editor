@@ -30,11 +30,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
 
+    // Connects the Canvas to the controller
     connect(ui->canvas, &Canvas::canvasInputSignal, control, &Controller::handleCanvasInputSlot);
 
     connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
 
     connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
+
+    // Connects the Color Pallete to the controller
+    connect(ui->colorPalette, &Canvas::canvasInputSignal, control, &Controller::handleColorPaletteInput);
+
+    connect(control, &Controller::drawColorPalettePixel, ui->colorPalette, &Canvas::drawPixel);
+
+    connect(control, &Controller::initializeColorPalette, ui->colorPalette, &Canvas::initialize);
 
     // Direct connection from Toolbar to Controller
     connect(ui->toolbarWidget, &toolbar::standardBrushSelectedSignal, control, &Controller::standardBrushSelectedSlot);

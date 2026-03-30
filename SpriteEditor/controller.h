@@ -34,6 +34,20 @@ private:
      * Ensures the Canvas View is perfectly synced with the Model.
      */
     void updateCanvas();
+
+    /**
+     * @brief colorPalette contains a set of colors to choose from.
+     *
+     * Renders to a Canvas widget.
+     */
+    Frame colorPalette;
+
+    /**
+     * @brief updateColorPalette
+     *
+     * Handles drawing to the color palette.
+     */
+    void updateColorPalette();
 public:
     /**
      * @brief Controller constructor
@@ -48,11 +62,46 @@ signals:
     void frameModified();
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
-    // sends specific pixel data to the canvas.
+
+    /**
+     * @brief drawPixel to the Canvas
+     * @param x coordinate
+     * @param y coordinate
+     * @param color in [R,G,B,A] format
+     *
+     * Singal connects to the canvas widget to update to reflect
+     * changes to `model`.
+     */
     void drawPixel(int x, int y, std::vector<int> color);
 
-    // tells the canvas to resize its internal buffers.
+    /**
+     * @brief initializeCanvas
+     * @param width in pixels
+     * @param height in pixels
+     *
+     * Tells the canvas how many pixels it needs to render.
+     */
     void initializeCanvas(int width, int height);
+
+    /**
+     * @brief initializeColorPalette
+     * @param width in pixels
+     * @param height in pixels
+     *
+     * Tells the color palette how many pixels it needs to render
+     */
+    void initializeColorPalette(int width, int height);
+
+    /**
+     * @brief drawColorPalettePixel
+     * @param x coordinate
+     * @param y coordinate
+     * @param color in [R,G,B,A] format
+     *
+     * Singal connects to the color palette widget.
+     * Triggers update to reflect changes to `colorPalette`.
+     */
+    void drawColorPalettePixel(int x, int y, std::vector<int> color);
 
 public slots:
     /**
@@ -127,8 +176,23 @@ public slots:
      */
     void selectionTool(int x, int y);
 
-public slots:
+    /**
+     * @brief initializePalette creates the color palette
+     * @param size effects the number of colors which are created
+     *
+     * Creates a new Frame object and populates it with colors.
+     * Uses a O(size^2) loop to create as many unique colors between
+     * RGB(0,0,0) and RGB(255,255,255) as possible.
+     */
+    void initializePalette(int size);
+
     void newProjectSlot(int spriteSize);
+
+    /**
+     * @brief handleCanvasInputSlot
+     * @param x
+     * @param y
+     */
     void handleCanvasInputSlot(int x, int y);
 
     /// TOOL BAR ///
@@ -138,6 +202,16 @@ public slots:
     void eyeDropperToolSelectedSlot();
     void mirrorToolSelectedSlot();
     void selectionToolSelectedSlot();
+
+    /**
+     * @brief handleColorPaletteInput
+     * @param x coordinate
+     * @param y coordinate
+     *
+     * Interprets a color palette input and sets the pixel color at some
+     * coordinate to the currentColor
+     */
+    void handleColorPaletteInput(int x, int y);
 
 };
 

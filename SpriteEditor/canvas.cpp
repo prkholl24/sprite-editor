@@ -18,7 +18,7 @@ Canvas::Canvas(QWidget *parent)
     , spriteHeight(16)
 {
     ui->setupUi(this);
-    setMinimumSize(500, 500);
+    setMinimumSize(150, 150);
     render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
     render.fill(Qt::transparent);
 }

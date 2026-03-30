@@ -194,6 +194,17 @@ void Controller::selectionToolSelectedSlot(){
     std::cout << "6 selected!" << std::endl;
 }
 
+void Controller::updateColorPalette() {
+
+}
+
+void Controller::handleColorPaletteInput(int x, int y) {
+    return;
+}
+
+void Controller::initializePalette(int size) {
+    return;
+}
 
 
 //TOOLBAR
