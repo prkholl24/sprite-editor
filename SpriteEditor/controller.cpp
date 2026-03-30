@@ -83,15 +83,15 @@ void Controller::handleCanvasInputSlot(int x, int y){
 
 /// TOOL METHODS ///
 void Controller::standardBrush(int x, int y){
-    ///TODO: Manipulate the sprite to draw one pixel using standardBrush.
+    currentFrame->getPixel(x,y).setColor(currentColor);
 }
 
 void Controller::eraserTool(int x, int y){
-    ///TODO: ERASE ONE PIXEL IN SPRITE
+    std::vector<int> defaultBackgroundColor = {0,0,0,0};
+    currentFrame->getPixel(x,y).setColor(defaultBackgroundColor);
 }
 
 void Controller::fillBucket(int x, int y){
-    ///TODO: FILL AREA WITHIN ENCLOSED SPACE.
     std::vector<int> oldColor = currentFrame->pixels[x][y].getColor();
     if (oldColor == currentColor)
         return;
@@ -99,15 +99,33 @@ void Controller::fillBucket(int x, int y){
 }
 
 void Controller::eyeDropperTool(int x, int y){
-    ///TODO: SAVES A SELECTED COLOR AT GIVEN PIXEL
+    currentColor = currentFrame->getPixel(x,y).getColor();
 }
 
 void Controller::mirrorTool(int x, int y){
-    ///TODO: MIRROR TOOL
+
+    int halfCanvas = currentFrame->pixels.size() / 2;
+    int offset;
+
+    standardBrush(x,y);
+
+    /// LEFT
+    if (x < halfCanvas){
+        offset = halfCanvas - x;
+        standardBrush(halfCanvas+offset,y);
+    /// RIGHT
+    } else {
+        offset = x - halfCanvas;
+        standardBrush(halfCanvas-offset,y);
+    }
 }
 
 void Controller::selectionTool(int x, int y){
     ///TODO: SELECTION TOOL
+    ///
+    /// OVERDIE MOSUECLICK (X,Y) TOGGLE
+    ///
+    /// OVERRIDE MOUSEDRAGED (X,Y) TOGGLE
 }
 
 
