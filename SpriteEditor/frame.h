@@ -54,6 +54,11 @@ public:
      */
     int getHeight() const;
 
+    /**
+     * @brief pixels is two dimensional vector containing all of the color data through Pixel objects.
+     */
+    std::vector<std::vector<Pixel>> pixels;
+
 private:
     /**
      * @brief width of the frame
@@ -65,10 +70,6 @@ private:
      */
     int height;
 
-    /**
-     * @brief pixels is two dimensional vector containing all of the color data through Pixel objects.
-     */
-    std::vector<std::vector<Pixel>> pixels;
 };
 
 #endif // FRAME_H
