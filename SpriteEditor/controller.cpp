@@ -257,7 +257,40 @@ Frame* Controller::artDecoPalette() {
 }
 
 Frame* Controller::defaultPalette() {
-    return new Frame();
+    int size = 50;
+    Frame* palette = new Frame(size, size);
+
+    for (int x = 0; x < size; ++x) {
+        for (int y = 0; y < size; ++y) {
+
+            // Determines the relative location of the current x and y to the size of the palette.
+            double xRatio = static_cast<double>(x) / (size - 1);
+            double yRatio = static_cast<double>(y) / (size - 1);
+
+            // As xRatio increases, Red goes down to 0, and Green goes up to 255
+            double topR = 255.0 * (1.0 - xRatio);
+            double topG = 255.0 * xRatio;
+            double topB = 0.0;
+
+            // As xRatio increases, Blue stays 255, Red and Green go up to 255
+            double botR = 255.0 * xRatio;
+            double botG = 255.0 * xRatio;
+            double botB = 255.0;
+
+            // Linear interpolation (LERP) mixes the colors bases on how close this
+            // pixel is to the bottom vs top.
+            int r = static_cast<int>(topR * (1.0 - yRatio) + botR * yRatio);
+            int g = static_cast<int>(topG * (1.0 - yRatio) + botG * yRatio);
+            int b = static_cast<int>(topB * (1.0 - yRatio) + botB * yRatio);
+
+            if (r > 255) { r = 255; }
+            if (g > 255) { g = 255; }
+            if (b > 255) { b = 255; }
+
+            palette->getPixel(x, y).setColor({r, g, b, 255});
+        }
+    }
+    return palette;
 }
 
 //TOOLBAR
