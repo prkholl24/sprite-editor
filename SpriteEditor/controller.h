@@ -38,6 +38,7 @@ public:
      */
     Controller(QWidget *parent = nullptr);
 signals:
+    void frameModified();
 
 public slots:
     void newProjectSlot(int spriteSize);

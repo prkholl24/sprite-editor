@@ -1,31 +1,11 @@
 #include "canvas.h"
-#include "qpushbutton.h"
 #include "ui_canvas.h"
 
-Canvas::Canvas(int width, int height, int tileSize, QWidget *parent)
+Canvas::Canvas(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Canvas)
 {
     ui->setupUi(this);
-
-    setFixedSize(width, height);
-
-    QGridLayout* grid = new QGridLayout(this);
-    grid->setSpacing(0);
-    grid->setContentsMargins(0,0,0,0);
-
-    int cols = width / tileSize;
-    int rows = height / tileSize;
-
-    for (int r = 0; r < rows; r++) {
-        for (int c = 0; c < cols; c++) {
-            auto* btn = new QPushButton(this);
-            btn->setFixedSize(tileSize, tileSize);
-            grid->addWidget(btn, r, c);
-        }
-    }
-
-    setLayout(grid);
 }
 
 Canvas::~Canvas()
@@ -33,4 +13,26 @@ Canvas::~Canvas()
     delete ui;
 }
 
+void Canvas::drawPixel(int x, int y, std::vector<int> color) {
+    return;
+}
 
+void Canvas::initialize(int width, int height) {
+    return;
+}
+
+void Canvas::paintEvent(QPaintEvent *event) {
+    return;
+}
+
+void Canvas::mousePressEvent(QMouseEvent *event) {
+    return;
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent *event) {
+    return;
+}
+
+QPoint Canvas::mapToSprite(const QPoint &pos) const {
+    return pos;
+}
