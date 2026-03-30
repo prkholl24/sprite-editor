@@ -33,15 +33,6 @@ public:
      */
     ~Canvas();
 
-    /**
-     * @brief Initializes the canvas with sprite dimensions.
-     * @param width The width of the sprite in pixels.
-     * @param height The height of the sprite in pixels.
-     *
-     * Decides how many pixels should be rendered and how big to make them.
-     */
-    void initialize(int width, int height);
-
 public slots:
     /**
      * @brief Receives pixel data from the Controller to update the rendering.
@@ -54,6 +45,15 @@ public slots:
      * schedules a redraw of the widget.
      */
     void drawPixel(int x, int y, std::vector<int> color);
+
+    /**
+     * @brief Initializes the canvas with sprite dimensions.
+     * @param width The width of the sprite in pixels.
+     * @param height The height of the sprite in pixels.
+     *
+     * This slot decides how many pixels should be rendered and how big to make them.
+     */
+    void initialize(int width, int height);
 
 signals:
     /**
@@ -76,22 +76,20 @@ protected:
 
     /**
      * @brief Captures the initial mouse interaction.
-     *
-     * Overrides the standard mouse press event to map screen coordinates 
-     * to logical sprite coordinates and emit the canvasInputSignal.
-     *
      * @param event Details of the mouse press event.
+     *
+     * Overrides the standard mouse press event to map screen coordinates
+     * to logical sprite coordinates and emit the canvasInputSignal.
      */
     void mousePressEvent(QMouseEvent *event) override;
 
     /**
      * @brief Captures continuous mouse movement for drawing/selection.
-     *
-     * Overrides the standard mouse move event. If the mouse is being dragged, 
-     * it maps screen coordinates to logical sprite coordinates and emits 
-     * the canvasInputSignal.
-     *
      * @param event Details of the mouse move event.
+     *
+     * Overrides the standard mouse move event. If the mouse is being dragged,
+     * it maps screen coordinates to logical sprite coordinates and emits
+     * the canvasInputSignal.
      */
     void mouseMoveEvent(QMouseEvent *event) override;
 
@@ -112,13 +110,12 @@ private:
 
     /**
      * @brief Maps a widget-space coordinate to a logical sprite coordinate.
-     *
-     * Helper method to convert the local position of a mouse event into 
-     * the corresponding (x, y) index on the sprite grid based on the widget's 
-     * current scaling.
-     *
      * @param pos The position in widget coordinates (pixels).
      * @return The corresponding (x, y) point in sprite coordinates.
+     *
+     * Helper method to convert the local position of a mouse event into
+     * the corresponding (x, y) index on the sprite grid based on the widget's
+     * current scaling.
      */
     QPoint mapToSprite(const QPoint &pos) const;
 };

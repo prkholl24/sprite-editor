@@ -27,14 +27,24 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>169</x>
-      <y>300</y>
-      <width>341</width>
-      <height>121</height>
+      <x>230</x>
+      <y>470</y>
+      <width>291</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="text">
      <string>testButton</string>
+    </property>
+   </widget>
+   <widget class="canvas" name="canvas" native="true">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>50</y>
+      <width>400</width>
+      <height>400</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -44,7 +54,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>33</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -79,6 +89,12 @@
    <class>toolbar</class>
    <extends>QWidget</extends>
    <header location="global">toolbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>canvas</class>
+   <extends>QWidget</extends>
+   <header location="global">canvas.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

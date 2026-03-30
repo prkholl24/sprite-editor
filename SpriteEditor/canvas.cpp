@@ -4,8 +4,11 @@
 Canvas::Canvas(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Canvas)
+    , spriteWidth(16)
+    , spriteHeight(16)
 {
     ui->setupUi(this);
+    render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
 }
 
 Canvas::~Canvas()
@@ -18,7 +21,11 @@ void Canvas::drawPixel(int x, int y, std::vector<int> color) {
 }
 
 void Canvas::initialize(int width, int height) {
-    return;
+    spriteWidth = width;
+    spriteHeight = height;
+    render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
+    render.fill(Qt::transparent);
+    update();
 }
 
 void Canvas::paintEvent(QPaintEvent *event) {
