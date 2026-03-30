@@ -18,9 +18,18 @@ public:
 
 signals:
 
-    void eraserClickedSignal();
+    /// TOOL SIGNALS ///
+    void standardBrushSelectedSignal();
 
-    void paintBucketSelected();
+    void eraserToolSelectedSignal();
+
+    void paintBucketSelectedSignal();
+
+    void eyeDropperToolSelectedSignal();
+
+    void mirrorToolSelectedSignal();
+
+    void selectionToolSelectedSignal();
 
 private slots:
     void on_PaintBrush_clicked();

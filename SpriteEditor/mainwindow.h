@@ -23,9 +23,6 @@ public:
 
 signals:
 
-    /*
-     *
-     */
     void newProject(int spriteSize);
 
 
