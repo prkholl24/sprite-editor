@@ -32,6 +32,39 @@ Pixel& Pixel::operator=(const Pixel& px){
     return *this;
 }
 
+
+QJsonObject Pixel::toJson() const {
+    QJsonObject json;
+
+    QJsonArray jsonArray;
+    for(int n : color){
+
+        jsonArray.append(n);
+
+    }
+
+    json["color"] = jsonArray;
+
+    return json;
+
+}
+
+Pixel Pixel::fromJson(const QJsonObject& json){
+
+    QJsonArray jsonArray = json["color"].toArray();
+
+    color.clear();
+
+    for(auto val : std::as_const(jsonArray)){
+
+        color.push_back(val.toInt());
+    }
+
+}
+
+
+
+
 void Pixel::setColor(const std::vector<int>& newColor){
     if (newColor.size() != 4) {
         return;
