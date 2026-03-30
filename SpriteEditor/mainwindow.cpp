@@ -57,6 +57,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolbarWidget, &toolbar::selectionToolSelectedSignal, control, &Controller::selectionToolSelectedSlot);
 
+    // Initialize the color palette when the application starts
+    control->initializePalette(10);
 }
 
 MainWindow::~MainWindow()

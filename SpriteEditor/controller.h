@@ -40,7 +40,7 @@ private:
      *
      * Renders to a Canvas widget.
      */
-    Frame colorPalette;
+    Frame* colorPalette = nullptr;
 
     /**
      * @brief updateColorPalette

@@ -7,7 +7,7 @@
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/29/2026
  *
- * Last Revision: 3/29/2026 12:51AM MST by Charles Adair
+ * Last Revision: 3/30/2026 2:39PM MST by Charles Adair
  */
 // TO-DO move all includes to .h file
 #include "controller.h"
@@ -195,17 +195,46 @@ void Controller::selectionToolSelectedSlot(){
 }
 
 void Controller::updateColorPalette() {
+    if (!colorPalette)
+        return;
 
+    emit initializeColorPalette(colorPalette->getWidth(), colorPalette->getHeight());
+
+    for (int x = 0; x < colorPalette->getWidth(); x++) {
+        for (int y = 0; y < colorPalette->getHeight(); y++) {
+            emit drawColorPalettePixel(x, y, colorPalette->getPixel(x, y).getColor());
+        }
+    }
 }
 
 void Controller::handleColorPaletteInput(int x, int y) {
-    return;
+    if (colorPalette != nullptr) {
+        currentColor = colorPalette->getPixel(x, y).getColor();
+    }
 }
 
 void Controller::initializePalette(int size) {
-    return;
-}
+    if (colorPalette) {
+        delete colorPalette;
+    }
+    colorPalette = new Frame(size, size);
 
+    int increments = 255 / (size - 1);
+
+    int r = 0, g = 0, b = 0;
+
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            colorPalette->getPixel(i, j).setColor(std::vector<int>{r, g, b, 255});
+
+            // TO-DO: Fix this really bad color palette init.
+            r > 255 ? r = 255 : r += increments;
+            g > 255 ? g = 255 : g += increments;
+            b > 255 ? b = 255 : b += increments;
+        }
+    }
+    updateColorPalette();
+}
 
 //TOOLBAR
 //Signal is received from toolbar.
