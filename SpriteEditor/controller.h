@@ -32,7 +32,7 @@ signals:
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
 
-public slots:
+public:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
      * Does this via "emit sendPixmap(pixmap-you-just-made)".

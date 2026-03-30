@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     //Connecting signal new project in mainwindow to slot newProjectSlot in controller
     connect(this, &MainWindow::newProject, control, &Controller::newProjectSlot);
 
+
+
     connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
 
     // Direct connection from Toolbar to Controller
@@ -73,3 +75,9 @@ void MainWindow::on_pushButton_clicked()
 {
     emit canvasInput(0,0);
 }
+
+void MainWindow::on_actionLoad_triggered()
+{
+
+}
+
