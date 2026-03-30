@@ -64,6 +64,21 @@ void Controller::newProjectSlot(int spriteSize){
     model = new Sprite(spriteSize, spriteSize);
     currentFrame = &model->getFrame(0);
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
+
+    emit initializeCanvas(spriteSize, spriteSize);
+    updateCanvas();
+}
+
+
+void Controller::updateCanvas() {
+    if (!currentFrame)
+        return;
+
+    for (int x = 0; x < currentFrame->getWidth(); ++x) {
+        for (int y = 0; y < currentFrame->getHeight(); ++y) {
+            emit drawPixel(x, y, currentFrame->getPixel(x, y).getColor());
+        }
+    }
 }
 
 
@@ -96,9 +111,12 @@ void Controller::handleCanvasInputSlot(int x, int y){
             std::cout << "Selection tool selected!" << std::endl;
             break;
         }
+
+        // Refresh the canvas to reflect changes
+        updateCanvas();
     }
     else {
-        QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the File tab first.");
+        QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the `File` tab first.");
     }
 }
 

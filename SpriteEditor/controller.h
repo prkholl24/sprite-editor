@@ -27,10 +27,32 @@ private:
 
     ToolStates currentTool = ToolStates::StandardBrush;
     
+    void fillBucket();
 
+    /**
+     * @brief Loops through the current frame and emits drawPixel for every pixel.
+     * Ensures the Canvas View is perfectly synced with the Model.
+     */
+    void updateCanvas();
+public:
+    /**
+     * @brief Controller constructor
+     *
+     * Creates a new controller object with no model initialized.
+     * On initialization this Controller waits for a signal from the
+     * "New" or "Load" buttons in order to create the Sprite object
+     * to manipulate
+     */
+    Controller(QWidget *parent = nullptr);
 signals:
+    void frameModified();
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
+    // sends specific pixel data to the canvas.
+    void drawPixel(int x, int y, std::vector<int> color);
+
+    // tells the canvas to resize its internal buffers.
+    void initializeCanvas(int width, int height);
 
 public slots:
     /**
@@ -104,19 +126,6 @@ public slots:
      * @param x and y coordinate
      */
     void selectionTool(int x, int y);
-
-
-public:
-    /**
-     * @brief Controller constructor
-     *
-     * Creates a new controller object with no model initialized.
-     * On initialization this Controller waits for a signal from the
-     * "New" or "Load" buttons in order to create the Sprite object
-     * to manipulate
-     */
-    Controller(QWidget *parent = nullptr);
-signals:
 
 public slots:
     void newProjectSlot(int spriteSize);

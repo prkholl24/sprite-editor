@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="cursor">
-   <cursorShape>BusyCursor</cursorShape>
+   <cursorShape>CrossCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>Form</string>
