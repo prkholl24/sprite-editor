@@ -67,7 +67,12 @@ void Canvas::mousePressEvent(QMouseEvent *event) {
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event) {
-    return;
+    if (event->buttons() & Qt::LeftButton) {
+        QPoint spritePos = mapToSprite(event->pos());
+        if (spritePos.x() != -1) {
+            emit canvasInputSignal(spritePos.x(), spritePos.y());
+        }
+    }
 }
 
 QPoint Canvas::mapToSprite(const QPoint &pos) const {

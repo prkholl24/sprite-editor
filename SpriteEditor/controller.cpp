@@ -84,8 +84,6 @@ void Controller::updateCanvas() {
 
 void Controller::handleCanvasInputSlot(int x, int y){
     if (!(model == nullptr)) {
-        // TO-DO: Remove std::cout statements.
-        std::cout << "Input at: (" << x << ", " << y << ")" << std::endl;
         switch(currentTool) {
 
         case ToolStates::PaintBucket:
@@ -118,7 +116,7 @@ void Controller::handleCanvasInputSlot(int x, int y){
         updateCanvas();
     }
     else {
-        QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the File tab first.");
+        QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the `File` tab first.");
     }
 }
 
