@@ -171,7 +171,6 @@ void Controller::selectionTool(int x, int y){
     /// OVERRIDE MOUSEDRAGED (X,Y) TOGGLE
 }
 
-
 /// CURRENT TOOL SLOTS ///
 void Controller::standardBrushSelectedSlot(){
     currentTool = ToolStates::StandardBrush;
@@ -388,6 +387,23 @@ Frame* Controller::defaultPalette() {
         }
     }
     return palette;
+}
+
+void Controller::handleAddFrame() {
+    model->addFrame();
+}
+
+void Controller::handleRemoveFrame(int index) {
+    model->removeFrame(index);
+}
+
+void Controller::handleFrameSelected(int index) {
+    currentFrame = &model->getFrame(index);
+    updateCanvas();
+}
+
+void Controller::handleFpsChanged(int fps) {
+    model->setFPS(fps);
 }
 
 //TOOLBAR
