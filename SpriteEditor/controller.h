@@ -8,9 +8,14 @@
  * the canvas, timeline, and color palette in sync.
  *
  * Team: Green Goombas
- * @authors Charles Adair, Armando Carrillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
- * @date 3-30-2026
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
+ * @date 3/30/2026
+ *
+ * Last Revision: 3/30/2026 8:52PM MST by Lindsey Reese
  */
+
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 

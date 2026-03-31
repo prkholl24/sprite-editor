@@ -7,10 +7,12 @@
  * It also tracks the currently active frame.
  *
  * Team: Green Goombas
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/26/2026
  *
- * Last Revision: 3/27/2026 1:26AM MST by Charles Adair
+ * Last Revision: 3/30/2026 9:00PM MST by Charles Adair
  */
 
 #ifndef SPRITE_H

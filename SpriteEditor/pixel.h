@@ -4,10 +4,13 @@
  *
  * This class represents a Pixel which contains color data
  *
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/26/2026
  *
- * Last Revision: 3/26/2026 3:02PM MST by Charles Adair
+ * Last Revision: 3/30/2026 9:10PM MST by Lindsey Reese
  */
 
 #ifndef PIXEL_H
