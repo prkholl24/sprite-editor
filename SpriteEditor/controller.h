@@ -226,6 +226,13 @@ signals:
     void sendPixmap(int index, QPixmap map);
 
     /**
+     * @brief clearCanvas
+     *
+     * Tells the canvas to clear itself before redrawing.
+     */
+    void clearCanvas();
+
+    /**
      * @brief drawPixel to the Canvas
      * @param x coordinate
      * @param y coordinate

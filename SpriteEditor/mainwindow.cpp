@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
 
+    connect(control, &Controller::clearCanvas, ui->canvas, &Canvas::clear);
+
     connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
     connect(control, &Controller::initializeCanvas, ui->preview, &Canvas::initialize);
 

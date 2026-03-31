@@ -36,6 +36,11 @@ public:
 
 public slots:
     /**
+     * @brief Clears the canvas, making it fully transparent.
+     */
+    void clear();
+
+    /**
      * @brief Receives pixel data from the Controller to update the rendering.
      * @param x is the x-coordinate on the sprite grid where 0 is the left most pixel.
      * @param y is the y-coordinate on the sprite grid where 0 is the top most pixel.

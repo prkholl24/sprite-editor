@@ -28,12 +28,22 @@ Canvas::~Canvas()
     delete ui;
 }
 
+void Canvas::clear() {
+    render.fill(Qt::transparent);
+    update();
+}
+
 void Canvas::drawPixel(int x, int y, std::vector<int> color) {
     if (x < 0 || x >= spriteWidth || y < 0 || y >= spriteHeight)
         return;
     
     QColor qcolor(color[0], color[1], color[2], color[3]);
-    render.setPixelColor(x, y, qcolor);
+    
+    QPainter painter(&render);
+    // Use SourceOver to blend colors (especially useful for tweening layer)
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+    painter.setPen(qcolor);
+    painter.drawPoint(x, y);
     update();
 }
 

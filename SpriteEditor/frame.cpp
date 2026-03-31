@@ -69,7 +69,7 @@ Frame Frame::fromJson(const QJsonObject &json){
          std::cout << "Frame Outter array" << std::endl;
         QJsonArray inner = main.toArray();
         for (const QJsonValue &inner : std::as_const(inner)){
-             std::cout << "Frame Inner Array: y: " << y << " x: "<< x << std::endl;
+            std::cout << "Frame Inner Array: y: " << y << " x: "<< x << std::endl;
             Pixel testingPixel = Pixel::fromJson(inner.toObject());
             copyFrame.getPixel(x,y) = testingPixel;
             y++;

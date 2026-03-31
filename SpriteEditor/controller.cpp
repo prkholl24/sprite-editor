@@ -152,9 +152,31 @@ void Controller::updateCanvas() {
     if (!currentFrame)
         return;
 
+    emit clearCanvas();
+
+    // Draw the previous frame with reduced opacity (Tweening/Onion Skinning)
+    if (model->getFrameCount() > 0 && currentFrameIndex > 0) {
+        Frame& tweeningLayer = model->getFrame(currentFrameIndex - 1);
+        for (int x = 0; x < currentFrame->getWidth(); ++x) {
+            for (int y = 0; y < currentFrame->getHeight(); ++y) {
+                std::vector<int> color = tweeningLayer.getPixel(x, y).getColor();
+                // Only draw if the previous frame pixel wasn't transparent
+                if (color[3] > 0) {
+                    color[3] = (255 / 4); // Make it quite transparent
+                    emit drawPixel(x, y, color);
+                }
+            }
+        }
+    }
+
+    // Draw the current frame
     for (int x = 0; x < currentFrame->getWidth(); ++x) {
         for (int y = 0; y < currentFrame->getHeight(); ++y) {
-            emit drawPixel(x, y, currentFrame->getPixel(x, y).getColor());
+            std::vector<int> color = currentFrame->getPixel(x, y).getColor();
+            // Draw all pixels from current frame. 
+            // If it's transparent (alpha 0), it won't overwrite the tweening layer 
+            // because Canvas::drawPixel now uses SourceOver blending.
+            emit drawPixel(x, y, color);
         }
     }
 }
