@@ -48,6 +48,7 @@ void Timeline::addFrame()
 
     connect(frameBtn, &QPushButton::clicked, this, &Timeline::onFrameClicked);
 
+    // create a new frame at the end of the timeline.
     int insertIndex = ui->frameLayout->count() - 1;
     ui->frameLayout->insertWidget(insertIndex, frameBtn);
 
@@ -72,14 +73,17 @@ void Timeline::removeFrame(int index)
         return;
     }
 
+    // remove the desired frame
     QPushButton* btn = frameButtons.takeAt(index);
     ui->frameLayout->removeWidget(btn);
     delete btn;
 
+    // update the labels of each frame
     for (int i = 0; i < frameButtons.size(); i++) {
         frameButtons[i]->setText(QString::number(i + 1));
     }
 
+    // prevent selectedIndex from going out of bounds.
     if (selectedIndex >= frameButtons.size()) {
         selectedIndex = frameButtons.size() - 1;
     }
@@ -100,6 +104,7 @@ int Timeline::selectedFrame() const
 
 void Timeline::selectFrame(int index)
 {
+    // prevent out of bounds index selection
     if (index < 0 || index >= frameButtons.size()) {
         return;
     }
