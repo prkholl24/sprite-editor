@@ -25,6 +25,7 @@ HEADERS += \
     controller.h \
     frame.h \
     mainwindow.h \
+    palettedata.h \
     pixel.h \
     sprite.h \
     timeline.h \
