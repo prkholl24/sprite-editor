@@ -6,25 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>1000</height>
+    <width>1100</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>1000</height>
+    <width>1100</width>
+    <height>800</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sprite Editor - Green Goombas</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="toolbar" name="toolbarWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>30</y>
+      <x>20</x>
+      <y>20</y>
       <width>161</width>
       <height>221</height>
      </rect>
@@ -33,40 +33,72 @@
    <widget class="Canvas" name="canvas" native="true">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>10</y>
-      <width>420</width>
-      <height>420</height>
+      <x>200</x>
+      <y>20</y>
+      <width>512</width>
+      <height>512</height>
      </rect>
     </property>
    </widget>
    <widget class="Canvas" name="colorPalette" native="true">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>280</y>
-      <width>150</width>
-      <height>150</height>
+      <x>20</x>
+      <y>260</y>
+      <width>160</width>
+      <height>160</height>
      </rect>
     </property>
    </widget>
    <widget class="Canvas" name="preview" native="true">
     <property name="geometry">
      <rect>
-      <x>650</x>
-      <y>0</y>
-      <width>150</width>
-      <height>150</height>
+      <x>730</x>
+      <y>20</y>
+      <width>200</width>
+      <height>200</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="previewLabel">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>225</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Animation Preview</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="colorPaletteLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>425</y>
+      <width>160</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Color Palette</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <widget class="Timeline" name="timelineWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>540</y>
-      <width>781</width>
-      <height>161</height>
+      <x>20</x>
+      <y>560</y>
+      <width>1060</width>
+      <height>180</height>
      </rect>
     </property>
    </widget>
@@ -76,8 +108,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
-     <height>17</height>
+     <width>1100</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
