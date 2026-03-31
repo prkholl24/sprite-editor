@@ -208,6 +208,7 @@ void Timeline::updateFrameStyles()
 void Timeline::updateButtonImage(int index, QPixmap image) {
     if (index < 0 || index >= frameButtons.size())
         return;
+    frameButtons[index]->setText("");
     frameButtons[index]->setIcon(QIcon(image));
     frameButtons[index]->setIconSize(frameButtons[index]->size());
 }
