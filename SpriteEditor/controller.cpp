@@ -42,9 +42,9 @@ void Controller::convertToPixmap(int index, Frame frame) {
     emit sendPixmap(index, pixmap);
 }
 
-void Controller::convertAllFrames(const std::vector<Frame>& frames) {
-    for (size_t i = 0; i < frames.size(); ++i) {
-        convertToPixmap(static_cast<int>(i), frames[i]);
+void Controller::convertAllFrames() {
+    for (int i = 0; i < model->getFrameCount(); ++i) {
+        convertToPixmap(i, model->getFrame(i));
     }
 }
 
@@ -112,11 +112,6 @@ void Controller::loadProjectSlot(QString filePath){
     model = Sprite::fromJson(doc.object());
     file.close();
 
-
-
-
-
-    convertAllFrames(model->frames);
     currentFrameIndex = 0;
     currentFrame = &model->getFrame(0);
 
@@ -125,11 +120,13 @@ void Controller::loadProjectSlot(QString filePath){
     emit initializeCanvas(spriteSize, spriteSize);
     emit setTimelineFrameCount(model->getFrameCount());
     updateCanvas();
+    convertAllFrames();
 
     // Start the preview timer
     previewFrameIndex = 0;
     previewTimer->start(1000 / model->getFPS());
-    convertToPixmap(0, *currentFrame);
+
+
 
 
 
