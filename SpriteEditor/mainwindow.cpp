@@ -20,7 +20,6 @@
 #include <QFileDialog>
 #include "timeline.h"
 #include <QAction>
-#include <iostream>
 #include "controller.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -28,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    control = new Controller(this);
+    control = new Controller();
 
     //Connecting signal new project in mainwindow to slot newProjectSlot in controller
     connect(this, &MainWindow::newProjectSignal, control, &Controller::newProjectSlot);
@@ -118,7 +117,7 @@ void MainWindow::on_actionSave_triggered()
 void MainWindow::on_actionLoad_triggered()
 {
 
-    QString fileName = QFileDialog::getOpenFileName(this, "Save Sprite", "", "JSON Files (*.json);;All Files (*)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Load Sprite", "", "SSP Files (*.ssp);;JSON Files (*.json);;All Files (*)");
 
     if(fileName.isEmpty()){
         return;

@@ -15,7 +15,7 @@
 
 #include "controller.h"
 
-Controller::Controller(QWidget *parent)
+Controller::Controller()
 {
     // Starts a new thread to continuously cycle through frames for the preview
     initializePreviewTimer();
@@ -93,7 +93,6 @@ void Controller::newProjectSlot(int spriteSize){
 void Controller::loadProjectSlot(QString filePath){
     QFile file(filePath);
 
-
     if(!file.open(QIODevice::ReadOnly)){
         return;
     }
@@ -118,11 +117,6 @@ void Controller::loadProjectSlot(QString filePath){
     // Start the preview timer
     previewFrameIndex = 0;
     previewTimer->start(1000 / model->getFPS());
-
-
-
-
-
 }
 
 void Controller::saveProjectSlot(QString filePath){
@@ -132,7 +126,12 @@ void Controller::saveProjectSlot(QString filePath){
 
     QByteArray data = output.toJson();
 
+    QFileInfo info(filePath);
+
+    filePath = info.path() + "/" + info.completeBaseName() + ".ssp";
+
     QFile file(filePath);
+
 
     if(!file.open(QIODevice::WriteOnly)){
         return;
@@ -140,8 +139,6 @@ void Controller::saveProjectSlot(QString filePath){
 
     file.write(data);
     file.close();
-
-
 }
 
 
@@ -198,9 +195,6 @@ void Controller::handleCanvasInputSlot(int x, int y){
         case ToolStates::Mirror:
             mirrorTool(x,y);
             break;
-        case ToolStates::SelectionTool:
-            selectionTool(x,y);
-            break;
         }
 
         // Refresh the canvas to reflect changes
@@ -253,13 +247,7 @@ void Controller::mirrorTool(int x, int y){
     }
 }
 
-void Controller::selectionTool(int x, int y){
-    ///TODO: SELECTION TOOL
-    ///
-    /// OVERDIE MOSUECLICK (X,Y) TOGGLE
-    ///
-    /// OVERRIDE MOUSEDRAGED (X,Y) TOGGLE
-}
+
 
 
 /// CURRENT TOOL SLOTS ///
@@ -524,7 +512,7 @@ void Controller::frameSelectedSlot(int index) {
     updateCanvas();
 }
 
-void Controller::addFrameSlot(int index) {
+void Controller::addFrameSlot() {
     if (!model)
         return;
 
