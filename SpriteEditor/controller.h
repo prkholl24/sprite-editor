@@ -45,8 +45,6 @@ public:
      */
     Controller(QWidget *parent = nullptr);
 signals:
-    // sends the pixmap over to the view.
-    void sendPixmap(int index, QPixmap map);
     void frameModified();
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
