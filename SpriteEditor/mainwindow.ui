@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>800</height>
+    <width>1000</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>800</height>
+    <width>1000</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,10 @@
    <widget class="toolbar" name="toolbarWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>121</width>
-      <height>201</height>
+      <x>60</x>
+      <y>30</y>
+      <width>161</width>
+      <height>221</height>
      </rect>
     </property>
    </widget>
@@ -50,16 +50,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="Timeline" name="timelineWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>500</y>
-      <width>781</width>
-      <height>161</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="Canvas" name="preview" native="true">
     <property name="geometry">
      <rect>
@@ -70,13 +60,23 @@
      </rect>
     </property>
    </widget>
+   <widget class="Timeline" name="timelineWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>540</y>
+      <width>781</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1000</width>
      <height>17</height>
     </rect>
    </property>

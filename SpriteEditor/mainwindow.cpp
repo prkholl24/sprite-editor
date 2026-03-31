@@ -14,6 +14,7 @@
 // TO-DO move all includes to .h file
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "timeline.h"
 #include <QAction>
 #include <iostream>
 #include "controller.h"
@@ -73,17 +74,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialize the color palette when the application starts
     control->initializePalette();
-    // Direct connection from Timeline to Controller
-    connect(ui->timelineWidget, &Timeline::frameAdded, control, &Controller::handleAddFrame);
-
-    connect(ui->timelineWidget, &Timeline::frameRemoved, control, &Controller::handleRemoveFrame);
-
-    connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::handleFrameSelected);
-
-    connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::handleFpsChanged);
-
+    
     // Preview widget connection
     connect(control, &Controller::drawPreviewPixel, ui->preview, &Canvas::drawPixel);
+    
+    // Timeline connections
+    connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::frameSelectedSlot);
+    connect(ui->timelineWidget, &Timeline::frameAdded, control, &Controller::addFrameSlot);
+    connect(ui->timelineWidget, &Timeline::frameRemoved, control, &Controller::removeFrameSlot);
+    connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::setSpriteFPS);
+
+    // Controller -> Timeline sync
+    connect(control, &Controller::setTimelineFrameCount, ui->timelineWidget, &Timeline::setFrameCount);
+    connect(control, &Controller::sendPixmap, ui->timelineWidget, &Timeline::updateButtonImage);
 }
 
 MainWindow::~MainWindow()
