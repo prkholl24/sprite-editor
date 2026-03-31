@@ -245,6 +245,17 @@ signals:
      */
     void drawColorPalettePixel(int x, int y, std::vector<int> color);
 
+    /**
+     * @brief drawPreviewPixel
+     * @param x coordinate
+     * @param y coordinate
+     * @param color in [R,G,B,A] format
+     *
+     * Singal connects to the preview widget.
+     * Triggers continuously to display the animation.
+     */
+    void drawPreviewPixel(int x, int y, std::vector<int> color);
+
 public slots:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
@@ -337,6 +348,13 @@ public slots:
     void handleRemoveFrame(int index);
     void handleFrameSelected(int index);
     void handleFpsChanged(int fps);
+
+    /**
+     * @brief Advances the preview animation to the next frame.
+     *
+     * Triggered by previewTimer.
+     */
+    void updatePreview();
 
 public slots:
     void newProjectSlot(int spriteSize);

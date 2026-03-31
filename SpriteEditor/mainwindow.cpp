@@ -81,6 +81,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::handleFpsChanged);
 
+    // Preview widget connection
+    connect(control, &Controller::drawPreviewPixel, ui->preview, &Canvas::drawPixel);
 }
 
 MainWindow::~MainWindow()
