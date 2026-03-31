@@ -328,6 +328,7 @@ signals:
      * Triggers continuously to display the animation.
      */
     void drawPreviewPixel(int x, int y, std::vector<int> color);
+    void clearPreview();
     void setTimelineFrameCount(int count);
 
 public slots:

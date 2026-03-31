@@ -85,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
     
     // Preview widget connection
     connect(control, &Controller::drawPreviewPixel, ui->preview, &Canvas::drawPixel);
+    connect(control, &Controller::clearPreview, ui->preview, &Canvas::clear);
     
     // Timeline connections
     connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::frameSelectedSlot);

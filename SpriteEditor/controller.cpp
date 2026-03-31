@@ -179,7 +179,6 @@ void Controller::updateCanvas() {
 void Controller::handleCanvasInputSlot(int x, int y){
     if (!(model == nullptr)) {
         switch(currentTool) {
-
         case ToolStates::PaintBucket:
             fillBucket(x,y);
             break;
@@ -486,6 +485,8 @@ void Controller::initializePreviewTimer() {
 void Controller::updatePreview() {
     if (!model)
         return;
+
+    emit clearPreview();
 
     // Chooses the next frame or loops back to the first frame.
     previewFrameIndex = (previewFrameIndex + 1) % model->getFrameCount();
