@@ -1,3 +1,21 @@
+/**
+ * @file controller.h
+ * @brief Defines the Controller class for the sprite editor application.
+ *
+ * This file contains the declaration of the Controller class, which manages
+ * communication between the Sprite model and the user interface. The Controller
+ * handles user input from the view, updates the model, and emits signals to keep
+ * the canvas, timeline, and color palette in sync.
+ *
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
+ * @date 3/30/2026
+ *
+ * Last Revision: 3/30/2026 8:52PM MST by Lindsey Reese
+ */
+
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
@@ -9,7 +27,19 @@
 #include <vector>
 #include "sprite.h"
 #include "palettedata.h"
+#include <QMessageBox>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFileDialog>
 
+/**
+ * @brief Coordinates interactions between the model and the UI.
+ *
+ * The Controller responds to user actions (mouse input, toolbar selection,
+ * palette selection), applies changes to the Sprite model, and emits signals
+ * so the view updates accordingly. It also manages tool state and the active
+ * color palette.
+ */
 class Controller : public QObject
 {
     Q_OBJECT
@@ -21,13 +51,21 @@ private:
      */
     Sprite* model = nullptr;
 
+    /**
+     * @brief Points to the frame currently being edited.
+     */
     Frame* currentFrame = nullptr;
 
-    /**
+    /*
      * @brief Index of the currently selected frame in the sprite.
      */
     int currentFrameIndex = 0;
 
+    /**
+     * @brief Stores the currently selected drawing color in RGBA format.
+     *
+     * Default color is black (RGBA).
+     */
     std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
 
     enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
@@ -38,6 +76,7 @@ private:
 
     /**
      * @brief Loops through the current frame and emits drawPixel for every pixel.
+     *
      * Ensures the Canvas View is perfectly synced with the Model.
      */
     void updateCanvas();
@@ -49,20 +88,27 @@ private:
      */
     Frame* colorPalette = nullptr;
 
+    /**
+     * @brief Stores which preset color palette is currently selected.
+     */
     PaletteType selectedPalette = PaletteType::Default;
 
     /**
-     * @brief updateColorPalette
+     * @brief Updates the color palette view to match the current palette.
      *
-     * Handles drawing to the color palette.
+     * Emits initializeColorPalette and drawColorPalettePixel so the palette
+     * widget redraws using the colors stored in colorPalette.
      */
     void updateColorPalette();
 
     /**
-     * @brief defaultPalette
-     * @return
+     * @brief Creates and returns the default color palette.
      *
-     * Creates the default color wheel
+     * This is the fallback palette used when no themed palette is selected.
+     * It provides a standard color wheel so the user can choose from a wide
+     * range of basic colors.
+     *
+     * @return A pointer to a Frame containing the default palette colors.
      */
     Frame* defaultPalette();
 
@@ -75,9 +121,6 @@ private:
      * contrast, and refined materials, including metallic tones,
      * neutrals, and bold accents commonly used in architecture,
      * fashion, and interior design of the era.
-     *
-     * The colors are based on Pantone references including Lavender Violet,
-     * Turtledove, Champagne Beige, Carnelian, Jet Black, and Silver.
      *
      * The palette is represented as a 3x2 Frame where each pixel corresponds
      * to a selectable color in the UI.
@@ -149,10 +192,6 @@ private:
      * and design trends. The palette emphasizes earthy, muted tones
      * commonly used in 1970s home decor, textiles, and appliances.
      *
-     * The colors are based on Pantone references including Avocado,
-     * Golden Olive, Cream Gold, Harvest Gold, Burnt Orange, and
-     * Tortoise Shell.
-     *
      * The palette is represented as a 3x2 Frame where each pixel corresponds
      * to a selectable color in the UI.
      *
@@ -172,14 +211,10 @@ private:
      *
      * This palette is inspired by Pantone color selections featured in
      * "Pantone: The 20th Century in Color", specifically the "The Day the
-     *  Word Turned Day-Glo” section, featuring aesthetic associated with
+     *  Word Turned Day-Glo” section, featuring the aesthetic associated with
      *  1980s fashion and design. The palette emphasizes high-saturation,
      *  fluorescent colors commonly used in punk, pop, and experimental
      *  visual styles of the era.
-     *
-     * The colors are based on Pantone references including Process Blue,
-     * 7488 (green), Yellow 012, 1575, Orange 021, 213, Rhodamine Red,
-     * and Black 6.
      *
      * The palette is represented as a 3x3 Frame where each pixel corresponds
      * to a selectable color in the UI.
@@ -234,41 +269,45 @@ signals:
 
     /**
      * @brief drawPixel to the Canvas
+     *
+     * Signal connects to the canvas widget to update to reflect
+     * changes to `model`.
+     *
      * @param x coordinate
      * @param y coordinate
      * @param color in [R,G,B,A] format
-     *
-     * Singal connects to the canvas widget to update to reflect
-     * changes to `model`.
      */
     void drawPixel(int x, int y, std::vector<int> color);
 
     /**
      * @brief initializeCanvas
-     * @param width in pixels
-     * @param height in pixels
      *
      * Tells the canvas how many pixels it needs to render.
+     *
+     * @param width in pixels
+     * @param height in pixels
      */
     void initializeCanvas(int width, int height);
 
     /**
      * @brief initializeColorPalette
-     * @param width in pixels
-     * @param height in pixels
      *
      * Tells the color palette how many pixels it needs to render
+     *
+     * @param width in pixels
+     * @param height in pixels
      */
     void initializeColorPalette(int width, int height);
 
     /**
      * @brief drawColorPalettePixel
+     *
+     * Signal connects to the color palette widget.
+     * Triggers update to reflect changes to `colorPalette`.
+     *
      * @param x coordinate
      * @param y coordinate
      * @param color in [R,G,B,A] format
-     *
-     * Singal connects to the color palette widget.
-     * Triggers update to reflect changes to `colorPalette`.
      */
     void drawColorPalettePixel(int x, int y, std::vector<int> color);
 
@@ -288,7 +327,9 @@ signals:
 public slots:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
+     *
      * Does this via "emit sendPixmap(pixmap-you-just-made)".
+     *
      * @param index The index of the frame button to update
      * @param frame The frame to convert
      */
@@ -296,13 +337,15 @@ public slots:
 
     /**
      * @brief Converts all frames to pixmaps and sends them to the timeline.
+     *
      * Use this when loading a new sprite or initializing the timeline.
+     *
      * @param frames Vector of all frames to convert
      */
     void convertAllFrames(const std::vector<Frame>& frames);
 
     /**
-     * @brief Sets the sprite's framerate accordingly upon reception of an fpsChanged() signal.
+     * @brief Paints a single pixel using the current drawing color.
      * @param fps The FPS value to set.
      */
     void setSpriteFPS(int fps);
@@ -310,70 +353,81 @@ public slots:
     /**
      * @brief standardBrush
      *
-     * Paints one pixel in Sprite.
-     * @param x and y coordinate
+     * Called when the standard brush tool is active. Sets the pixel at the
+     * selected coordinate to currentColor and updates the canvas.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void standardBrush(int x, int y);
 
     /**
-     * @brief eraserBrush
+     * @brief Erases a single pixel.
      *
-     * Erases one pixel in Sprite.
-     * @param x and y coordinate
+     * Called when the eraser tool is active. Resets the pixel at the selected
+     * coordinate to a default or transparent color and updates the canvas.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void eraserTool(int x, int y);
 
     /**
-     * @brief fillBucket
+     * @brief Fills a connected region starting at the selected pixel.
      *
-     * Fills a enclosed area with one color.
-     * @param x and y coordinate
+     * Called when the paint bucket tool is active. Replaces all connected pixels
+     * that match the starting pixel’s color with currentColor.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void fillBucket(int x, int y);
 
     /**
-     * @brief fillBucketLogic
+     * @brief Recursive helper method for the paint bucket tool.
      *
-     * Depth-First Search fill bucket helper method.
-     * FLOOD FILL ALGORITHM
-     * TODO: UNTESTED UNTIL CANVAS IS DONE
+     * Performs a depth-first flood fill on the pixel grid, replacing all connected
+     * pixels that match oldColor with currentColor.
+     *
+     * @param pixelGrid The grid of pixels being modified.
+     * @param x The current x coordinate being checked.
+     * @param y The current y coordinate being checked.
+     * @param oldColor The original color being replaced.
      */
     void fillBucketLogic(std::vector<std::vector<Pixel>>& pixelGrid, int x, int y, std::vector<int> oldColor);
 
     /**
-     * @brief eyeDropperTool
+     * @brief Samples the color at the selected coordinate.
      *
-     * Saves selected color of selected pixel.
-     * @param x and y coordinate
+     * Called when the eyedropper tool is active. Sets currentColor to match
+     * the color of the selected pixel.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void eyeDropperTool(int x, int y);
 
     /**
-     * @brief mirrorTool
+     * @brief Draws a mirrored pixel across the canvas.
      *
-     * Mirror sprite manipulation.
-     * @param x and y coordinate
+     * Called when the mirror tool is active. Applies the same color to the
+     * mirrored position of the selected pixel.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void mirrorTool(int x, int y);
 
     /**
-     * @brief selectionTool
+     * @brief Handles selection tool behavior.
      *
-     * Selects pixel selection tool.
-     * @param x and y coordinate
+     * Called when the selection tool is active. Allows selecting regions or
+     * pixels for future operations.
+     *
+     * @param x The x coordinate of the selected pixel.
+     * @param y The y coordinate of the selected pixel.
      */
     void selectionTool(int x, int y);
-
-    /**
-     * @brief Controller constructor
-     *
-     * Creates a new controller object with no model initialized.
-     * On initialization this Controller waits for a signal from the
-     * "New" or "Load" buttons in order to create the Sprite object
-     * to manipulate
-     */
-  
-signals:
 
 public slots:
   
@@ -382,11 +436,11 @@ public slots:
 
 
     /**
-     * @brief initializePalette creates the color palette
+     * @brief Initializes the currently selected preset color palette.
      * @param size effects the number of colors which are created
      *
-     * Creates a new Frame object and populates it with colors.
-     * Colors a
+     * Deletes the existing palette (if one exists), creates a new palette
+     * based on selectedPalette, and updates the palette view to reflect it.
      */
     void initializePalette();
 
@@ -401,12 +455,24 @@ public slots:
      */
     void updatePreview();
 
+    /**
+     * @brief Creates a new sprite project with the given size.
+     *
+     * Initializes a new Sprite model, sets the first frame as currentFrame,
+     * resets the drawing color, and updates the canvas to reflect the new project.
+     *
+     * @param spriteSize The width and height of the new sprite in pixels.
+     */
     void newProjectSlot(int spriteSize);
 
     /**
-     * @brief handleCanvasInputSlot
-     * @param x
-     * @param y
+     * @brief Handles user input on the canvas.
+     *
+     * Applies the currently selected tool to the given coordinate and
+     * updates the canvas to reflect any changes.
+     *
+     * @param x The x coordinate of the clicked pixel.
+     * @param y The y coordinate of the clicked pixel.
      */
     void handleCanvasInputSlot(int x, int y);
 
@@ -430,21 +496,65 @@ public slots:
      */
     void removeFrameSlot(int index);
 
-    /// TOOL BAR ///
+    // ==================== TOOL BAR ====================
+
+    /**
+     * @brief Sets the current tool to Standard Brush.
+     *
+     * Called when the user selects the standard brush tool from the toolbar.
+     * Updates currentTool so future canvas input uses the brush behavior.
+     */
     void standardBrushSelectedSlot();
+
+    /**
+     * @brief Sets the current tool to Eraser.
+     *
+     * Called when the user selects the eraser tool from the toolbar.
+     * Updates currentTool so future canvas input removes color instead of applying it.
+     */
     void eraserToolSelectedSlot();
+
+    /**
+     * @brief Sets the current tool to Paint Bucket.
+     *
+     * Called when the user selects the paint bucket tool from the toolbar.
+     * Updates currentTool so future canvas input performs a flood fill operation.
+     */
     void paintBucketSelectedSlot();
+
+    /**
+     * @brief Sets the current tool to Eyedropper.
+     *
+     * Called when the user selects the eyedropper tool from the toolbar.
+     * Updates currentTool so future canvas input samples colors from the sprite.
+     */
     void eyeDropperToolSelectedSlot();
+
+    /**
+     * @brief Sets the current tool to Mirror.
+     *
+     * Called when the user selects the mirror tool from the toolbar.
+     * Updates currentTool so future canvas input applies mirrored drawing behavior.
+     */
     void mirrorToolSelectedSlot();
+
+    /**
+     * @brief Sets the current tool to Selection Tool.
+     *
+     * Called when the user selects the selection tool from the toolbar.
+     * Updates currentTool so future canvas input uses selection behavior.
+     */
     void selectionToolSelectedSlot();
 
     /**
-     * @brief handleColorPaletteInput
-     * @param x coordinate
-     * @param y coordinate
+     * @brief Updates the current drawing color based on a palette selection.
      *
-     * Interprets a color palette input and sets the pixel color at some
-     * coordinate to the currentColor
+     * Called when the user clicks on the color palette. Retrieves the color
+     * stored at the selected palette position and sets it as currentColor,
+     * which will be used for future drawing operations.
+     *
+     * @param x The x coordinate in the color palette.
+     * @param y The y coordinate in the color palette.
      */
     void handleColorPaletteInput(int x, int y);
 

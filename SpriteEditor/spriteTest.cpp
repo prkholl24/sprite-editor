@@ -6,8 +6,10 @@
 //  * animation data.
 //  *
 //  * Team: Green Goombas
-//  * @authors Charles Adair, Armando Carrillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
-//  * @date 3-26-2026
+//  * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+//  * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+//  *          Brady Nelson, Lindsey Reese, Kent Wilkison
+//  * @date 3/26/2026
 //  */
 
 // #include <QtTest/QtTest>

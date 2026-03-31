@@ -7,7 +7,9 @@
  * such as the current frame and playback speed.
  *
  * Team: Green Goombas
- * @authors Charles Adair, Armando Calrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/26/2026
  *
  * Last Revision: 3/29/2026 12:44AM MST by Charles Adair

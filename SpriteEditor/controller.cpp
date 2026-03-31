@@ -4,20 +4,16 @@
  *
  * This class handles the relationship between the Sprite model and the Graphical User Interface
  *
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/29/2026
  *
- * Last Revision: 3/29/2026 12:51AM MST by Charles Adair
+ * Last Revision: 3/30/2026 2:39PM MST by Charles Adair
  */
-// TO-DO move all includes to .h file
+
 #include "controller.h"
-#include <QMessageBox>
-#include <iostream>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QFileDialog>
-
-
 
 Controller::Controller(QWidget *parent)
 {
@@ -97,7 +93,6 @@ void Controller::newProjectSlot(int spriteSize){
 void Controller::loadProjectSlot(QString filePath){
     QFile file(filePath);
 
-    std::cout << "in load project slot" << std::endl;
 
     if(!file.open(QIODevice::ReadOnly)){
         return;
@@ -107,7 +102,6 @@ void Controller::loadProjectSlot(QString filePath){
 
     QJsonDocument doc = QJsonDocument::fromJson(data);
 
-    std::cout << "Line 85 above Sprite::fromJson" << std::endl;
     model = Sprite::fromJson(doc.object());
 
 
@@ -187,27 +181,21 @@ void Controller::handleCanvasInputSlot(int x, int y){
 
         case ToolStates::PaintBucket:
             fillBucket(x,y);
-            std::cout << "Fill bucket selected!" << std::endl;
             break;
         case ToolStates::StandardBrush:
             standardBrush(x,y);
-            std::cout << "Standard brush selected!" << std::endl;
             break;
         case ToolStates::Eraser:
             eraserTool(x,y);
-            std::cout << "Eraser tool selected!" << std::endl;
             break;
         case ToolStates::Eyedropper:
             eyeDropperTool(x,y);
-            std::cout << "Eye dropper tool selected!" << std::endl;
             break;
         case ToolStates::Mirror:
             mirrorTool(x,y);
-            std::cout << "Mirror tool selected!" << std::endl;
             break;
         case ToolStates::SelectionTool:
             selectionTool(x,y);
-            std::cout << "Selection tool selected!" << std::endl;
             break;
         }
 
@@ -273,27 +261,21 @@ void Controller::selectionTool(int x, int y){
 /// CURRENT TOOL SLOTS ///
 void Controller::standardBrushSelectedSlot(){
     currentTool = ToolStates::StandardBrush;
-    std::cout << "1 selected!" << std::endl;
 }
 void Controller::eraserToolSelectedSlot(){
     currentTool = ToolStates::Eraser;
-    std::cout << "2 selected!" << std::endl;
 }
 void Controller::paintBucketSelectedSlot(){
     currentTool = ToolStates::PaintBucket;
-    std::cout << "3 selected!" << std::endl;
 }
 void Controller::eyeDropperToolSelectedSlot(){
     currentTool = ToolStates::Eyedropper;
-    std::cout << "4 selected!" << std::endl;
 }
 void Controller::mirrorToolSelectedSlot(){
     currentTool = ToolStates::Mirror;
-    std::cout << "5 selected!" << std::endl;
 }
 void Controller::selectionToolSelectedSlot(){
     currentTool = ToolStates::SelectionTool;
-    std::cout << "6 selected!" << std::endl;
 }
 
 

@@ -7,8 +7,12 @@
  * These palettes are used by the ColorPalette widget to display selectable colors.
  *
  * Team: Green Goombas
- * @authors Charles Adair, Armando Carrillo, Parker Hollingsed, Brady Nelson, Lindsey Reese, Kent Wilkison
+ * GitHub: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3-29-2026
+ *
+ * Last Revision: 3/30/2026 8:52AM MST by Lindsey Reese
  */
 
 #ifndef PALETTEDATA_H

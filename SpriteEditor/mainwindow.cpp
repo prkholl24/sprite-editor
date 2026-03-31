@@ -5,7 +5,10 @@
  * UI component initialized on execution upon which each of the disparate UI components sits.
  * Also initializes the Controller and interfaces with its slots and signals.
  *
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/29/2026
  *
  * Last Revision: 3/29/2026 12:54AM MST by Charles Adair
