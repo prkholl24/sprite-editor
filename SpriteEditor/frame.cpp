@@ -57,25 +57,20 @@ QJsonObject Frame::toJson() const {
 
 
 Frame Frame::fromJson(const QJsonObject &json){
-    std::cout << "in FrameFromJson" << std::endl;
     Frame copyFrame(json["Size"].toInt(),json["Size"].toInt());
     QJsonArray jsonArray = json["PixelGrid"].toArray();
 
-     std::cout << "Frame:62" << std::endl;
 
     int x = 0;
     for (auto main : std::as_const(jsonArray)){
         int y = 0;
-         std::cout << "Frame Outter array" << std::endl;
         QJsonArray inner = main.toArray();
         for (const QJsonValue &inner : std::as_const(inner)){
-             std::cout << "Frame Inner Array: y: " << y << " x: "<< x << std::endl;
             Pixel testingPixel = Pixel::fromJson(inner.toObject());
             copyFrame.getPixel(x,y) = testingPixel;
             y++;
         }
         x++;
     }
-    std::cout << "above return copyFrame in frame" << std::endl;
     return copyFrame;
 }

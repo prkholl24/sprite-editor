@@ -219,7 +219,7 @@ public:
      * "New" or "Load" buttons in order to create the Sprite object
      * to manipulate
      */
-    Controller(QWidget *parent = nullptr);
+    Controller();
 signals:
     void frameModified();
     // sends the pixmap over to the view.
@@ -414,7 +414,7 @@ public slots:
      * @brief Adds a new frame to the model at the given index.
      * @param index The index where the frame was added in the timeline.
      */
-    void addFrameSlot(int index);
+    void addFrameSlot();
 
     /**
      * @brief Removes the frame at the given index from the model.
