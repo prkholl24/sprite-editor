@@ -37,9 +37,9 @@ void Controller::convertToPixmap(int index, Frame frame) {
     emit sendPixmap(index, pixmap);
 }
 
-void Controller::convertAllFrames(const std::vector<Frame>& frames) {
-    for (size_t i = 0; i < frames.size(); ++i) {
-        convertToPixmap(static_cast<int>(i), frames[i]);
+void Controller::convertAllFrames() {
+    for (int i = 0; i < model->getFrameCount(); ++i) {
+        convertToPixmap(i, model->getFrame(i));
     }
 }
 
@@ -103,19 +103,23 @@ void Controller::loadProjectSlot(QString filePath){
     QJsonDocument doc = QJsonDocument::fromJson(data);
 
     model = Sprite::fromJson(doc.object());
+    file.close();
 
-
+    currentFrameIndex = 0;
+    currentFrame = &model->getFrame(0);
 
     int spriteSize = model->getHeight();
 
     emit initializeCanvas(spriteSize, spriteSize);
     emit setTimelineFrameCount(model->getFrameCount());
     updateCanvas();
+    convertAllFrames();
 
     // Start the preview timer
     previewFrameIndex = 0;
     previewTimer->start(1000 / model->getFPS());
-    convertToPixmap(0, *currentFrame);
+
+
 
 
 
@@ -241,11 +245,11 @@ void Controller::mirrorTool(int x, int y){
     /// LEFT
     if (x < halfCanvas){
         offset = halfCanvas - x;
-        standardBrush(halfCanvas+offset,y);
+        standardBrush(halfCanvas+offset-1,y);
     /// RIGHT
     } else {
         offset = x - halfCanvas;
-        standardBrush(halfCanvas-offset,y);
+        standardBrush(halfCanvas-offset-1,y);
     }
 }
 

@@ -339,10 +339,8 @@ public slots:
      * @brief Converts all frames to pixmaps and sends them to the timeline.
      *
      * Use this when loading a new sprite or initializing the timeline.
-     *
-     * @param frames Vector of all frames to convert
      */
-    void convertAllFrames(const std::vector<Frame>& frames);
+    void convertAllFrames();
 
     /**
      * @brief Paints a single pixel using the current drawing color.
