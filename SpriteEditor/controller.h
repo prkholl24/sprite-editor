@@ -133,6 +133,11 @@ public slots:
      */
     void selectionTool(int x, int y);
 
+    void handleAddFrame();
+    void handleRemoveFrame(int index);
+    void handleFrameSelected(int index);
+    void handleFpsChanged(int fps);
+
 public slots:
     void newProjectSlot(int spriteSize);
     void handleCanvasInputSlot(int x, int y);

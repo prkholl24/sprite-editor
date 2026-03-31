@@ -171,7 +171,6 @@ void Controller::selectionTool(int x, int y){
     /// OVERRIDE MOUSEDRAGED (X,Y) TOGGLE
 }
 
-
 /// CURRENT TOOL SLOTS ///
 void Controller::standardBrushSelectedSlot(){
     currentTool = ToolStates::StandardBrush;
@@ -198,7 +197,22 @@ void Controller::selectionToolSelectedSlot(){
     std::cout << "6 selected!" << std::endl;
 }
 
+void Controller::handleAddFrame() {
+    model->addFrame();
+}
 
+void Controller::handleRemoveFrame(int index) {
+    model->removeFrame(index);
+}
+
+void Controller::handleFrameSelected(int index) {
+    currentFrame = &model->getFrame(index);
+    updateCanvas();
+}
+
+void Controller::handleFpsChanged(int fps) {
+    model->setFPS(fps);
+}
 
 //TOOLBAR
 //Signal is received from toolbar.

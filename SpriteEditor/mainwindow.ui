@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>800</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>800</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -19,8 +25,8 @@
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>191</width>
-      <height>161</height>
+      <width>121</width>
+      <height>201</height>
      </rect>
     </property>
    </widget>
@@ -34,6 +40,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="Timeline" name="timelineWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>500</y>
+      <width>781</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -41,7 +57,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -82,6 +98,12 @@
    <class>Canvas</class>
    <extends>QWidget</extends>
    <header location="global">canvas.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Timeline</class>
+   <extends>QWidget</extends>
+   <header location="global">timeline.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

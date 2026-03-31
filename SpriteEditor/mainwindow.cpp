@@ -49,15 +49,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolbarWidget, &toolbar::selectionToolSelectedSignal, control, &Controller::selectionToolSelectedSlot);
 
+    // Direct connection from Timeline to Controller
+    connect(ui->timelineWidget, &Timeline::frameAdded, control, &Controller::handleAddFrame);
+
+    connect(ui->timelineWidget, &Timeline::frameRemoved, control, &Controller::handleRemoveFrame);
+
+    connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::handleFrameSelected);
+
+    connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::handleFpsChanged);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
-
 
 void MainWindow::on_actionSave_triggered()
 {
