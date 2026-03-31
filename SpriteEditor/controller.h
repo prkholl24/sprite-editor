@@ -358,6 +358,23 @@ public slots:
     void selectionTool(int x, int y);
 
     /**
+     * @brief Controller constructor
+     *
+     * Creates a new controller object with no model initialized.
+     * On initialization this Controller waits for a signal from the
+     * "New" or "Load" buttons in order to create the Sprite object
+     * to manipulate
+     */
+  
+signals:
+
+public slots:
+  
+    void loadProjectSlot(QString filePath);
+    void saveProjectSlot(QString filePath);
+
+
+    /**
      * @brief initializePalette creates the color palette
      * @param size effects the number of colors which are created
      *

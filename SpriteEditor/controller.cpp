@@ -7,12 +7,18 @@
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/29/2026
  *
+ * Last Revision: 3/29/2026 12:51AM MST by Charles Adair
  * Last Revision: 3/30/2026 2:39PM MST by Charles Adair
  */
 // TO-DO move all includes to .h file
 #include "controller.h"
 #include <QMessageBox>
 #include <iostream>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFileDialog>
+
+
 
 Controller::Controller(QWidget *parent)
 {
@@ -73,6 +79,7 @@ void Controller::newProjectSlot(int spriteSize){
         delete model;
     }
     model = new Sprite(spriteSize, spriteSize);
+
     currentFrameIndex = 0;
     currentFrame = &model->getFrame(0);
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
@@ -85,6 +92,59 @@ void Controller::newProjectSlot(int spriteSize){
     previewFrameIndex = 0;
     previewTimer->start(1000 / model->getFPS());
     convertToPixmap(0, *currentFrame);
+
+}
+
+void Controller::loadProjectSlot(QString filePath){
+    QFile file(filePath);
+
+    std::cout << "in load project slot" << std::endl;
+
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    std::cout << "Line 85 above Sprite::fromJson" << std::endl;
+    model = Sprite::fromJson(doc.object());
+
+
+
+    int spriteSize = model->getHeight();
+
+    emit initializeCanvas(spriteSize, spriteSize);
+    emit setTimelineFrameCount(model->getFrameCount());
+    updateCanvas();
+
+    // Start the preview timer
+    previewFrameIndex = 0;
+    previewTimer->start(1000 / model->getFPS());
+    convertToPixmap(0, *currentFrame);
+
+
+
+}
+
+void Controller::saveProjectSlot(QString filePath){
+    QJsonObject object = model->toJson();
+
+    QJsonDocument output(object);
+
+    QByteArray data = output.toJson();
+
+    QFile file(filePath);
+
+    if(!file.open(QIODevice::WriteOnly)){
+        return;
+    }
+
+    file.write(data);
+    file.close();
+
+
 }
 
 
@@ -188,6 +248,7 @@ void Controller::selectionTool(int x, int y){
     /// OVERRIDE MOUSEDRAGED (X,Y) TOGGLE
 }
 
+
 /// CURRENT TOOL SLOTS ///
 void Controller::standardBrushSelectedSlot(){
     currentTool = ToolStates::StandardBrush;
@@ -213,6 +274,7 @@ void Controller::selectionToolSelectedSlot(){
     currentTool = ToolStates::SelectionTool;
     std::cout << "6 selected!" << std::endl;
 }
+
 
 void Controller::updateColorPalette() {
     if (!colorPalette)

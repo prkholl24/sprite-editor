@@ -30,11 +30,6 @@
 class Sprite {
 private:
 
-    /**
-     * @brief Frames is  a set of 2D arrays containing color data ordered by
-     * the sequence in which they are played back.
-     */
-    std::vector<Frame> frames;
 
     /**
      * @brief Frame rate at which the playback occurs
@@ -77,6 +72,12 @@ private:
     Frame createDefaultFrame() const;
 
 public:
+
+    /**
+     * @brief Frames is  a set of 2D arrays containing color data ordered by
+     * the sequence in which they are played back.
+     */
+    std::vector<Frame> frames;
 
     /**
      * @brief Default constructor for Sprite.
@@ -168,6 +169,19 @@ public:
      * @return The number of frames.
      */
     int getFrameCount() const;
+
+    /**
+     * @brief toJson Converting sprite into Json.
+     * @return Json text
+     */
+    QJsonObject toJson() const;
+
+    /**
+     * @brief fromJson Creates a Sprite object from Json
+     * @param json test
+     * @return Sprite Object
+     */
+    static Sprite* fromJson(const QJsonObject &json);
 };
 
 #endif // SPRITE_H

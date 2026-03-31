@@ -23,8 +23,11 @@ public:
 
 signals:
 
-    void newProject(int spriteSize);
+    void newProjectSignal(int spriteSize);
 
+    void loadProjectSignal(QString filePath);
+
+    void saveProjectSignal(QString filePath);
 
 
     void canvasInput(int x, int y);
@@ -38,7 +41,8 @@ private slots:
 
     void on_pushButton_clicked();
 
-    void on_fillBucket_clicked();
+
+    void on_actionLoad_triggered();
 
 private:
     Ui::MainWindow *ui;
