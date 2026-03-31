@@ -369,7 +369,6 @@ public slots:
     void handleAddFrame();
     void handleRemoveFrame(int index);
     void handleFrameSelected(int index);
-    void handleFpsChanged(int fps);
 
     /**
      * @brief Advances the preview animation to the next frame.

@@ -44,6 +44,11 @@ void Controller::convertAllFrames(const std::vector<Frame>& frames) {
 
 void Controller::setSpriteFPS(int fps) {
     model->setFPS(fps);
+    if (fps > 0) {
+        previewTimer->start(1000 / fps);
+    } else {
+        previewTimer->stop();
+    }
 }
 
 void Controller::fillBucketLogic(std::vector<std::vector<Pixel>>& pixelGrid, int x, int y, std::vector<int> oldColor) {
@@ -412,15 +417,6 @@ void Controller::handleRemoveFrame(int index) {
 void Controller::handleFrameSelected(int index) {
     currentFrame = &model->getFrame(index);
     updateCanvas();
-}
-
-void Controller::handleFpsChanged(int fps) {
-    model->setFPS(fps);
-    if (fps > 0) {
-        previewTimer->start(1000 / fps);
-    } else {
-        previewTimer->stop();
-    }
 }
 
 void Controller::initializePreviewTimer() {
