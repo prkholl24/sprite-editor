@@ -221,8 +221,15 @@ public:
      */
     Controller(QWidget *parent = nullptr);
 signals:
+    /**
+     * @brief Updates Frame modified.
+     */
     void frameModified();
-    // sends the pixmap over to the view.
+    /**
+     * @brief Sends pixmap to timelime
+     * @param Frame index
+     * @param Image information
+     */
     void sendPixmap(int index, QPixmap map);
 
     /**
@@ -275,7 +282,6 @@ signals:
      * Triggers continuously to display the animation.
      */
     void drawPreviewPixel(int x, int y, std::vector<int> color);
-    // tells the timeline to sync its frame count with the model.
     void setTimelineFrameCount(int count);
 
 public slots:
@@ -328,8 +334,6 @@ public slots:
      * @brief fillBucketLogic
      *
      * Depth-First Search fill bucket helper method.
-     * FLOOD FILL ALGORITHM
-     * TODO: UNTESTED UNTIL CANVAS IS DONE
      */
     void fillBucketLogic(std::vector<std::vector<Pixel>>& pixelGrid, int x, int y, std::vector<int> oldColor);
 
@@ -357,22 +361,18 @@ public slots:
      */
     void selectionTool(int x, int y);
 
-    /**
-     * @brief Controller constructor
-     *
-     * Creates a new controller object with no model initialized.
-     * On initialization this Controller waits for a signal from the
-     * "New" or "Load" buttons in order to create the Sprite object
-     * to manipulate
-     */
-  
-signals:
-
 public slots:
-  
-    void loadProjectSlot(QString filePath);
-    void saveProjectSlot(QString filePath);
 
+    /**
+     * @brief Loads a pre-existing sprite from the filePath
+     * @param Sprite filepath
+     */
+    void loadProjectSlot(QString filePath);
+    /**
+     * @brief Saves a sprite to the filepath
+     * @param Sprite filepath
+     */
+    void saveProjectSlot(QString filePath);
 
     /**
      * @brief initializePalette creates the color palette
@@ -383,8 +383,20 @@ public slots:
      */
     void initializePalette();
 
+    /**
+     * @brief Add frame to timeline and updates view.
+     */
     void handleAddFrame();
+
+    /**
+     * @brief Remove frame from timeline and updates view.
+     */
     void handleRemoveFrame(int index);
+
+    /**
+     * @brief Handles the selected frame.
+     * @param selected frame index
+     */
     void handleFrameSelected(int index);
 
     /**
@@ -423,12 +435,29 @@ public slots:
      */
     void removeFrameSlot(int index);
 
-    /// TOOL BAR ///
+    /**
+     * @brief Updates current brush/tool to standard brush.
+     */
     void standardBrushSelectedSlot();
+    /**
+     * @brief Updates current brush/tool to eraser tool.
+     */
     void eraserToolSelectedSlot();
+    /**
+     * @brief Updates current brush/tool to paint bucket tool.
+     */
     void paintBucketSelectedSlot();
+    /**
+     * @brief Updates current brush/tool to eye dropper tool.
+     */
     void eyeDropperToolSelectedSlot();
+    /**
+     * @brief Updates current brush/tool to mirror tool.
+     */
     void mirrorToolSelectedSlot();
+    /**
+     * @brief Updates current brush/tool to selection tool.
+     */
     void selectionToolSelectedSlot();
 
     /**

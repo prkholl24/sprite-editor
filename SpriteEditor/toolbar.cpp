@@ -3,12 +3,12 @@
  * @file toolbar.cpp
  * @brief Implementation of the Toolbar UI
  *
- * // TO-DO: Fill this in
+ * Displays tool/brush options that allow the user to change current tool/brush to edit the Sprite.
  *
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/29/2026
  *
- * Last Revision: 3/29/2026 10:54AM MST by Armando Carrillo
+ * Last Revision: 3/30/2026 10:24PM MST by Armando Carrillo
  */
 #include "toolbar.h"
 #include "ui_toolbar.h"
@@ -18,8 +18,6 @@ toolbar::toolbar(QWidget *parent)
     , ui(new Ui::toolbar)
 {
     ui->setupUi(this);
-
-    //connect
 }
 
 toolbar::~toolbar()

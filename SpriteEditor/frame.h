@@ -60,13 +60,13 @@ public:
     std::vector<std::vector<Pixel>> pixels;
 
     /**
-     * @brief Converts Frame to Json.
-     * @return Json
+     * @brief Converts Frame Objeect into QJsonObject for serializing into .ssp
+     * @return Frame QJsonObject
      */
     QJsonObject toJson() const;
 
     /**
-     * @brief fromJson Creates a Frame object from Json
+     * @brief Converts Frame QJsonObject into Frame Object for deserializing.
      * @param Json text
      * @return Frame Object
      */

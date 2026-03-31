@@ -171,15 +171,15 @@ public:
     int getFrameCount() const;
 
     /**
-     * @brief toJson Converting sprite into Json.
-     * @return Json text
+     * @brief Converts Sprite object into Sprite QJsonObject for serializing into .ssp
+     * @return Sprite QJsonObject
      */
     QJsonObject toJson() const;
 
     /**
-     * @brief fromJson Creates a Sprite object from Json
-     * @param json test
-     * @return Sprite Object
+     * @brief Converts Sprite QJsonObject into Sprite object pointer for deserializing.
+     * @param Sprite QJsonObject
+     * @return Sprite object pointer
      */
     static Sprite* fromJson(const QJsonObject &json);
 };
