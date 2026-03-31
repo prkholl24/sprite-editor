@@ -36,15 +36,6 @@
     <property name="text">
      <string>testButton</string>
     </property>
-   <widget class="Canvas" name="canvas" native="true">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>-20</y>
-      <width>475</width>
-      <height>475</height>
-     </rect>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -88,12 +79,6 @@
    <class>toolbar</class>
    <extends>QWidget</extends>
    <header location="global">toolbar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>Canvas</class>
-   <extends>QWidget</extends>
-   <header location="global">canvas.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

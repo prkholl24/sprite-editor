@@ -17,8 +17,6 @@
 #include <QAction>
 #include "controller.h"
 #include <QFileDialog>
-#include <iostream>
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,16 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::saveProjectSignal, control, &Controller::saveProjectSlot);
 
     connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
-
-    connect(this, &MainWindow::newProject, control, &Controller::newProjectSlot);
-
-    connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
-
-    connect(ui->canvas, &Canvas::canvasInputSignal, control, &Controller::handleCanvasInputSlot);
-
-    connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
-
-    connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
 
     // Direct connection from Toolbar to Controller
     connect(ui->toolbarWidget, &toolbar::standardBrushSelectedSignal, control, &Controller::standardBrushSelectedSlot);
@@ -105,7 +93,3 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
-void MainWindow::on_fillBucket_clicked()
-{
-    emit fillBucketSelected();
-}

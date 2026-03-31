@@ -28,42 +28,11 @@ private:
     ToolStates currentTool = ToolStates::StandardBrush;
     
 
-    Frame* currentFrame = nullptr;
-
-    std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
-
-    enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
-
-    ToolStates currentTool = ToolStates::StandardBrush;
-    
-    void fillBucket();
-
-    /**
-     * @brief Loops through the current frame and emits drawPixel for every pixel.
-     * Ensures the Canvas View is perfectly synced with the Model.
-     */
-    void updateCanvas();
-public:
-    /**
-     * @brief Controller constructor
-     *
-     * Creates a new controller object with no model initialized.
-     * On initialization this Controller waits for a signal from the
-     * "New" or "Load" buttons in order to create the Sprite object
-     * to manipulate
-     */
-    Controller(QWidget *parent = nullptr);
 signals:
-    void frameModified();
     // sends the pixmap over to the view.
     void sendPixmap(int index, QPixmap map);
-    // sends specific pixel data to the canvas.
-    void drawPixel(int x, int y, std::vector<int> color);
 
-    // tells the canvas to resize its internal buffers.
-    void initializeCanvas(int width, int height);
-
-public slots:
+public:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
      * Does this via "emit sendPixmap(pixmap-you-just-made)".
