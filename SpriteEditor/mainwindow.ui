@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1000</width>
+    <height>1000</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>1000</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -17,24 +23,51 @@
    <widget class="toolbar" name="toolbarWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>191</width>
-      <height>161</height>
+      <x>60</x>
+      <y>30</y>
+      <width>161</width>
+      <height>221</height>
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="Canvas" name="canvas" native="true">
     <property name="geometry">
      <rect>
-      <x>169</x>
-      <y>300</y>
-      <width>341</width>
-      <height>121</height>
+      <x>210</x>
+      <y>10</y>
+      <width>420</width>
+      <height>420</height>
      </rect>
     </property>
-    <property name="text">
-     <string>testButton</string>
+   </widget>
+   <widget class="Canvas" name="colorPalette" native="true">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>280</y>
+      <width>150</width>
+      <height>150</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Canvas" name="preview" native="true">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>0</y>
+      <width>150</width>
+      <height>150</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="Timeline" name="timelineWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>540</y>
+      <width>781</width>
+      <height>161</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -43,8 +76,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>33</height>
+     <width>1000</width>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -55,7 +88,19 @@
     <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
    </widget>
+   <widget class="QMenu" name="menuPalettes">
+    <property name="title">
+     <string>Palettes</string>
+    </property>
+    <addaction name="actionColorWheel"/>
+    <addaction name="actionArt_Deco"/>
+    <addaction name="actionRetro_Pastel"/>
+    <addaction name="action60s_Pop"/>
+    <addaction name="action70s_Earth"/>
+    <addaction name="action80s_Neon"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuPalettes"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -73,12 +118,54 @@
     <string>Save</string>
    </property>
   </action>
+  <action name="actionColorWheel">
+   <property name="text">
+    <string>Color Wheel</string>
+   </property>
+  </action>
+  <action name="actionArt_Deco">
+   <property name="text">
+    <string>Art Deco</string>
+   </property>
+  </action>
+  <action name="actionRetro_Pastel">
+   <property name="text">
+    <string>Retro Pastel</string>
+   </property>
+  </action>
+  <action name="action60s_Pop">
+   <property name="text">
+    <string>60s Pop</string>
+   </property>
+  </action>
+  <action name="action70s_Earth">
+   <property name="text">
+    <string>70s Earth</string>
+   </property>
+  </action>
+  <action name="action80s_Neon">
+   <property name="text">
+    <string>80s Neon</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>toolbar</class>
    <extends>QWidget</extends>
    <header location="global">toolbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QWidget</extends>
+   <header location="global">canvas.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Timeline</class>
+   <extends>QWidget</extends>
+   <header location="global">timeline.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

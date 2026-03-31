@@ -32,6 +32,7 @@ signals:
 
     void canvasInput(int x, int y);
 
+    void fillBucketSelected();
 
 private slots:
     void on_actionSave_triggered();
