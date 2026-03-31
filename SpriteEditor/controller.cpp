@@ -110,8 +110,15 @@ void Controller::loadProjectSlot(QString filePath){
 
     std::cout << "Line 85 above Sprite::fromJson" << std::endl;
     model = Sprite::fromJson(doc.object());
+    file.close();
 
 
+
+
+
+    convertAllFrames(model->frames);
+    currentFrameIndex = 0;
+    currentFrame = &model->getFrame(0);
 
     int spriteSize = model->getHeight();
 
