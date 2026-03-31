@@ -59,9 +59,20 @@ public:
      */
     Pixel& operator=(const Pixel& px);
 
+
+    /**
+     * @brief Converts Pixel object into Pixel QJsonObject for serializing into .ssp
+     * @return Pixel QJsonObject
+     */
     QJsonObject toJson() const;
 
+    /**
+     * @brief Converts Pixel QJsonObject into Pixel Object for deserializing.
+     * @param Pixel Json
+     * @return Pixel
+     */
     static Pixel fromJson(const QJsonObject &json);
+
     /**
      * @brief Gets the color of the Pixel.
      *

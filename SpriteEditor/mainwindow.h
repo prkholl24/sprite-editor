@@ -19,29 +19,48 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-//public slots: void openFile();
-
 signals:
 
+    /**
+     * @brief Notifies the Controller that a new Sprite Project is being created and to initialize a new Sprite object
+     * @param Sprite size
+     */
     void newProjectSignal(int spriteSize);
 
+    /**
+     * @brief Notifies the Controller that a pre-existing Sprite Project is being loaded into the program.
+     * @param existing Sprite file
+     */
     void loadProjectSignal(QString filePath);
 
+    /**
+     * @brief Notifies the Controller to save the current Sprite Project into a Sprite file.
+     * @param file path to save sprite
+     */
     void saveProjectSignal(QString filePath);
 
-
+    /**
+     * @brief Notifies the Controller of user input to Canvas.
+     * @param user mouseclick's x coordinate
+     * @param user mouseClick's y coordinate
+     */
     void canvasInput(int x, int y);
 
-    void fillBucketSelected();
-
 private slots:
+
+    /**
+     * @brief emits a signal to Controller to save a Sprite
+     */
     void on_actionSave_triggered();
 
+    /**
+     * @brief emits a signal to Controller to create a new Sprite
+     */
     void on_actionNew_triggered();
 
-    void on_pushButton_clicked();
-
-
+    /**
+     * @brief emits a signal to Controller to load a Sprite
+     */
     void on_actionLoad_triggered();
 
 private:
