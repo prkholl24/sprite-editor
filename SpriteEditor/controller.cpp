@@ -239,11 +239,11 @@ void Controller::mirrorTool(int x, int y){
     /// LEFT
     if (x < halfCanvas){
         offset = halfCanvas - x;
-        standardBrush(halfCanvas+offset,y);
+        standardBrush(halfCanvas+offset-1,y);
     /// RIGHT
     } else {
         offset = x - halfCanvas;
-        standardBrush(halfCanvas-offset,y);
+        standardBrush(halfCanvas-offset-1,y);
     }
 }
 
