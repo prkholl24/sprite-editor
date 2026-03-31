@@ -26,9 +26,6 @@ Canvas::Canvas(int width, int height, int tileSize, QWidget *parent)
     }
 
     setLayout(grid);
-    setMinimumSize(150, 150);
-    render = QImage(spriteWidth, spriteHeight, QImage::Format_ARGB32_Premultiplied);
-    render.fill(Qt::transparent);
 }
 
 Canvas::~Canvas()

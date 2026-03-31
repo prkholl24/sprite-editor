@@ -21,10 +21,6 @@ Sprite::Sprite(int width, int height) : fps{DEFAULT_FPS}, width{width}, height{h
     frames.push_back(createDefaultFrame());
 }
 
-void Sprite::addFrame() {
-    frames.push_back(Frame(this->width, this->height));
-}
-
 bool Sprite::isValidFrameIndex(int index) const
 {
     return index >= 0 && index < static_cast<int>(frames.size());

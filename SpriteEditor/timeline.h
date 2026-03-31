@@ -101,7 +101,7 @@ signals:
      */
     void fpsChanged(int fps);
 
-public slots:
+private slots:
     /**
      * @brief Receives the signal from controller that a button image need to be updated.
      * Upon receiving the signal, the view draws the image drawn on the frame at index to a more current rendition.
@@ -110,7 +110,6 @@ public slots:
      */
     void updateButtonImage(int index, QPixmap image);
 
-private slots:
     /**
      * @brief Receives the signal from controller that a frame was selected.
      * Upon receiving the signal, the button is redrawn to the "selected" state from the stylesheet.
