@@ -17,6 +17,8 @@
 #define PIXEL_H
 
 #include <vector>
+#include <QJsonObject>
+#include <QJsonArray>
 
 class Pixel
 {
@@ -57,6 +59,9 @@ public:
      */
     Pixel& operator=(const Pixel& px);
 
+    QJsonObject toJson() const;
+
+    static Pixel fromJson(const QJsonObject &json);
     /**
      * @brief Gets the color of the Pixel.
      *
@@ -84,6 +89,9 @@ public:
      * @param opacity An integer representing the new opacity value.
      */
     void setOpacity(int opacity);
+
+
+
 
 private:
 

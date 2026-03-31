@@ -7,15 +7,23 @@
  * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
  * @date 3/29/2026
  *
+ * Last Revision: 3/29/2026 12:51AM MST by Charles Adair
  * Last Revision: 3/30/2026 2:39PM MST by Charles Adair
  */
 // TO-DO move all includes to .h file
 #include "controller.h"
 #include <QMessageBox>
 #include <iostream>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFileDialog>
+
+
 
 Controller::Controller(QWidget *parent)
 {
+    // Starts a new thread to continuously cycle through frames for the preview
+    initializePreviewTimer();
 }
 
 void Controller::convertToPixmap(int index, Frame frame) {
@@ -37,6 +45,15 @@ void Controller::convertToPixmap(int index, Frame frame) {
 void Controller::convertAllFrames(const std::vector<Frame>& frames) {
     for (size_t i = 0; i < frames.size(); ++i) {
         convertToPixmap(static_cast<int>(i), frames[i]);
+    }
+}
+
+void Controller::setSpriteFPS(int fps) {
+    model->setFPS(fps);
+    if (fps > 0) {
+        previewTimer->start(1000 / fps);
+    } else {
+        previewTimer->stop();
     }
 }
 
@@ -62,11 +79,72 @@ void Controller::newProjectSlot(int spriteSize){
         delete model;
     }
     model = new Sprite(spriteSize, spriteSize);
+
+    currentFrameIndex = 0;
     currentFrame = &model->getFrame(0);
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
 
     emit initializeCanvas(spriteSize, spriteSize);
+    emit setTimelineFrameCount(model->getFrameCount());
     updateCanvas();
+
+    // Start the preview timer
+    previewFrameIndex = 0;
+    previewTimer->start(1000 / model->getFPS());
+    convertToPixmap(0, *currentFrame);
+
+}
+
+void Controller::loadProjectSlot(QString filePath){
+    QFile file(filePath);
+
+    std::cout << "in load project slot" << std::endl;
+
+    if(!file.open(QIODevice::ReadOnly)){
+        return;
+    }
+
+    QByteArray data = file.readAll();
+
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    std::cout << "Line 85 above Sprite::fromJson" << std::endl;
+    model = Sprite::fromJson(doc.object());
+
+
+
+    int spriteSize = model->getHeight();
+
+    emit initializeCanvas(spriteSize, spriteSize);
+    emit setTimelineFrameCount(model->getFrameCount());
+    updateCanvas();
+
+    // Start the preview timer
+    previewFrameIndex = 0;
+    previewTimer->start(1000 / model->getFPS());
+    convertToPixmap(0, *currentFrame);
+
+
+
+}
+
+void Controller::saveProjectSlot(QString filePath){
+    QJsonObject object = model->toJson();
+
+    QJsonDocument output(object);
+
+    QByteArray data = output.toJson();
+
+    QFile file(filePath);
+
+    if(!file.open(QIODevice::WriteOnly)){
+        return;
+    }
+
+    file.write(data);
+    file.close();
+
+
 }
 
 
@@ -114,6 +192,9 @@ void Controller::handleCanvasInputSlot(int x, int y){
 
         // Refresh the canvas to reflect changes
         updateCanvas();
+
+        // Update the current frame's thumbnail in the timeline
+        convertToPixmap(currentFrameIndex, *currentFrame);
     }
     else {
         QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the `File` tab first.");
@@ -193,6 +274,7 @@ void Controller::selectionToolSelectedSlot(){
     currentTool = ToolStates::SelectionTool;
     std::cout << "6 selected!" << std::endl;
 }
+
 
 void Controller::updateColorPalette() {
     if (!colorPalette)
@@ -384,6 +466,78 @@ Frame* Controller::defaultPalette() {
         }
     }
     return palette;
+}
+
+void Controller::handleAddFrame() {
+    model->addFrame();
+}
+
+void Controller::handleRemoveFrame(int index) {
+    model->removeFrame(index);
+}
+
+void Controller::handleFrameSelected(int index) {
+    currentFrame = &model->getFrame(index);
+    updateCanvas();
+}
+
+void Controller::initializePreviewTimer() {
+    if (!previewTimer) {
+        previewTimer = new QTimer(this);
+        connect(previewTimer, &QTimer::timeout, this, &Controller::updatePreview);
+    }
+}
+
+void Controller::updatePreview() {
+    if (!model)
+        return;
+
+    // Chooses the next frame or loops back to the first frame.
+    previewFrameIndex = (previewFrameIndex + 1) % model->getFrameCount();
+    Frame& frame = model->getFrame(previewFrameIndex);
+
+    // Draws to the preview.
+    for (int x = 0; x < frame.getWidth(); ++x) {
+        for (int y = 0; y < frame.getHeight(); ++y) {
+            emit drawPreviewPixel(x, y, frame.getPixel(x, y).getColor());
+        }
+    }
+}
+
+/// TIMELINE SLOTS ///
+void Controller::frameSelectedSlot(int index) {
+    if (!model)
+        return;
+
+    if (index < 0 || index >= model->getFrameCount())
+        return;
+
+    currentFrameIndex = index;
+    currentFrame = &model->getFrame(index);
+    updateCanvas();
+}
+
+void Controller::addFrameSlot(int index) {
+    if (!model)
+        return;
+
+    model->addFrame();
+    // Update the new frame's thumbnail
+    convertToPixmap(model->getFrameCount() - 1, model->getFrame(model->getFrameCount() - 1));
+}
+
+void Controller::removeFrameSlot(int index) {
+    if (!model)
+        return;
+
+    model->removeFrame(index);
+
+    // Adjust current frame index if needed
+    if (currentFrameIndex >= model->getFrameCount()) {
+        currentFrameIndex = model->getFrameCount() - 1;
+    }
+    currentFrame = &model->getFrame(currentFrameIndex);
+    updateCanvas();
 }
 
 //TOOLBAR

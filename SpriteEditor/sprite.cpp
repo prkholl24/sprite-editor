@@ -14,10 +14,15 @@
  */
 
 #include "sprite.h"
+#include <iostream>
 
 Sprite::Sprite(int width, int height) : fps{DEFAULT_FPS}, width{width}, height{height} {
     createDefaultFrame();
     frames.push_back(createDefaultFrame());
+}
+
+void Sprite::addFrame() {
+    frames.push_back(Frame(this->width, this->height));
 }
 
 bool Sprite::isValidFrameIndex(int index) const
@@ -111,4 +116,41 @@ int Sprite::getHeight() const {
 int Sprite::getFrameCount() const
 {
     return static_cast<int>(frames.size());
+}
+
+QJsonObject Sprite::toJson() const {
+    QJsonObject json;
+    QJsonArray frameArray;
+
+    for(Frame frame : frames){
+        frameArray.append(frame.toJson());
+    }
+
+    json["Frames"] = frameArray;
+    json["Size"] = width;
+    json["FPS"] = fps;
+
+    return json;
+
+}
+
+Sprite* Sprite::fromJson(const QJsonObject &json){
+    int size = json["Size"].toInt();
+    int fps = json["FPS"].toInt();
+    QJsonArray jsonFrames = json["Frames"].toArray();
+    std::cout << "sprite:137" << std::endl;
+
+    Sprite* newSprite = new Sprite(size,size);
+    newSprite->setFPS(fps);
+    newSprite->frames.clear();
+    std::cout << "sprite:142" << std::endl;
+
+    for (const QJsonValue &jsonFrame : std::as_const(jsonFrames)){
+
+        Frame frame = Frame::fromJson(jsonFrame.toObject());
+        std::cout << "sprite:147" << std::endl;
+        newSprite->frames.push_back(frame);
+    }
+    std::cout << "Made it to return newSprite in sprite.cpp" << std::endl;
+    return newSprite;
 }

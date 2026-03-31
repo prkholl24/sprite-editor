@@ -14,6 +14,8 @@
 // TO-DO move all includes to .h file
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QFileDialog>
+#include "timeline.h"
 #include <QAction>
 #include <iostream>
 #include "controller.h"
@@ -26,9 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     control = new Controller(this);
 
     //Connecting signal new project in mainwindow to slot newProjectSlot in controller
-    connect(this, &MainWindow::newProject, control, &Controller::newProjectSlot);
+    connect(this, &MainWindow::newProjectSignal, control, &Controller::newProjectSlot);
 
-    connect(this, &MainWindow::canvasInput, control, &Controller::handleCanvasInputSlot);
+    connect(this, &MainWindow::loadProjectSignal, control, &Controller::loadProjectSlot);
+
+    connect(this, &MainWindow::saveProjectSignal, control, &Controller::saveProjectSlot);
+  
 
     // Connects the Canvas to the controller
     connect(ui->canvas, &Canvas::canvasInputSignal, control, &Controller::handleCanvasInputSlot);
@@ -36,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
 
     connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
+    connect(control, &Controller::initializeCanvas, ui->preview, &Canvas::initialize);
 
     // Connects the Color Pallete to the controller
     connect(ui->colorPalette, &Canvas::canvasInputSignal, control, &Controller::handleColorPaletteInput);
@@ -72,6 +78,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialize the color palette when the application starts
     control->initializePalette();
+    
+    // Preview widget connection
+    connect(control, &Controller::drawPreviewPixel, ui->preview, &Canvas::drawPixel);
+    
+    // Timeline connections
+    connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::frameSelectedSlot);
+    connect(ui->timelineWidget, &Timeline::frameAdded, control, &Controller::addFrameSlot);
+    connect(ui->timelineWidget, &Timeline::frameRemoved, control, &Controller::removeFrameSlot);
+    connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::setSpriteFPS);
+
+    // Controller -> Timeline sync
+    connect(control, &Controller::setTimelineFrameCount, ui->timelineWidget, &Timeline::setFrameCount);
+    connect(control, &Controller::sendPixmap, ui->timelineWidget, &Timeline::updateButtonImage);
 }
 
 MainWindow::~MainWindow()
@@ -79,14 +98,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
-
 void MainWindow::on_actionSave_triggered()
 {
-    std::cout << "hello world" << std::endl;
+    QString fileName = QFileDialog::getSaveFileName(this, "Save Sprite", "", "JSON Files (*.json);;All Files (*)");
+
+    if(fileName.isEmpty()){
+        return;
+    }
+
+    emit saveProjectSignal(fileName);
 }
 
+
+void MainWindow::on_actionLoad_triggered()
+{
+
+    QString fileName = QFileDialog::getOpenFileName(this, "Save Sprite", "", "JSON Files (*.json);;All Files (*)");
+
+    if(fileName.isEmpty()){
+        return;
+    }
+
+    emit loadProjectSignal(fileName);
+}
 
 /// TEST SLOTS MEANT FOR TESTING ///
 void MainWindow::on_actionNew_triggered()
@@ -94,16 +128,12 @@ void MainWindow::on_actionNew_triggered()
 
     int spriteSize = QInputDialog::getInt(nullptr, "New Srite Wizard", "Please enter the resolution", QLineEdit::Normal);
 
-    emit newProject(spriteSize);
+    emit newProjectSignal(spriteSize);
 }
-
 
 void MainWindow::on_pushButton_clicked()
 {
     emit canvasInput(0,0);
 }
 
-void MainWindow::on_fillBucket_clicked()
-{
-    emit fillBucketSelected();
-}
+

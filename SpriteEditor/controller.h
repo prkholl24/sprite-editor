@@ -23,6 +23,7 @@
 #include "qpixmap.h"
 #include <QObject>
 #include <QWidget>
+#include <QTimer>
 #include <vector>
 #include "sprite.h"
 #include "palettedata.h"
@@ -51,16 +52,23 @@ private:
      */
     Frame* currentFrame = nullptr;
 
+    /*
+     * @brief Index of the currently selected frame in the sprite.
+     */
+    int currentFrameIndex = 0;
+
     /**
      * @brief Stores the currently selected drawing color in RGBA format.
      *
      * Default color is black (RGBA).
      */
-    std::vector<int> currentColor = {0, 0, 0, 255};
+    std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
 
     enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
 
     ToolStates currentTool = ToolStates::StandardBrush;
+
+    void fillBucket();
 
     /**
      * @brief Loops through the current frame and emits drawPixel for every pixel.
@@ -219,6 +227,20 @@ private:
      */
     Frame* eightiesNeonPalette();
 
+    /**
+     * @brief Timer used to trigger the animation playback for the preview window.
+     */
+    QTimer* previewTimer = nullptr;
+
+    /**
+     * @brief Stores the index of the frame currently being displayed in the preview.
+     */
+    int previewFrameIndex = 0;
+    /**
+     * @brief Helper method to initialize the preview timer and its connections.
+     */
+    void initializePreviewTimer();
+
 public:
     /**
      * @brief Controller constructor
@@ -278,6 +300,19 @@ signals:
      */
     void drawColorPalettePixel(int x, int y, std::vector<int> color);
 
+    /**
+     * @brief drawPreviewPixel
+     * @param x coordinate
+     * @param y coordinate
+     * @param color in [R,G,B,A] format
+     *
+     * Singal connects to the preview widget.
+     * Triggers continuously to display the animation.
+     */
+    void drawPreviewPixel(int x, int y, std::vector<int> color);
+    // tells the timeline to sync its frame count with the model.
+    void setTimelineFrameCount(int count);
+
 public slots:
     /**
      * @brief Receives a frame from the Model, and converts it to a pix map.
@@ -300,6 +335,12 @@ public slots:
 
     /**
      * @brief Paints a single pixel using the current drawing color.
+     * @param fps The FPS value to set.
+     */
+    void setSpriteFPS(int fps);
+
+    /**
+     * @brief standardBrush
      *
      * Called when the standard brush tool is active. Sets the pixel at the
      * selected coordinate to currentColor and updates the canvas.
@@ -377,13 +418,31 @@ public slots:
      */
     void selectionTool(int x, int y);
 
+public slots:
+  
+    void loadProjectSlot(QString filePath);
+    void saveProjectSlot(QString filePath);
+
+
     /**
      * @brief Initializes the currently selected preset color palette.
+     * @param size effects the number of colors which are created
      *
      * Deletes the existing palette (if one exists), creates a new palette
      * based on selectedPalette, and updates the palette view to reflect it.
      */
     void initializePalette();
+
+    void handleAddFrame();
+    void handleRemoveFrame(int index);
+    void handleFrameSelected(int index);
+
+    /**
+     * @brief Advances the preview animation to the next frame.
+     *
+     * Triggered by previewTimer.
+     */
+    void updatePreview();
 
     /**
      * @brief Creates a new sprite project with the given size.
@@ -405,6 +464,26 @@ public slots:
      * @param y The y coordinate of the clicked pixel.
      */
     void handleCanvasInputSlot(int x, int y);
+
+    /// TIMELINE SLOTS ///
+    /**
+     * @brief Switches to the frame at the given index.
+     * Updates currentFrame and currentFrameIndex, then refreshes the canvas.
+     * @param index The index of the frame to select.
+     */
+    void frameSelectedSlot(int index);
+
+    /**
+     * @brief Adds a new frame to the model at the given index.
+     * @param index The index where the frame was added in the timeline.
+     */
+    void addFrameSlot(int index);
+
+    /**
+     * @brief Removes the frame at the given index from the model.
+     * @param index The index of the frame to remove.
+     */
+    void removeFrameSlot(int index);
 
     // ==================== TOOL BAR ====================
 
