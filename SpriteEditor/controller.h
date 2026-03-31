@@ -422,17 +422,6 @@ public slots:
      */
     void mirrorTool(int x, int y);
 
-    /**
-     * @brief Handles selection tool behavior.
-     *
-     * Called when the selection tool is active. Allows selecting regions or
-     * pixels for future operations.
-     *
-     * @param x The x coordinate of the selected pixel.
-     * @param y The y coordinate of the selected pixel.
-     */
-    void selectionTool(int x, int y);
-
 public slots:
 
     /**
