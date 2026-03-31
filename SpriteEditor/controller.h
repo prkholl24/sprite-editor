@@ -27,6 +27,10 @@
 #include <vector>
 #include "sprite.h"
 #include "palettedata.h"
+#include <QMessageBox>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QFileDialog>
 
 /**
  * @brief Coordinates interactions between the model and the UI.

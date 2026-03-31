@@ -1,4 +1,3 @@
-
 /**
  * @file toolbar.cpp
  * @brief Implementation of the Toolbar UI

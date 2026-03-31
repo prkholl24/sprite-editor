@@ -4,10 +4,13 @@
  *
  * Initializes the application
  *
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
  * @date 3/29/2026
  *
- * Last Revision: 3/29/2026 12:46AM MST by Charles Adair
+ * Last Revision: 3/30/2026 10:40PM MST by Lindsey Reese
  */
 #include "mainwindow.h"
 

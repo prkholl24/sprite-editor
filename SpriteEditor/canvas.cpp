@@ -1,13 +1,18 @@
 /**
  * @file canvas.cpp
  * @brief implementation of the Canvas widget
+ *
  * Displays the Frame data and processes inputs to send back to the controller
  *
- * @authors Charles Adair, Armando Carrillo, Brady Nelson, Lindsey Reese, Kent Wilkison, Parker Hollingsed
- * @date 3/29/2026
+ * Team: Green Goombas
+ * github url: https://github.com/UofU-CS3505/cs3505-assignment8-GreenGoombas.git
+ * @authors Charles Adair, Armando Carrillo, Parker Hollingsed,
+ *          Brady Nelson, Lindsey Reese, Kent Wilkison
+ * @date 3/30/2026
  *
  * Last Revision: 3/30/2026 12:56AM MST by Charles Adair
  */
+
 #include "canvas.h"
 #include "ui_canvas.h"
 
