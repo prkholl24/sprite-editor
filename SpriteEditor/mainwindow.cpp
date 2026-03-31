@@ -44,6 +44,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(control, &Controller::initializeColorPalette, ui->colorPalette, &Canvas::initialize);
 
+    // Color tab in the main window connects to the Controller slots for updating the color palette
+    connect(ui->actionColorWheel, &QAction::triggered, control, &Controller::defaultPaletteSelected);
+
+    connect(ui->actionArt_Deco, &QAction::triggered, control, &Controller::artDecoPaletteSelected);
+
+    connect(ui->actionRetro_Pastel, &QAction::triggered, control, &Controller::retroPastelPaletteSelected);
+
+    connect(ui->action60s_Pop, &QAction::triggered, control, &Controller::sixtiesPopPaletteSelected);
+
+    connect(ui->action70s_Earth, &QAction::triggered, control, &Controller::seventiesEarthPaletteSelected);
+
+    connect(ui->action80s_Neon, &QAction::triggered, control, &Controller::eightiesNeonPaletteSelected);
+
     // Direct connection from Toolbar to Controller
     connect(ui->toolbarWidget, &toolbar::standardBrushSelectedSignal, control, &Controller::standardBrushSelectedSlot);
 

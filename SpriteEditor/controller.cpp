@@ -241,6 +241,36 @@ void Controller::initializePalette() {
     updateColorPalette();
 }
 
+void Controller::defaultPaletteSelected() {
+    selectedPalette = PaletteType::Default;
+    initializePalette();
+}
+
+void Controller::artDecoPaletteSelected() {
+    selectedPalette = PaletteType::ArtDecoGold;
+    initializePalette();
+}
+
+void Controller::retroPastelPaletteSelected() {
+    selectedPalette = PaletteType::RetroPastel;
+    initializePalette();
+}
+
+void Controller::sixtiesPopPaletteSelected() {
+    selectedPalette = PaletteType::SixtiesPop;
+    initializePalette();
+}
+
+void Controller::seventiesEarthPaletteSelected() {
+    selectedPalette = PaletteType::SeventiesEarth;
+    initializePalette();
+}
+
+void Controller::eightiesNeonPaletteSelected() {
+    selectedPalette = PaletteType::EightiesNeon;
+    initializePalette();
+}
+
 Frame* Controller::eightiesNeonPalette(){
     Frame* palette = new Frame(3,3);
 
