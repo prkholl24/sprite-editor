@@ -18,8 +18,9 @@ Timeline::Timeline(QWidget *parent, Controller* controller)
 
     connect(ui->fpsSlider, &QSlider::valueChanged,
             this, &Timeline::onFpsSliderChanged);
-    connect(controller, &Controller::sendPixmap,
-            this, &Timeline::updateButtonImage);  // Now passes (int index, QPixmap image)
+
+    // Note: sendPixmap -> updateButtonImage is connected in MainWindow
+    // since the timeline is created by Qt Designer without a controller reference
 
     addFrame();
 }
@@ -53,9 +54,12 @@ void Timeline::addFrame()
     frameButtons.append(frameBtn);
 
     int newIndex = frameButtons.size() - 1;
-    selectFrame(newIndex);
 
+    // Emit frameAdded FIRST so the model can add the frame
     emit frameAdded(newIndex);
+
+    // Then select the new frame (this emits frameSelected)
+    selectFrame(newIndex);
 }
 
 void Timeline::removeFrame(int index)
@@ -120,6 +124,9 @@ void Timeline::setFps(int value)
 
 void Timeline::setFrameCount(int count)
 {
+    // Block signals to avoid triggering model changes while syncing
+    blockSignals(true);
+
     // Clear all existing buttons
     while (!frameButtons.isEmpty()) {
         QPushButton* btn = frameButtons.takeLast();
@@ -131,6 +138,13 @@ void Timeline::setFrameCount(int count)
     // Add the specified number of frames
     for (int i = 0; i < count; ++i) {
         addFrame();
+    }
+
+    blockSignals(false);
+
+    // Select the first frame after syncing
+    if (count > 0) {
+        selectFrame(0);
     }
 }
 

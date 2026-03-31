@@ -112,3 +112,8 @@ int Sprite::getFrameCount() const
 {
     return static_cast<int>(frames.size());
 }
+
+void Sprite::addFrame()
+{
+    frames.push_back(createDefaultFrame());
+}

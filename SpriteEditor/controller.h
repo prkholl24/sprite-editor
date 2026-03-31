@@ -21,6 +21,11 @@ private:
 
     Frame* currentFrame = nullptr;
 
+    /**
+     * @brief Index of the currently selected frame in the sprite.
+     */
+    int currentFrameIndex = 0;
+
     std::vector<int> currentColor = {0, 0, 0, 255}; // Default black (RGBA)
 
     enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
@@ -53,6 +58,9 @@ signals:
 
     // tells the canvas to resize its internal buffers.
     void initializeCanvas(int width, int height);
+
+    // tells the timeline to sync its frame count with the model.
+    void setTimelineFrameCount(int count);
 
 public slots:
     /**
@@ -130,6 +138,32 @@ public slots:
 public slots:
     void newProjectSlot(int spriteSize);
     void handleCanvasInputSlot(int x, int y);
+
+    /// TIMELINE SLOTS ///
+    /**
+     * @brief Switches to the frame at the given index.
+     * Updates currentFrame and currentFrameIndex, then refreshes the canvas.
+     * @param index The index of the frame to select.
+     */
+    void frameSelectedSlot(int index);
+
+    /**
+     * @brief Adds a new frame to the model at the given index.
+     * @param index The index where the frame was added in the timeline.
+     */
+    void addFrameSlot(int index);
+
+    /**
+     * @brief Removes the frame at the given index from the model.
+     * @param index The index of the frame to remove.
+     */
+    void removeFrameSlot(int index);
+
+    /**
+     * @brief Sets the FPS (frames per second) in the model.
+     * @param fps The new FPS value.
+     */
+    void setSpriteFPS(int fps);
 
     /// TOOL BAR ///
     void standardBrushSelectedSlot();

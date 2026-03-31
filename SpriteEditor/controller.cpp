@@ -62,11 +62,14 @@ void Controller::newProjectSlot(int spriteSize){
         delete model;
     }
     model = new Sprite(spriteSize, spriteSize);
+    currentFrameIndex = 0;
     currentFrame = &model->getFrame(0);
     currentColor = {255, 0, 0, 255}; // Default to red for new projects
 
     emit initializeCanvas(spriteSize, spriteSize);
+    emit setTimelineFrameCount(model->getFrameCount());
     updateCanvas();
+    convertToPixmap(0, *currentFrame);
 }
 
 
@@ -114,6 +117,9 @@ void Controller::handleCanvasInputSlot(int x, int y){
 
         // Refresh the canvas to reflect changes
         updateCanvas();
+
+        // Update the current frame's thumbnail in the timeline
+        convertToPixmap(currentFrameIndex, *currentFrame);
     }
     else {
         QMessageBox::warning(nullptr, "Error", "Please load or create a new model in the `File` tab first.");
@@ -195,6 +201,49 @@ void Controller::selectionToolSelectedSlot(){
 }
 
 
+
+/// TIMELINE SLOTS ///
+void Controller::frameSelectedSlot(int index) {
+    if (!model)
+        return;
+
+    if (index < 0 || index >= model->getFrameCount())
+        return;
+
+    currentFrameIndex = index;
+    currentFrame = &model->getFrame(index);
+    updateCanvas();
+}
+
+void Controller::addFrameSlot(int index) {
+    if (!model)
+        return;
+
+    model->addFrame();
+    // Update the new frame's thumbnail
+    convertToPixmap(model->getFrameCount() - 1, model->getFrame(model->getFrameCount() - 1));
+}
+
+void Controller::removeFrameSlot(int index) {
+    if (!model)
+        return;
+
+    model->removeFrame(index);
+
+    // Adjust current frame index if needed
+    if (currentFrameIndex >= model->getFrameCount()) {
+        currentFrameIndex = model->getFrameCount() - 1;
+    }
+    currentFrame = &model->getFrame(currentFrameIndex);
+    updateCanvas();
+}
+
+void Controller::setSpriteFPS(int fps) {
+    if (!model)
+        return;
+
+    model->setFPS(fps);
+}
 
 //TOOLBAR
 //Signal is received from toolbar.

@@ -14,6 +14,7 @@
 // TO-DO move all includes to .h file
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "timeline.h"
 #include <QAction>
 #include <iostream>
 #include "controller.h"
@@ -49,6 +50,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->toolbarWidget, &toolbar::selectionToolSelectedSignal, control, &Controller::selectionToolSelectedSlot);
 
+    // Timeline connections
+    connect(ui->timelineWidget, &Timeline::frameSelected, control, &Controller::frameSelectedSlot);
+    connect(ui->timelineWidget, &Timeline::frameAdded, control, &Controller::addFrameSlot);
+    connect(ui->timelineWidget, &Timeline::frameRemoved, control, &Controller::removeFrameSlot);
+    connect(ui->timelineWidget, &Timeline::fpsChanged, control, &Controller::setSpriteFPS);
+
+    // Controller -> Timeline sync
+    connect(control, &Controller::setTimelineFrameCount, ui->timelineWidget, &Timeline::setFrameCount);
+    connect(control, &Controller::sendPixmap, ui->timelineWidget, &Timeline::updateButtonImage);
 }
 
 MainWindow::~MainWindow()
