@@ -5,6 +5,7 @@
 #include "qpixmap.h"
 #include <QObject>
 #include <QWidget>
+#include <QTimer>
 #include <vector>
 #include "sprite.h"
 #include "palettedata.h"
@@ -190,6 +191,20 @@ private:
      */
     Frame* eightiesNeonPalette();
 
+    /**
+     * @brief Timer used to trigger the animation playback for the preview window.
+     */
+    QTimer* previewTimer = nullptr;
+
+    /**
+     * @brief Stores the index of the frame currently being displayed in the preview.
+     */
+    int previewFrameIndex = 0;
+    /**
+     * @brief Helper method to initialize the preview timer and its connections.
+     */
+    void initializePreviewTimer();
+
 public:
     /**
      * @brief Controller constructor
@@ -356,7 +371,6 @@ public slots:
      */
     void updatePreview();
 
-public slots:
     void newProjectSlot(int spriteSize);
 
     /**

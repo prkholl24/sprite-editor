@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(control, &Controller::drawPixel, ui->canvas, &Canvas::drawPixel);
 
     connect(control, &Controller::initializeCanvas, ui->canvas, &Canvas::initialize);
+    connect(control, &Controller::initializeCanvas, ui->preview, &Canvas::initialize);
 
     // Connects the Color Pallete to the controller
     connect(ui->colorPalette, &Canvas::canvasInputSignal, control, &Controller::handleColorPaletteInput);

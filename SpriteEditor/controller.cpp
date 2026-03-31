@@ -16,6 +16,8 @@
 
 Controller::Controller(QWidget *parent)
 {
+    // Starts a new thread to continuously cycle through frames for the preview
+    initializePreviewTimer();
 }
 
 void Controller::convertToPixmap(int index, Frame frame) {
@@ -71,6 +73,10 @@ void Controller::newProjectSlot(int spriteSize){
 
     emit initializeCanvas(spriteSize, spriteSize);
     updateCanvas();
+
+    // Start the preview timer
+    previewFrameIndex = 0;
+    previewTimer->start(1000 / model->getFPS());
 }
 
 
@@ -404,6 +410,34 @@ void Controller::handleFrameSelected(int index) {
 
 void Controller::handleFpsChanged(int fps) {
     model->setFPS(fps);
+    if (fps > 0) {
+        previewTimer->start(1000 / fps);
+    } else {
+        previewTimer->stop();
+    }
+}
+
+void Controller::initializePreviewTimer() {
+    if (!previewTimer) {
+        previewTimer = new QTimer(this);
+        connect(previewTimer, &QTimer::timeout, this, &Controller::updatePreview);
+    }
+}
+
+void Controller::updatePreview() {
+    if (!model)
+        return;
+
+    // Chooses the next frame or loops back to the first frame.
+    previewFrameIndex = (previewFrameIndex + 1) % model->getFrameCount();
+    Frame& frame = model->getFrame(previewFrameIndex);
+
+    // Draws to the preview.
+    for (int x = 0; x < frame.getWidth(); ++x) {
+        for (int y = 0; y < frame.getHeight(); ++y) {
+            emit drawPreviewPixel(x, y, frame.getPixel(x, y).getColor());
+        }
+    }
 }
 
 //TOOLBAR
