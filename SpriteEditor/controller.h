@@ -61,32 +61,132 @@ private:
     Frame* defaultPalette();
 
     /**
-     * @brief artDecoPalette
-     * @return
+     * @brief Creates and returns the Art Deco color palette.
+     *
+     * This palette is inspired by Pantone color selections featured in
+     * "Pantone: The 20th Century in Color", representing the Art Deco
+     * design movement of the 1920s. The palette emphasizes luxury,
+     * contrast, and refined materials, including metallic tones,
+     * neutrals, and bold accents commonly used in architecture,
+     * fashion, and interior design of the era.
+     *
+     * The colors are based on Pantone references including Lavender Violet,
+     * Turtledove, Champagne Beige, Carnelian, Jet Black, and Silver.
+     *
+     * The palette is represented as a 3x2 Frame where each pixel corresponds
+     * to a selectable color in the UI.
+     *
+     * Layout (x, y):
+     * (0,0) Lavender Violet   (1,0) Turtledove        (2,0) Champagne Beige
+     * (0,1) Carnelian         (1,1) Jet Black         (2,1) Silver
+     *
+     * Each color is stored as an RGBA vector in the format:
+     * {red, green, blue, alpha}, where alpha = 255 (fully opaque).
+     *
+     * @return A pointer to Frame containing the palette colors.
      */
     Frame* artDecoPalette();
 
     /**
-     * @brief retroPastelPalette
-     * @return
+     * @brief Creates and returns the Retro Pastel color palette.
+     *
+     * This palette is inspired by Pantone color selections featured in
+     * "Pantone: The 20th Century in Color", representing softer color trends
+     * of the 1960s seen in fashion, film, and advertising. The palette emphasizes
+     * light, pastel tones commonly associated with elegance, femininity,
+     * and mid-century design aesthetics.
+     *
+     * The palette is represented as a 3x2 Frame where each pixel corresponds
+     * to a selectable color in the UI.
+     *
+     * Layout (x, y):
+     * (0,0) Blush Pink (9286)   (1,0) Mint (5483)       (2,0) Pale Yellow (9140)
+     * (0,1) Baby Blue (9402)    (1,1) Peach (9200)      (2,1) Lavender (9340)
+     *
+     * Each color is stored as an RGBA vector in the format:
+     * {red, green, blue, alpha}, where alpha = 255 (fully opaque).
+     *
+     * @return A pointer to Frame containing the palette colors.
      */
     Frame* retroPastelPalette();
 
     /**
-     * @brief sixtiesPopPalette
-     * @return
+     * @brief Creates and returns the Sixties Pop color palette.
+     *
+     * This palette is inspired by Pantone color selections featured in
+     * "Pantone: The 20th Century in Color", particularly the pop art
+     * movement of the 1960s as shown in work by artists like Andy Warhol.
+     * The palette emphasizes bold, high-contrast colors and playful,
+     * graphic combinations commonly used in pop art prints and media.
+     *
+     * The palette is represented as a 3x3 Frame where each pixel corresponds
+     * to a selectable color in the UI.
+     *
+     * Layout (x, y):
+     * (0,0) Red (7621)        (1,0) Orange (158)      (2,0) Teal (7713)
+     * (0,1) Green (340)       (1,1) Light Aqua (318)  (2,1) Pink (516)
+     * (0,2) Purple (7662)     (1,2) Lime (7744)       (2,2) Yellow (1235)
+     *
+     * Each color is stored as an RGBA vector in the format:
+     * {red, green, blue, alpha}, where alpha = 255 (fully opaque).
+     *
+     * @return A pointer to Frame containing the palette colors.
      */
     Frame* sixtiesPopPalette();
 
     /**
-     * @brief seventiesEarthPalette
-     * @return
-     */
+     * @brief Creates and returns the Seventies Earth color palette.
+     *
+     * This palette is inspired by Pantone color selections featured in
+     * "Pantone: The 20th Century in Color", specifically the
+     * "Avocado and Harvest Gold" section representing 1970s interior
+     * and design trends. The palette emphasizes earthy, muted tones
+     * commonly used in 1970s home decor, textiles, and appliances.
+     *
+     * The colors are based on Pantone references including Avocado,
+     * Golden Olive, Cream Gold, Harvest Gold, Burnt Orange, and
+     * Tortoise Shell.
+     *
+     * The palette is represented as a 3x2 Frame where each pixel corresponds
+     * to a selectable color in the UI.
+     *
+     * Layout (x, y):
+     * (0,0) Avocado        (1,0) Golden Olive     (2,0) Cream Gold
+     * (0,1) Harvest Gold   (1,1) Burnt Orange     (2,1) Tortoise Shell
+     *
+     * Each color is stored as an RGBA vector in the format:
+     * {red, green, blue, alpha}, where alpha = 255 (fully opaque).
+     *
+     * @return A pointer to Frame containing the palette colors.
+    */
     Frame* seventiesEarthPalette();
 
     /**
-     * @brief eightiesNeonPalette
-     * @return
+     * @brief Creates and returns the Eighties Neon color palette.
+     *
+     * This palette is inspired by Pantone color selections featured in
+     * "Pantone: The 20th Century in Color", specifically the "The Day the
+     *  Word Turned Day-Glo” section, featuring aesthetic associated with
+     *  1980s fashion and design. The palette emphasizes high-saturation,
+     *  fluorescent colors commonly used in punk, pop, and experimental
+     *  visual styles of the era.
+     *
+     * The colors are based on Pantone references including Process Blue,
+     * 7488 (green), Yellow 012, 1575, Orange 021, 213, Rhodamine Red,
+     * and Black 6.
+     *
+     * The palette is represented as a 3x3 Frame where each pixel corresponds
+     * to a selectable color in the UI.
+     *
+     * Layout (x, y):
+     * (0,0) Process Blue        (1,0) Pantone 7488 Green   (2,0) Yellow 012
+     * (0,1) Pantone 1575        (1,1) Orange 021           (2,1) Pantone 213 Pink
+     * (0,2) Rhodamine Red       (1,2) Black 6              (2,2) White (neutral)
+     *
+     * Each color is stored as an RGBA vector in the format:
+     * {red, green, blue, alpha}, where alpha = 255 (fully opaque).
+     *
+     * @return A pointer to Frame containing the palette colors.
      */
     Frame* eightiesNeonPalette();
 

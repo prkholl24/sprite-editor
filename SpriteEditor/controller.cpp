@@ -223,37 +223,100 @@ void Controller::initializePalette() {
         colorPalette = defaultPalette();
         break;
     case PaletteType::ArtDecoGold:
+        colorPalette = artDecoPalette();
+        break;
     case PaletteType::RetroPastel:
+        colorPalette = retroPastelPalette();
+        break;
     case PaletteType::SixtiesPop:
+        colorPalette = sixtiesPopPalette();
+        break;
     case PaletteType::SeventiesEarth:
+        colorPalette = seventiesEarthPalette();
+        break;
     case PaletteType::EightiesNeon:
+        colorPalette = eightiesNeonPalette();
         break;
     }
     updateColorPalette();
 }
 
 Frame* Controller::eightiesNeonPalette(){
-    Frame* eightiesPalette = new Frame(3,3);
+    Frame* palette = new Frame(3,3);
 
-    eightiesPalette->getPixel(0,0).setColor(std::vector<int> {0,0,0,255});
-    eightiesPalette->getPixel(1,1).setColor(std::vector<int> {123,0,0,255});
-    return eightiesPalette;
+    palette->getPixel(0,0).setColor(std::vector<int> {0, 133, 202, 255});  // Process Blue
+    palette->getPixel(1,0).setColor(std::vector<int> {120, 190, 32, 255}); // Pantone 7488 Green
+    palette->getPixel(2,0).setColor(std::vector<int> {255, 215, 0, 255});  // Yellow 012
+
+    palette->getPixel(0,1).setColor(std::vector<int> {232, 170, 66,255});  // Pantone 1575
+    palette->getPixel(1,1).setColor(std::vector<int> {255, 102, 0, 255});  // Orange 021
+    palette->getPixel(2,1).setColor(std::vector<int> {123, 64, 129, 255}); // Pantone 213 Pink
+
+    palette->getPixel(0,2).setColor(std::vector<int> {237, 41, 57, 255});  // Rhodamine Red
+    palette->getPixel(1,2).setColor(std::vector<int> {16, 24, 32, 255});   // Black 6
+    palette->getPixel(2,2).setColor(std::vector<int> {255, 255, 255, 255});// White (neutral)
+
+    return palette;
 }
 
 Frame* Controller::seventiesEarthPalette() {
-    return new Frame();
+    Frame* palette = new Frame(3,2);
+
+    palette->getPixel(0,0).setColor(std::vector<int> {107, 122, 58, 255});  // Avocado
+    palette->getPixel(1,0).setColor(std::vector<int> {168, 160, 60, 255});  // Golden Olive
+    palette->getPixel(2,0).setColor(std::vector<int> {238, 220, 130, 255}); // Cream Gold
+
+    palette->getPixel(0,1).setColor(std::vector<int> {201, 152, 36, 255});  // Harvest Gold
+    palette->getPixel(1,1).setColor(std::vector<int> {204, 85, 0, 255});    // Burnt Orange
+    palette->getPixel(2,1).setColor(std::vector<int> {112, 66, 20, 255});   // Tortoise Shell
+
+    return palette;
 }
 
 Frame* Controller::sixtiesPopPalette() {
-    return new Frame();
+    Frame* palette = new Frame(3, 3);
+
+    palette->getPixel(0,0).setColor({166, 25, 46, 255});   // 7621 Red
+    palette->getPixel(1,0).setColor({255, 111, 0, 255});   // 158 Orange
+    palette->getPixel(2,0).setColor({0, 121, 140, 255});   // 7713 Teal
+
+    palette->getPixel(0,1).setColor({0, 132, 61, 255});    // 340 Green
+    palette->getPixel(1,1).setColor({167, 219, 216, 255}); // 318 Light Aqua
+    palette->getPixel(2,1).setColor({240, 163, 188, 255}); // 516 Pink
+
+    palette->getPixel(0,2).setColor({109, 57, 139, 255});  // 7662 Purple
+    palette->getPixel(1,2).setColor({181, 206, 8, 255});   // 7744 Lime
+    palette->getPixel(2,2).setColor({255, 184, 28, 255});  // 1235 Yellow
+
+    return palette;
 }
 
 Frame* Controller::retroPastelPalette() {
-    return new Frame();
+    Frame* palette = new Frame(3,2);
+
+    palette->getPixel(0,0).setColor({244, 221, 224, 255}); // 9286 Blush Pink
+    palette->getPixel(1,0).setColor({178, 214, 204, 255}); // 5483 Mint
+    palette->getPixel(2,0).setColor({245, 236, 180, 255}); // 9140 Pale Yellow
+
+    palette->getPixel(0,1).setColor({185, 205, 230, 255}); // 9402 Baby Blue
+    palette->getPixel(1,1).setColor({240, 205, 170, 255}); // 9200 Peach
+    palette->getPixel(2,1).setColor({225, 210, 230, 255}); // 9340 Lavender
+
+    return palette;
 }
 
 Frame* Controller::artDecoPalette() {
-    return new Frame();
+    Frame* palette = new Frame(3, 2);
+
+    palette->getPixel(0,0).setColor({140, 130, 180, 255}); // Lavender Violet
+    palette->getPixel(1,0).setColor({235, 230, 220, 255}); // Turtledove
+    palette->getPixel(2,0).setColor({210, 190, 150, 255}); // Champagne Beige
+
+    palette->getPixel(0,1).setColor({196, 98, 40, 255});   // Carnelian
+    palette->getPixel(1,1).setColor({20, 20, 20, 255});    // Jet Black
+    palette->getPixel(2,1).setColor({180, 180, 185, 255}); // Silver
+
+    return palette;
 }
 
 Frame* Controller::defaultPalette() {
