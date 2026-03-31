@@ -254,6 +254,36 @@ public slots:
      */
     void handleColorPaletteInput(int x, int y);
 
+    /**
+     * @brief Slot handles behavior for when the color wheel palette is selected.
+     */
+    void defaultPaletteSelected();
+
+    /**
+    * @brief Slot handles behavior for when the art deco palette is selected.
+     */
+    void artDecoPaletteSelected();
+
+    /**
+    * @brief Slot handles behavior for when the retro palette is selected.
+     */
+    void retroPastelPaletteSelected();
+
+    /**
+    * @brief Slot handles behavior for when the sixties pop palette is selected.
+     */
+    void sixtiesPopPaletteSelected();
+
+    /**
+     * @brief Slot handles behavior for when the earth palette is selected.
+     */
+    void seventiesEarthPaletteSelected();
+
+    /**
+     * @brief Slot handles behavior for when the eighties palette is selected.
+     */
+    void eightiesNeonPaletteSelected();
+
 };
 
 #endif // CONTROLLER_H

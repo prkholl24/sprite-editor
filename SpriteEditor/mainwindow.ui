@@ -67,6 +67,11 @@
      <string>Palettes</string>
     </property>
     <addaction name="actionColorWheel"/>
+    <addaction name="actionArt_Deco"/>
+    <addaction name="actionRetro_Pastel"/>
+    <addaction name="action60s_Pop"/>
+    <addaction name="action70s_Earth"/>
+    <addaction name="action80s_Neon"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPalettes"/>
@@ -89,7 +94,32 @@
   </action>
   <action name="actionColorWheel">
    <property name="text">
-    <string>ColorWheel</string>
+    <string>Color Wheel</string>
+   </property>
+  </action>
+  <action name="actionArt_Deco">
+   <property name="text">
+    <string>Art Deco</string>
+   </property>
+  </action>
+  <action name="actionRetro_Pastel">
+   <property name="text">
+    <string>Retro Pastel</string>
+   </property>
+  </action>
+  <action name="action60s_Pop">
+   <property name="text">
+    <string>60s Pop</string>
+   </property>
+  </action>
+  <action name="action70s_Earth">
+   <property name="text">
+    <string>70s Earth</string>
+   </property>
+  </action>
+  <action name="action80s_Neon">
+   <property name="text">
+    <string>80s Neon</string>
    </property>
   </action>
  </widget>

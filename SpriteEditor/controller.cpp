@@ -223,13 +223,52 @@ void Controller::initializePalette() {
         colorPalette = defaultPalette();
         break;
     case PaletteType::ArtDecoGold:
+        colorPalette = artDecoPalette();
+        break;
     case PaletteType::RetroPastel:
+        colorPalette = retroPastelPalette();
+        break;
     case PaletteType::SixtiesPop:
+        colorPalette = sixtiesPopPalette();
+        break;
     case PaletteType::SeventiesEarth:
+        colorPalette = seventiesEarthPalette();
+        break;
     case PaletteType::EightiesNeon:
+        colorPalette = eightiesNeonPalette();
         break;
     }
     updateColorPalette();
+}
+
+void Controller::defaultPaletteSelected() {
+    selectedPalette = PaletteType::Default;
+    initializePalette();
+}
+
+void Controller::artDecoPaletteSelected() {
+    selectedPalette = PaletteType::ArtDecoGold;
+    initializePalette();
+}
+
+void Controller::retroPastelPaletteSelected() {
+    selectedPalette = PaletteType::RetroPastel;
+    initializePalette();
+}
+
+void Controller::sixtiesPopPaletteSelected() {
+    selectedPalette = PaletteType::SixtiesPop;
+    initializePalette();
+}
+
+void Controller::seventiesEarthPaletteSelected() {
+    selectedPalette = PaletteType::SeventiesEarth;
+    initializePalette();
+}
+
+void Controller::eightiesNeonPaletteSelected() {
+    selectedPalette = PaletteType::EightiesNeon;
+    initializePalette();
 }
 
 Frame* Controller::eightiesNeonPalette(){
