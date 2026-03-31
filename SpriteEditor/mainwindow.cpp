@@ -131,9 +131,3 @@ void MainWindow::on_actionNew_triggered()
     emit newProjectSignal(spriteSize);
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    emit canvasInput(0,0);
-}
-
-

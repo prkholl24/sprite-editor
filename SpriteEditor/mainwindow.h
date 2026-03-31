@@ -46,15 +46,21 @@ signals:
      */
     void canvasInput(int x, int y);
 
-    void fillBucketSelected();
-
 private slots:
+
+    /**
+     * @brief emits a signal to Controller to save a Sprite
+     */
     void on_actionSave_triggered();
 
+    /**
+     * @brief emits a signal to Controller to create a new Sprite
+     */
     void on_actionNew_triggered();
 
-    void on_pushButton_clicked();
-
+    /**
+     * @brief emits a signal to Controller to load a Sprite
+     */
     void on_actionLoad_triggered();
 
 private:
