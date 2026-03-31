@@ -20,7 +20,6 @@
 #include "frame.h"
 
 /**
- * @class Sprite
  * @brief Represents an animated sprite composed of multiple frames.
  *
  * The Sprite class stores a sequence of Frame objects that together form
