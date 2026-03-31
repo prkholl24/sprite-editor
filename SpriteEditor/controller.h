@@ -27,7 +27,7 @@ private:
     enum class ToolStates {StandardBrush, PaintBucket, Eraser, Eyedropper, Mirror, SelectionTool};
 
     ToolStates currentTool = ToolStates::StandardBrush;
-    
+
     void fillBucket();
 
     /**
@@ -260,6 +260,12 @@ public slots:
      * @param frames Vector of all frames to convert
      */
     void convertAllFrames(const std::vector<Frame>& frames);
+
+    /**
+     * @brief Sets the sprite's framerate accordingly upon reception of an fpsChanged() signal.
+     * @param fps The FPS value to set.
+     */
+    void setSpriteFPS(int fps);
 
     /**
      * @brief standardBrush
