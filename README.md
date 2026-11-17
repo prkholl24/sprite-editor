@@ -1,6 +1,3 @@
-
-Developed by: Charlie Adair, Lindsey Reese, Kent Wilkison, Brady Nelson, Armando Carrillo, Parker Hollingsed. 
-
 <h1>Sprite Editor</h1>
 <h2>Summary</h2>
 <p>
